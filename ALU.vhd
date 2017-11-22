@@ -34,17 +34,17 @@ entity ALU is
     Port ( inputA : in  STD_LOGIC_VECTOR (15 downto 0);
            inputB : in  STD_LOGIC_VECTOR (15 downto 0);
            aluOp : in  STD_LOGIC_VECTOR (3 downto 0);
-           fout : buffer  STD_LOGIC_VECTOR (15 downto 0);
+           result : buffer  STD_LOGIC_VECTOR (15 downto 0);
            aluZero : out STD_LOGIC;
            aluSign : out STD_LOGIC;
 end ALU;
 
 architecture Behavioral of ALU is
 begin
-	aluSign <= fout(15);--sign bit
-	process (fout) --zero bit
+	aluSign <= result(15);--sign bit
+	process (result) --zero bit
 	begin
-		if (fout = X"0000") then
+		if (result = X"0000") then
 			aluZero <= '1';
 		else
 			aluZero <= '0';
@@ -55,34 +55,34 @@ begin
 	begin
 		case op is
 			when "0000" =>
-				fout <= ('0' & inputA) + ('0' & inputB);
+				result <= ('0' & inputA) + ('0' & inputB);
 			when "0001" =>
-				fout <= ('0' & inputA) - ('0' & inputB);
+				result <= ('0' & inputA) - ('0' & inputB);
 			when "0010" =>
-				fout <= (inputA and inputB);
+				result <= (inputA and inputB);
 				flag(0)<= '0';
 			when "0011" =>	
-				fout <= (inputA or inputB);
+				result <= (inputA or inputB);
 				flag(0) <= '0';
 			when "0100" =>
-				fout <= (inputA xor inputB);
+				result <= (inputA xor inputB);
 				flag(0) <= '0';
 			when "0101" => -- SLL
 				if InputB = "0000000000000000" then
-					fout <= to_stdlogicvector(to_bitvector(inputA) sll 8);
+					result <= to_stdlogicvector(to_bitvector(inputA) sll 8);
 				else
-					fout <= to_stdlogicvector(to_bitvector(inputA) sll conv_integer(inputB));
+					result <= to_stdlogicvector(to_bitvector(inputA) sll conv_integer(inputB));
 				end if;
 				flag(0) <= '0';
 			when "0110" => -- SRA
 				if InputB = "0000000000000000" then
-					fout <= to_stdlogicvector(to_bitvector(inputA) srl 8);
+					result <= to_stdlogicvector(to_bitvector(inputA) srl 8);
 				else
-					fout <= to_stdlogicvector(to_bitvector(inputA) srl conv_integer(inputB));
+					result <= to_stdlogicvector(to_bitvector(inputA) srl conv_integer(inputB));
 				end if;
 				flag(0) <= '0';
 			when others =>
-				fout <= "1111111111111111";
+				result <= "1111111111111111";
 		end case;
 	end process;
 end Behavioral;
