@@ -60,21 +60,21 @@ begin
 				result <= (inputA xor inputB);
 				flag(0) <= '0';
 			when "0101" => -- SLL
-				if InputB = "0000000000000000" then
+				if InputB = X"0000" then
 					result <= to_stdlogicvector(to_bitvector(inputA) sll 8);
 				else
 					result <= to_stdlogicvector(to_bitvector(inputA) sll conv_integer(inputB));
 				end if;
 				flag(0) <= '0';
 			when "0110" => -- SRA
-				if InputB = "0000000000000000" then
+				if InputB = X"0000" then
 					result <= to_stdlogicvector(to_bitvector(inputA) srl 8);
 				else
 					result <= to_stdlogicvector(to_bitvector(inputA) srl conv_integer(inputB));
 				end if;
 				flag(0) <= '0';
 			when others =>
-				result <= "1111111111111111";
+				result <= X"FFFF";
 		end case;
 	end process;
 end Behavioral;

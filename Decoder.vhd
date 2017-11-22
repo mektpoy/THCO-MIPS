@@ -35,7 +35,28 @@ architecture Behavioral of Decoder is
 begin
 	process(insturction)
 	begin
-		
+		instrId(4 downto 0) <= instruction(15 downto 11);
+		case instruction (15 downto 11) is
+			when "01001" => -- ADDIU
+				rxAddr <= '0' & instruction(10 downto 8);
+				ryAddr <= "1111";
+				imme(7 downto 0) <= instruction(7 downto 0);
+				imme(15 downto 8) <= (others => instruction(7));
+				regWbAddr <= '0' & instruction(10 downto 8);
+			when "01000" => -- ADDIU3
+				rxAddr <= '0' & instruction(10 downto 8);
+				ryAddr <= "1111";
+				imme(3 downto 0) <= instruction(3 downto 0);
+				imme(15 downto 4) <= (others => instruction(3));
+				regWbAddr <= '0' & instruction(7 downto 5);
+			when "00000" => -- ADDSP3
+				rxAddr <= "1010";
+				ryAddr <= "1111";
+				imme(7 downto 0) <= instruction(7 downto 0);
+				imme(15 downto 8) <= (others => instruction(7));
+				regWbAddr <= '0' & instruction(10 downto 8);
+			when ""
+		end case;
 	end process;
 end Behavioral;
 
