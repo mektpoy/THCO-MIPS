@@ -31,62 +31,58 @@ USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 --use UNISIM.VComponents.all;
 
 entity ALU is
-    Port ( InputA : in  STD_LOGIC_VECTOR (15 downto 0);
-           InputB : in  STD_LOGIC_VECTOR (15 downto 0);
-           op : in  STD_LOGIC_VECTOR (3 downto 0);
-           Fout : buffer  STD_LOGIC_VECTOR (15 downto 0);
-           Flag : out  STD_LOGIC_VECTOR (3 downto 0));--0 carry out; 1 zero; 2 sign
+    Port ( inputA : in  STD_LOGIC_VECTOR (15 downto 0);
+           inputB : in  STD_LOGIC_VECTOR (15 downto 0);
+           aluOp : in  STD_LOGIC_VECTOR (3 downto 0);
+           fout : buffer  STD_LOGIC_VECTOR (15 downto 0);
+           aluZero : out STD_LOGIC;
+           aluSign : out STD_LOGIC;
 end ALU;
 
 architecture Behavioral of ALU is
-signal temp:std_logic_vector(16 downto 0);--17bits in case of overflow and need sig-extend
 begin
-	flag(2) <= Fout(15);--sign bit
-	
-	process (Fout) --zero bit
+	aluSign <= fout(15);--sign bit
+	process (fout) --zero bit
 	begin
-		if (Fout = X"0000") then
-			flag(1) <= '1';
+		if (fout = X"0000") then
+			aluZero <= '1';
 		else
-			flag(1) <= '0';
+			aluZero <= '0';
 		end if;
 	end process;
 	
-	process (InputA, InputB, op, temp)
+	process (inputA, inputB, aluOp)
 	begin
 		case op is
 			when "0000" =>
-				Fout <= ('0' & InputA) + ('0' & InputB);
-				flag(0) <= temp(16);--
+				fout <= ('0' & inputA) + ('0' & inputB);
 			when "0001" =>
-				Fout <= ('0' & InputA) - ('0' & InputB);
-				flag(0) <= temp(16);
+				fout <= ('0' & inputA) - ('0' & inputB);
 			when "0010" =>
-				Fout <= (InputA and InputB);
+				fout <= (inputA and inputB);
 				flag(0)<= '0';
 			when "0011" =>	
-				Fout <= (InputA or InputB);
+				fout <= (inputA or inputB);
 				flag(0) <= '0';
 			when "0100" =>
-				Fout <= (InputA xor InputB);
+				fout <= (inputA xor inputB);
 				flag(0) <= '0';
 			when "0101" => -- SLL
 				if InputB = "0000000000000000" then
-					Fout <= to_stdlogicvector(to_bitvector(InputA) sll 8);
+					fout <= to_stdlogicvector(to_bitvector(inputA) sll 8);
 				else
-					Fout <= to_stdlogicvector(to_bitvector(InputA) sll conv_integer(InputB));
+					fout <= to_stdlogicvector(to_bitvector(inputA) sll conv_integer(inputB));
 				end if;
 				flag(0) <= '0';
 			when "0110" => -- SRA
 				if InputB = "0000000000000000" then
-					Fout <= to_stdlogicvector(to_bitvector(InputA) srl 8);
+					fout <= to_stdlogicvector(to_bitvector(inputA) srl 8);
 				else
-					Fout <= to_stdlogicvector(to_bitvector(InputA) srl conv_integer(InputB));
+					fout <= to_stdlogicvector(to_bitvector(inputA) srl conv_integer(inputB));
 				end if;
 				flag(0) <= '0';
 			when others =>
-				Fout <= "1111111111111111";
-				flag(0) <= '0';
+				fout <= "1111111111111111";
 		end case;
 	end process;
 end Behavioral;
