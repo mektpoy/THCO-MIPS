@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    22:44:28 11/22/2017 
+-- Create Date:    19:22:20 11/22/2017 
 -- Design Name: 
--- Module Name:    Register - Behavioral 
+-- Module Name:    RegisterFile - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
