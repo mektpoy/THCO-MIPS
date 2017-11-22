@@ -4,7 +4,7 @@
 -- 
 -- Create Date:    00:11:20 11/23/2017 
 -- Design Name: 
--- Module Name:    AMux - Behavioral 
+-- Module Name:    BMux0 - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -22,25 +22,25 @@ use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
-entity AMux is
-    Port ( forwardOp0 : in STD_LOGIC_VECTOR (1 downto 0);
+entity BMux0 is
+    Port ( forwardOp1 : in STD_LOGIC_VECTOR (1 downto 0);
+           ryValue : in STD_LOGIC_VECTOR (15 downto 0);
            result : in STD_LOGIC_VECTOR (15 downto 0);
            regWbValue : in STD_LOGIC_VECTOR (15 downto 0);
-           rxValue : in STD_LOGIC_VECTOR (15 downto 0);
            inputA : out STD_LOGIC_VECTOR (15 downto 0);
-end AMux;
+end BMux0;
 
-architecture Behavioral of AMux is
+architecture Behavioral of BMux0 is
 begin
-	process (forwardOp0, result, regWbValue, rxValue)
+	process (forwardOp1, ryValue, result, regWbValue)
 	begin
-		case forwardOp0 is
+		case forwardOp1 is
 			when "00" =>
-				inputA <= result;
+				inputA <= ryValue;
 			when "01" =>
-				inputA <= regWbValue;
+				inputA <= result;
 			when "10" =>
-				inputA <= rxValue;
+				inputA <= regWbValue;
 		end case;
 	end process;
 end Behavioral;
