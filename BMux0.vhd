@@ -24,23 +24,23 @@ USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity BMux0 is
     Port ( forwardOp1 : in STD_LOGIC_VECTOR (1 downto 0);
-           ryValue : in STD_LOGIC_VECTOR (15 downto 0);
            result : in STD_LOGIC_VECTOR (15 downto 0);
            regWbValue : in STD_LOGIC_VECTOR (15 downto 0);
+           ryValue : in STD_LOGIC_VECTOR (15 downto 0);
            inputB0 : out STD_LOGIC_VECTOR (15 downto 0);
 end BMux0;
 
 architecture Behavioral of BMux0 is
 begin
-	process (forwardOp1, ryValue, result, regWbValue)
+	process (forwardOp1, result, regWbValue, ryValue)
 	begin
 		case forwardOp1 is
 			when "00" =>
-				inputB0 <= ryValue;
-			when "01" =>
 				inputB0 <= result;
-			when "10" =>
+			when "01" =>
 				inputB0 <= regWbValue;
+			when "10" =>
+				inputB0 <= ryValue;
 		end case;
 	end process;
 end Behavioral;
