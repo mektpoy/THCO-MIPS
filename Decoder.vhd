@@ -86,14 +86,14 @@ begin
 						imme(15 downto 0) <= X"0000";
 						regWbAddr <= "1010";
 						instrId <= "01011";
-					when "00000" => -- JR / MFPC
+					when "00000" => -- JR
 						if (instruction(7 downto 5) = "000") then
 							rxAddr <= '0' & instruction(10 downto 8);
 							ryAddr <= "1111";
 							imme(15 downto 0) <= X"0000";
 							regWbAddr <= "1111";
 							instrId <= "01100";
-						else
+						else -- MFPC
 							rxAddr <= "1000";
 							ryAddr <= "1111";
 							imme(15 downto 0) <= X"0000";
@@ -121,13 +121,20 @@ begin
 				imme(15 downto 8) <= (others => instruction(7));
 				regWbAddr <= "1111";
 				instrId <= "01000";
-			when "00101" => -- BTEQZ
+			when "00101" => -- BNEZ
 				rxAddr <= '0' & instruction(10 downto 8);
 				ryAddr <= "1111";
 				imme(7 downto 0) <= instruction(7 downto 0);
 				imme(15 downto 8) <= (others => instruction(7));
 				regWbAddr <= "1111";
 				instrId <= "01001";
+			when "00101" => -- BTEQZ
+				rxAddr <= '0' & instruction(10 downto 8);
+				ryAddr <= "1111";
+				imme(7 downto 0) <= instruction(7 downto 0);
+				imme(15 downto 8) <= (others => instruction(7));
+				regWbAddr <= "1111";
+				instrId <= "01010";
 			when "01101" => -- LI
 				rxAddr <= "1111";
 				ryAddr <= "1111";
@@ -149,24 +156,27 @@ begin
 				imme(15 downto 8) <= (others => instruction(7));
 				regWbAddr <= '0' & instruction(10 downto 8);
 				instrId <= "01111";
-			when "11110" => -- MFIH
-				rxAddr <= "1010";
-				ryAddr <= "1111";
-				imme(15 downto 0) <= X"0000";
-				regWbAddr <= '0' & instruction(10 downto 8);
-				instrId <= "10000";
+			when "11110" => 
+				case instruction(0) is
+					when '0' => -- MFIH
+						rxAddr <= "1111";
+						ryAddr <= "1010";
+						imme(15 downto 0) <= X"0000";
+						regWbAddr <= '0' & instruction(10 downto 8);
+						instrId <= "10000";
+					when '1' => -- MTIH
+						rxAddr <= "1111";
+						ryAddr <= '0' & instruction(10 downto 8);
+						imme(15 downto 0) <= X"0000";
+						regWbAddr <= "1010";
+						instrId <= "10011";
+				end case;
 			when "01111" => -- MOVE
-				rxAddr <= '0' & instruction(7 downto 5);
-				ryAddr <= "1111";
+				rxAddr <= "1111";
+				ryAddr <= '0' & instruction(7 downto 5);
 				imme(15 downto 0) <= X"0000";
 				regWbAddr <= '0' & instruction(10 downto 8);
 				instrId <= "10010";
-			when "11110" => -- MTIH
-				rxAddr <= '0' & instruction(10 downto 8);
-				ryAddr <= "1111";
-				imme(15 downto 0) <= X"0000";
-				regWbAddr <= "1010";
-				instrId <= "10011";
 			when "00001" => -- NOP
 				rxAddr <= "1111";
 				ryAddr <= "1111";
@@ -210,6 +220,36 @@ begin
 				imme(15 downto 5) <= (others => instruction(4));
 				regWbAddr <= "1111";
 				instrId <= "11100";
+			when "01100" =>
+				case instruction(10 downto 8) is
+					when "100" => -- MTSP
+						rxAddr <= "1111";
+						ryAddr <= instruction(7 downto 5);
+						imme(15 downto 0) <= (others => '0');
+						regWbAddr <= "1001";
+						instrId <= "10100";
+					when "011" => -- SW_RS
+						rxAddr <= "1001";
+						ryAddr <= "1111";
+						imme(7 downto 0) <= instruction(7 downto 0);
+						imme(15 downto 8) <= (others => instruction(7));
+						regWbAddr <= "1001";
+						instrId <= "11101";
+					when "010" => -- ADDSP
+						rxAddr <= "1001";
+						ryAddr <= "1111";
+						imme(7 downto 0) <= instruction(7 downto 0);
+						imme(15 downto 8) <= (others => instruction(7));
+						regWbAddr <= "1111";
+						instrId <= "00100";
+				end case;
+			when "11010" => -- SW_SP
+				rxAddr <= instruction(10 downto 8);
+				ryAddr <= "1111";
+				imme(7 downto 0) <= instruction(7 downto 0);
+				imme(15 downto 8) <= (others => instruction(7));
+				regWbAddr <= "1111";
+				instrId <= "11110";
 		end case;
 	end process;
 end Behavioral;
