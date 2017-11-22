@@ -21,14 +21,6 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
--- Uncomment the following library declaration if using
--- arithmetic functions with Signed or Unsigned values
---use IEEE.NUMERIC_STD.ALL;
-
--- Uncomment the following library declaration if instantiating  
--- any Xilinx primitives in this code.
---library UNISIM;
---use UNISIM.VComponents.all;
 
 entity RegisterFile is
     Port ( rxAddr : in STD_LOGIC_VECTOR (3 downto 0);
@@ -44,17 +36,21 @@ architecture Behavioral of RegisterFile is
 	type regs is array(15 downto 0) of STD_LOGIC_VECTOR(15 downto 0);
 	signal data : regs := (others => (others => '0'));
 begin
-	process (regWriteClk) --zero bit
+	process (regWriteClk)
 	begin
 		if (rising_edge(regWriteClk)) then
-			data(regWbAddr) <= data(regWbValue);
+			data(conv_integer(regWbAddr)) <= regWbValue;
+			if (conv_integer(rxAddr) = conv_integer(regWbAddr)) then
+				rxValue <= data(conv_integer(rxAddr));
+			if (conv_integer(ryAddr) = conv_integer(regWbAddr)) then
+				ryValue <= data(conv_integer(ryAddr));
 		end if;
 	end process;
 	
 	process (rxAddr, ryAddr)
 	begin
-		rxValue <= data(rxAddr);
-		ryValue <= data(ryAddr);
+		rxValue <= data(conv_integer(rxAddr));
+		ryValue <= data(conv_integer(ryAddr));
 	end process;
 end Behavioral;
 
