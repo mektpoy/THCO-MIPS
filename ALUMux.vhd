@@ -28,7 +28,7 @@ entity ALUMux is
            result : in STD_LOGIC_VECTOR (15 downto 0);
            inputB : in STD_LOGIC_VECTOR (15 downto 0);
            aluResultSrc : in STD_LOGIC_VECTOR (1 downto 0);
-           aluResult : out STD_LOGIC_VECTOR (15 downto 0);
+           aluResult : out STD_LOGIC_VECTOR (15 downto 0));
 end ALUMux;
 
 architecture Behavioral of ALUMux is

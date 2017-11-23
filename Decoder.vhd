@@ -28,7 +28,7 @@ entity Decoder is
            ryAddr : out STD_LOGIC_VECTOR (3 downto 0);
            imme : out STD_LOGIC_VECTOR (15 downto 0);
            regWbAddr : out STD_LOGIC_VECTOR (3 downto 0);
-           instrId : out STD_LOGIC_VECTOR (4 downto 0);
+           instrId : out STD_LOGIC_VECTOR (4 downto 0));
 end Decoder;
 
 architecture Behavioral of Decoder is

@@ -27,7 +27,7 @@ entity BMux0 is
            result : in STD_LOGIC_VECTOR (15 downto 0);
            regWbValue : in STD_LOGIC_VECTOR (15 downto 0);
            ryValue : in STD_LOGIC_VECTOR (15 downto 0);
-           inputB0 : out STD_LOGIC_VECTOR (15 downto 0);
+           inputB0 : out STD_LOGIC_VECTOR (15 downto 0));
 end BMux0;
 
 architecture Behavioral of BMux0 is
