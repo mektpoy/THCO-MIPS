@@ -23,10 +23,11 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity BMux is
-    Port ( BMuxOp : in STD_LOGIC;
-           inputB0 : in STD_LOGIC_VECTOR (15 downto 0);
-           imme : in STD_LOGIC_VECTOR (15 downto 0);
-           inputB : out STD_LOGIC_VECTOR (15 downto 0);
+	Port ( BMuxOp : in STD_LOGIC;
+		inputB0 : in STD_LOGIC_VECTOR (15 downto 0);
+		imme : in STD_LOGIC_VECTOR (15 downto 0);
+		inputB : out STD_LOGIC_VECTOR (15 downto 0);
+	);
 end BMux;
 
 architecture Behavioral of BMux is
