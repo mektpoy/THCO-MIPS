@@ -28,7 +28,7 @@ entity ForwardUnit is
     	   rxAddr : in STD_LOGIC_VECTOR (3 downto 0);
     	   ryAddr : in STD_LOGIC_VECTOR (3 downto 0);
            forwardOp0 : out STD_LOGIC_VECTOR (1 downto 0);
-           forwardOp1 : out STD_LOGIC_VECTOR (1 downto 0);
+           forwardOp1 : out STD_LOGIC_VECTOR (1 downto 0));
 end ForwardUnit;
 
 architecture Behavioral of ForwardUnit is

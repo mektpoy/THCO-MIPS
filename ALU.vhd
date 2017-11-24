@@ -28,7 +28,7 @@ entity ALU is
            aluOp : in  STD_LOGIC_VECTOR (3 downto 0);
            result : buffer  STD_LOGIC_VECTOR (15 downto 0);
            aluZero : out STD_LOGIC;
-           aluSign : out STD_LOGIC;
+           aluSign : out STD_LOGIC);
 end ALU;
 
 architecture Behavioral of ALU is

@@ -27,7 +27,7 @@ entity AMux is
            result : in STD_LOGIC_VECTOR (15 downto 0);
            regWbValue : in STD_LOGIC_VECTOR (15 downto 0);
            rxValue : in STD_LOGIC_VECTOR (15 downto 0);
-           inputA : out STD_LOGIC_VECTOR (15 downto 0);
+           inputA : out STD_LOGIC_VECTOR (15 downto 0));
 end AMux;
 
 architecture Behavioral of AMux is

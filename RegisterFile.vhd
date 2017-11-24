@@ -29,7 +29,7 @@ entity RegisterFile is
            regWbValue : in STD_LOGIC_VECTOR (15 downto 0);
            regWriteClk : in STD_LOGIC;
            rxValue : out STD_LOGIC_VECTOR (15 downto 0);
-           ryValue : out STD_LOGIC_VECTOR (15 downto 0);
+           ryValue : out STD_LOGIC_VECTOR (15 downto 0));
 end RegisterFile;
 
 architecture Behavioral of RegisterFile is
