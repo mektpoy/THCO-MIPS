@@ -31,12 +31,14 @@ begin
 						PCsrc <= "01";
 					when "1":
 						pcsrc <= "00";
+				end case;
 			when "011" =>
 				case equal is:
 					when "0":
 						PCsrc <= "00";
 					when "1":
 						PCsrc <= "01";
+				end case;
 			when "100" =>
 				PCsrc <= "10";
 			when others =>

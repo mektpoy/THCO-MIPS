@@ -28,6 +28,7 @@ entity BMux is
 		imme : in STD_LOGIC_VECTOR (15 downto 0);
 		inputB : out STD_LOGIC_VECTOR (15 downto 0)
 	);
+end BMux;
 
 architecture Behavioral of BMux is
 begin
