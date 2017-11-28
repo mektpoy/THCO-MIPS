@@ -42,8 +42,10 @@ begin
 			data(conv_integer(regWbAddr)) <= regWbValue;
 			if (conv_integer(rxAddr) = conv_integer(regWbAddr)) then
 				rxValue <= data(conv_integer(rxAddr));
+			end if;
 			if (conv_integer(ryAddr) = conv_integer(regWbAddr)) then
 				ryValue <= data(conv_integer(ryAddr));
+			end if;
 		end if;
 	end process;
 	

@@ -84,7 +84,7 @@ begin
             RegWriteClkOut <= "0";
             RegWriteOut <= "0";
 
-        elsif(clk 'event and clk = '1') then
+        elsif(rising_edge(clk)) then
             rxValueOut <= rxValueIn;
             ryValueOut <= ryValueIn;
             immeOut <= immeIn;
