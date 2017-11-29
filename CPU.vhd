@@ -303,5 +303,27 @@ begin
 		regWbValue : out STD_LOGIC_VECTOR (15 downto 0)
 	);
     end component;
+
+    signal stay : STD_LOGIC;
+    signal PCMuxOut : STD_LOGIC_VECTOR (15 downto 0);
+    signal outPC : STD_LOGIC_VECTOR (15 downto 0);
+    signal normal : STD_LOGIC_VECTOR (15 downto 0);
+    signal offsetJump : STD_LOGIC_VECTOR (15 downto 0);
+    signal regJump : STD_LOGIC_VECTOR (15 downto 0);
+    signal IDPCIn : STD_LOGIC_VECTOR (15 downto 0);
+    signal IDImme : STD_LOGIC_VECTOR (15 downto 0);
+    signal IDRxAddr : STD_LOGIC_VECTOR (3 downto 0);
+    signal IDRyAddr : STD_LOGIC_VECTOR (3 downto 0);
+    signal IDRegWbAddr : STD_LOGIC_VECTOR (3 downto 0);
+    signal IDRxValue : STD_LOGIC_VECTOR (15 downto 0);
+    signal IDRyValue : STD_LOGIC_VECTOR (15 downto 0);
+    signal instrId : STD_LOGIC_VECTOR (15 downto 0);
+    signal jumpType : STD_LOGIC_VECTOR (2 downto 0);
+    signal IDAluOp : STD_LOGIC;
+    signal IDBMuxOp : STD_LOGIC;
+    signal IDResultSrc : STD_LOGIC;
+    signal IDMemoryMode : out STD_LOGIC_VECTOR (1 downto 0);
+    signal IDAluResultSrc : out STD_LOGIC_VECTOR (1 downto 0);
+    signal IDRegWrite : out STD_LOGIC;
 end Behavioral;
 

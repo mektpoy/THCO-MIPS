@@ -13,7 +13,7 @@ entity Controller is
 		resultSrc : out STD_LOGIC;
 		memoryMode : out STD_LOGIC_VECTOR (1 downto 0);
 		aluResultSrc : out STD_LOGIC_VECTOR (1 downto 0);
-		regWriteClk : out STD_LOGIC
+		regWrite : out STD_LOGIC
 	);
 end Controller;
 
@@ -29,6 +29,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "10";
+				regWrite <= "1";
 			when "00010" =>
 				aluOp <= "000";
 				BMuxOp <= "1";
@@ -36,6 +37,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "10";
+				regWrite <= "1";
 			when "00011" =>
 				aluOp <= "000";
 				BMuxOp <= "1";
@@ -43,6 +45,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "10";
+				regWrite <= "1";
 			when "00100" =>
 				aluOp <= "000";
 				BMuxOp <= "1";
@@ -50,6 +53,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "10";
+				regWrite <= "1";
 			when "00101" =>
 				aluOp <= "000";
 				BMuxOp <= "0";
@@ -57,6 +61,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "10";
+				regWrite <= "1";
 			when "00110" =>
 				aluOp <= "010";
 				BMuxOp <= "0";
@@ -64,14 +69,19 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "10";
+				regWrite <= "1";
 			when "00111" =>
 				jumpType <= "001";
+				regWrite <= "0";
 			when "01000" =>
 				jumpType <= "010";
+				regWrite <= "0";
 			when "01001" =>
 				jumpType <= "011";
+				regWrite <= "0";
 			when "01010" =>
 				jumpType <= "010";
+				regWrite <= "0";
 			when "01011" =>
 				aluOp <= "100";
 				BMuxOp <= "0";
@@ -79,8 +89,10 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "00";
+				regWrite <= "1";
 			when "01100" =>
 				jumpType <= "100";
+				regWrite <= "0";
 			when "01101" =>
 				aluOp <= "111";
 				BMuxOp <= "1";
@@ -88,6 +100,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "11";
+				regWrite <= "1";
 			when "01110" =>
 				aluOp <= "000";
 				BMuxOp <= "1";
@@ -95,6 +108,7 @@ begin
 				resultSrc <= "0";
 				memoryMode <= "10";
 				aluResultSrc <= "10";
+				regWrite <= "1";
 			when "01111" =>
 				aluOp <= "000";
 				BMuxOp <= "1";
@@ -102,6 +116,7 @@ begin
 				resultSrc <= "0";
 				memoryMode <= "10";
 				aluResultSrc <= "10";
+				regWrite <= "1";
 			when "10000" =>
 				aluOp <= "111";
 				BMuxOp <= "0";
@@ -109,6 +124,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "11";
+				regWrite <= "1";
 			when "10001" =>
 				aluOp <= "111";
 				BMuxOp <= "0";
@@ -116,6 +132,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "11";
+				regWrite <= "1";
 			when "10010" =>
 				aluOp <= "111";
 				BMuxOp <= "0";
@@ -123,6 +140,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "11";
+				regWrite <= "1";
 			when "10011" =>
 				aluOp <= "111";
 				BMuxOp <= "0";
@@ -130,6 +148,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "11";
+				regWrite <= "1";
 			when "10100" =>
 				aluOp <= "111";
 				BMuxOp <= "0";
@@ -137,6 +156,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "11";
+				regWrite <= "1";
 			when "10101" =>
 				aluOp <= "111";
 				jumpType <= "000";
@@ -148,6 +168,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "10";
+				regWrite <= "1";
 			when "10111" =>
 				aluOp <= "101";
 				BMuxOp <= "1";
@@ -155,6 +176,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "10";
+				regWrite <= "1";
 			when "11000" =>
 				aluOp <= "001";
 				BMuxOp <= "0";
@@ -162,6 +184,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "01";
+				regWrite <= "1";
 			when "11001" =>
 				aluOp <= "001";
 				BMuxOp <= "1";
@@ -169,6 +192,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "01";
+				regWrite <= "1";
 			when "11010" =>
 				aluOp <= "110";
 				BMuxOp <= "1";
@@ -176,6 +200,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "10";
+				regWrite <= "1";
 			when "11011" =>
 				aluOp <= "001";
 				BMuxOp <= "0";
@@ -183,6 +208,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "00";
 				aluResultSrc <= "10";
+				regWrite <= "1";
 			when "11100" =>
 				aluOp <= "000";
 				BMuxOp <= "1";
@@ -190,6 +216,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "01";
 				aluResultSrc <= "10";
+				regWrite <= "0";
 			when "11101" =>
 				aluOp <= "000";
 				BMuxOp <= "1";
@@ -197,6 +224,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "01";
 				aluResultSrc <= "10";
+				regWrite <= "0";
 			when "11110" =>
 				aluOp <= "000";
 				BMuxOp <= "1";
@@ -204,6 +232,7 @@ begin
 				resultSrc <= "1";
 				memoryMode <= "01";
 				aluResultSrc <= "10";
+				regWrite <= "0";
 		end case;
 	end process;
 end Behavioral;
