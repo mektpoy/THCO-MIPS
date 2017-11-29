@@ -42,26 +42,22 @@ entity ID2EX is
 
         --control signals
         --E
-        BMuxIn : in STD_LOGIC;
-        BMuxOut : out STD_LOGIC;
-        ALUOpIn : in STD_LOGIC_VECTOR(3 downto 0);
-        ALUOpOut : out STD_LOGIC_VECTOR(3 downto 0);
-        ALUResultSrcIn : in STD_LOGIC_VECTOR(1 downto 0);
-        ALUResultSrcOut : out STD_LOGIC_VECTOR(1 downto 0);
+        BMuxOpIn : in STD_LOGIC;
+        BMuxOpOut : out STD_LOGIC;
+        aluOpIn : in STD_LOGIC_VECTOR(2 downto 0);
+        aluOpOut : out STD_LOGIC_VECTOR(2 downto 0);
+        aluResultSrcIn : in STD_LOGIC_VECTOR(1 downto 0);
+        aluResultSrcOut : out STD_LOGIC_VECTOR(1 downto 0);
 
         --M
-        MemoryModeIn : in STD_LOGIC_VECTOR(1 downto 0);
-        MemoryModeOut: out STD_LOGIC_VECTOR(1 downto 0);
+        memoryModeIn : in STD_LOGIC_VECTOR(1 downto 0);
+        memoryModeOut: out STD_LOGIC_VECTOR(1 downto 0);
 
         --W
-        ResultSrcIn : in STD_LOGIC;
-        ResultSrcOut : out STD_LOGIC;
-        RegWriteClkIn : in STD_LOGIC;
-        RegWriteClkOut : out STD_LOGIC;
-
-        --USED IN BOTH M AND W
-        RegWriteIn : in STD_LOGIC;
-        RegWriteOut : out STD_LOGIC
+        resultSrcIn : in STD_LOGIC;
+        resultSrcOut : out STD_LOGIC;
+        regWriteClkIn : in STD_LOGIC;
+        regWriteClkOut : out STD_LOGIC
     );
 end ID2EX;
 
@@ -91,13 +87,12 @@ begin
             regWbAddrOut <= regWbAddrIn;
             rxAddrOut <= rxAddrIn;
             ryAddrOut <= ryAddrIn;
-            BMuxOut <= BMuxIn;
-            ALUOpOut <= ALUOpIn;
-            ALUResultSrcOut <= ALUResultSrcIn;
-            MemoryModeOut <= MemoryModeIn;
-            ResultSrcOut <= ResultSrcIn;
-            RegWriteClkOut <= RegWriteClkIn;
-            RegWriteOut <= RegWriteIn;
+            BMuxOpOut <= BMuxOpIn;
+            aluOpOut <= aluOpIn;
+            aluResultSrcOut <= aluResultSrcIn;
+            memoryModeOut <= memoryModeIn;
+            resultSrcOut <= resultSrcIn;
+            regWriteClkOut <= regWriteClkIn;
         end if;
     end process;
 end Behavioral;
