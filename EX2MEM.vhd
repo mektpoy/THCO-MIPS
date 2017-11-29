@@ -7,26 +7,22 @@ entity EX2MEM is
     Port ( 
         clk: in STD_LOGIC;
         rst: in STD_LOGIC;
-        ALUResultIn : in STD_LOGIC_VECTOR(15 downto 0);
-        ALUResultOut : out STD_LOGIC_VECTOR(15 downto 0);
-        InputBIn : in STD_LOGIC_VECTOR(15 downto 0);
-        InputBOut : out STD_LOGIC_VECTOR(15 downto 0);
+        aluResultIn : in STD_LOGIC_VECTOR(15 downto 0);
+        aluResultOut : out STD_LOGIC_VECTOR(15 downto 0);
+        inputBIn : in STD_LOGIC_VECTOR(15 downto 0);
+        inputBOut : out STD_LOGIC_VECTOR(15 downto 0);
         regWbAddrIn : in STD_LOGIC_VECTOR (3 downto 0);
         regWbAddrOut : out STD_LOGIC_VECTOR (3 downto 0);
 
         --M
-        MemoryModeIn : in STD_LOGIC_VECTOR(1 downto 0);
-        MemoryModeOut: out STD_LOGIC_VECTOR(1 downto 0);
+        memoryModeIn : in STD_LOGIC_VECTOR(1 downto 0);
+        memoryModeOut: out STD_LOGIC_VECTOR(1 downto 0);
 
         --W
-        ResultSrcIn : in STD_LOGIC;
-        ResultSrcOut : out STD_LOGIC;
-        RegWriteClkIn : in STD_LOGIC;
-        RegWriteClkOut : out STD_LOGIC;
-
-        --USED IN BOTH M AND W
-        RegWriteIn : in STD_LOGIC;
-        RegWriteOut : out STD_LOGIC
+        resultSrcIn : in STD_LOGIC;
+        resultSrcOut : out STD_LOGIC;
+        regWriteClkIn : in STD_LOGIC;
+        regWriteClkOut : out STD_LOGIC
     );
 end EX2MEM;
 
@@ -41,16 +37,14 @@ begin
             MemoryModeOut <= "00";
             ResultSrcOut <= "0";
             RegWriteClkOut <= "0";
-            RegWriteOut <= "0";
 
-        elsif(clk 'event and clk = '1') then
-            ALUResultOut <= ALUResultIn;
-            InputBOut <= InputBIn;
+        elsif(rising_edge(clk)) then
+            aluResultOut <= aluResultIn;
+            inputBOut <= inputBIn;
             regWbAddrOut <= regWbAddrIn;
-            MemoryModeOut <= MemoryModeIn;
-            ResultSrcOut <= ResultSrcIn;
-            RegWriteClkOut <= RegWriteClkIn;
-            RegWriteOut <= RegWriteIn;
+            memoryModeOut <= memoryModeIn;
+            resultSrcOut <= resultSrcIn;
+            regWriteClkOut <= regWriteClkIn;
         end if;
     end process;
 end Behavioral;
