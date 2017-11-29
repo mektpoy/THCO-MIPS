@@ -1,3 +1,8 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
 entity IM is
     Port ( 
       ReadAddress : in STD_LOGIC_VECTOR (15 downto 0);
