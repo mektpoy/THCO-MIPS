@@ -5,27 +5,27 @@ USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity PCMUX is
 	Port ( 
-		PCsrc : in STD_LOGIC_VECTOR(1 downto 0);
-		Normal : in STD_LOGIC_VECTOR (15 downto 0);
-		RegJump : in STD_LOGIC_VECTOR (15 downto 0);
-		OffsetJump : in STD_LOGIC_VECTOR (15 downto 0);
+		pcSrc : in STD_LOGIC_VECTOR(1 downto 0);
+		normal : in STD_LOGIC_VECTOR (15 downto 0);
+		regJump : in STD_LOGIC_VECTOR (15 downto 0);
+		offsetJump : in STD_LOGIC_VECTOR (15 downto 0);
 		PCMuxOut : out STD_LOGIC_VECTOR (15 downto 0)
 	);
 end PCMUX;
 
 architecture Behavioral of PCMux is
 begin
-	process (PCsrc, Normal, RegJump, OffsetJump)
+	process (pcSrc, normal, regJump, offsetJump)
 	begin
-		case PCsrc is
+		case pcSrc is
 			when "00" =>
-				PCMuxOut <= Normal;
+				PCMuxOut <= regJump;
 			when "01" =>
-				PCMuxOut <= OffsetJump;
+				PCMuxOut <= offsetJump;
 			when "10" =>
-				PCMuxOut <= RegJump;
-			when others =>
-				PCMuxOut <= Normal;
+				PCMuxOut <= normal;
+			when "11" =>
+				PCMuxOut <= normal;
 		end case;
 	end process;
 end Behavioral;
