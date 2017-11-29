@@ -1,36 +1,20 @@
-----------------------------------------------------------------------------------
--- Company: 
--- Engineer: 
--- 
--- Create Date:    19:22:20 11/22/2017 
--- Design Name: 
--- Module Name:    RegisterFile - Behavioral 
--- Project Name: 
--- Target Devices: 
--- Tool versions: 
--- Description: 
---
--- Dependencies: 
---
--- Revision: 
--- Revision 0.01 - File Created
--- Additional Comments: 
---
-----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 use IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity RegisterFile is
-    Port ( rxAddr : in STD_LOGIC_VECTOR (3 downto 0);
-           ryAddr : in STD_LOGIC_VECTOR (3 downto 0);
-           regWbAddr : in STD_LOGIC_VECTOR (3 downto 0);
-           regWbValue : in STD_LOGIC_VECTOR (15 downto 0);
-           regWrite : in STD_LOGIC;
-           clk : in STD_LOGIC;
-           rxValue : out STD_LOGIC_VECTOR (15 downto 0);
-           ryValue : out STD_LOGIC_VECTOR (15 downto 0));
+    Port 
+    ( 
+		rxAddr : in STD_LOGIC_VECTOR (3 downto 0);
+		ryAddr : in STD_LOGIC_VECTOR (3 downto 0);
+		regWbAddr : in STD_LOGIC_VECTOR (3 downto 0);
+		regWbValue : in STD_LOGIC_VECTOR (15 downto 0);
+		regWrite : in STD_LOGIC;
+		clk : in STD_LOGIC;
+		rxValue : out STD_LOGIC_VECTOR (15 downto 0);
+		ryValue : out STD_LOGIC_VECTOR (15 downto 0)
+	);
 end RegisterFile;
 
 architecture Behavioral of RegisterFile is

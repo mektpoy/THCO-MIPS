@@ -23,10 +23,13 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity WBMux is
-    Port ( readData : in STD_LOGIC_VECTOR (15 downto 0);
-           aluResult : in STD_LOGIC_VECTOR (15 downto 0);
-           resultSrc : in STD_LOGIC;
-           regWbValue : out STD_LOGIC_VECTOR (15 downto 0));
+    Port 
+    ( 
+		readData : in STD_LOGIC_VECTOR (15 downto 0);
+		aluResult : in STD_LOGIC_VECTOR (15 downto 0);
+		resultSrc : in STD_LOGIC;
+		regWbValue : out STD_LOGIC_VECTOR (15 downto 0)
+	);
 end WBMux;
 
 architecture Behavioral of WBMux is

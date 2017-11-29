@@ -4,10 +4,11 @@ use IEEE.std_logic_arith.all;
 use IEEE.std_logic_unsigned.all;
 
 entity IF_PCAdder is
-    Port ( 
-        IF_PC_in : in STD_LOGIC_VECTOR(15 downto 0);
-        IF_PC_out : out STD_LOGIC_VECTOR(15 downto 0)
-    );   
+	Port 
+	( 
+		IF_PC_in : in STD_LOGIC_VECTOR(15 downto 0);
+		IF_PC_out : out STD_LOGIC_VECTOR(15 downto 0)
+	);   
 end IF_PCAdder;
 
 architecture Behavioral of IF_PCAdder is

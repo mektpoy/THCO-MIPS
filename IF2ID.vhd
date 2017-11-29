@@ -21,14 +21,16 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.ALL;
 
 entity IF2ID is
-    Port ( 
-		   clk: in STD_LOGIC;
-		   rst: in STD_LOGIC;
-		   stay: in STD_LOGIC;
-           PCin : in  STD_LOGIC_VECTOR (15 downto 0);
-		   PCout : out STD_LOGIC_VECTOR (15 downto 0);
-           Instructionin : in  STD_LOGIC_VECTOR (15 downto 0));
-           Instructionout : out  STD_LOGIC_VECTOR (15 downto 0));
+    Port 
+    ( 
+		clk: in STD_LOGIC;
+		rst: in STD_LOGIC;
+		stay: in STD_LOGIC;
+		PCin : in  STD_LOGIC_VECTOR (15 downto 0);
+		PCout : out STD_LOGIC_VECTOR (15 downto 0);
+		Instructionin : in  STD_LOGIC_VECTOR (15 downto 0));
+		Instructionout : out  STD_LOGIC_VECTOR (15 downto 0)
+	);
 end IF2ID;
 
 architecture Behavioral of IF2ID is

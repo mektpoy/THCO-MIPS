@@ -4,14 +4,17 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity Controller is
-    Port ( instrId : in STD_LOGIC_VECTOR (4 downto 0);
-    	   aluOp : out STD_LOGIC_VECTOR (2 downto 0);
-    	   BMuxOp : out STD_LOGIC;
-    	   jumpType : out STD_LOGIC_VECTOR (2 downto 0);
-    	   resultSrc : out STD_LOGIC;
-           memoryMode : out STD_LOGIC_VECTOR (1 downto 0);
-           aluResultSrc : out STD_LOGIC_VECTOR (1 downto 0);
-           regWriteClk : out STD_LOGIC);
+    Port 
+    ( 
+		instrId : in STD_LOGIC_VECTOR (4 downto 0);
+		aluOp : out STD_LOGIC_VECTOR (2 downto 0);
+		BMuxOp : out STD_LOGIC;
+		jumpType : out STD_LOGIC_VECTOR (2 downto 0);
+		resultSrc : out STD_LOGIC;
+		memoryMode : out STD_LOGIC_VECTOR (1 downto 0);
+		aluResultSrc : out STD_LOGIC_VECTOR (1 downto 0);
+		regWriteClk : out STD_LOGIC
+	);
 end Controller;
 
 architecture Behavioral of Controller is

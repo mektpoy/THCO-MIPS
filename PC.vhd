@@ -4,12 +4,13 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity PC is
-    port( 
-          clk, rst: in std_logic;
-          PCMuxOut: in std_logic_vector(15 downto 0);
-          stayPC: in std_logic;
-		  outPC: out std_logic_vector(15 downto 0)
-		 );
+    port
+    ( 
+		clk, rst: in std_logic;
+		PCMuxOut: in std_logic_vector(15 downto 0);
+		stayPC: in std_logic;
+		outPC: out std_logic_vector(15 downto 0)
+	);
 end PC;
 
 architecture Behavioral of PC is

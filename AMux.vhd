@@ -23,11 +23,14 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity AMux is
-    Port ( forwardOp0 : in STD_LOGIC_VECTOR (1 downto 0);
-           result : in STD_LOGIC_VECTOR (15 downto 0);
-           regWbValue : in STD_LOGIC_VECTOR (15 downto 0);
-           rxValue : in STD_LOGIC_VECTOR (15 downto 0);
-           inputA : out STD_LOGIC_VECTOR (15 downto 0));
+    Port 
+	( 
+		forwardOp0 : in STD_LOGIC_VECTOR (1 downto 0);
+		result : in STD_LOGIC_VECTOR (15 downto 0);
+		regWbValue : in STD_LOGIC_VECTOR (15 downto 0);
+		rxValue : in STD_LOGIC_VECTOR (15 downto 0);
+		inputA : out STD_LOGIC_VECTOR (15 downto 0)
+	);
 end AMux;
 
 architecture Behavioral of AMux is

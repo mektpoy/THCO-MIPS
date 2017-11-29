@@ -1,5 +1,6 @@
 entity DM is
-    Port ( 
+    Port 
+    ( 
       writeData : in  STD_LOGIC_VECTOR (15 downto 0);
       addr : in  STD_LOGIC_VECTOR (15 downto 0);
       clk, rst : in  STD_LOGIC;

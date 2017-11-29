@@ -4,7 +4,8 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity MEM2WB is 
-    Port ( 
+    Port 
+    ( 
         clk: in STD_LOGIC;
         rst: in STD_LOGIC;
         aluResultIn : in STD_LOGIC_VECTOR(15 downto 0);

@@ -4,7 +4,8 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity PCMUX is
-	Port ( 
+	Port 
+	( 
 		pcSrc : in STD_LOGIC_VECTOR(1 downto 0);
 		normal : in STD_LOGIC_VECTOR (15 downto 0);
 		regJump : in STD_LOGIC_VECTOR (15 downto 0);

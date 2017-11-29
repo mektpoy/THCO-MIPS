@@ -23,7 +23,8 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity ID2EX is 
-    Port ( 
+    Port 
+    ( 
         clk: in STD_LOGIC;
         rst: in STD_LOGIC;
         rxValueIn : in STD_LOGIC_VECTOR (15 downto 0);

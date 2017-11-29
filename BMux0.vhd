@@ -23,11 +23,14 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity BMux0 is
-    Port ( forwardOp1 : in STD_LOGIC_VECTOR (1 downto 0);
-           result : in STD_LOGIC_VECTOR (15 downto 0);
-           regWbValue : in STD_LOGIC_VECTOR (15 downto 0);
-           ryValue : in STD_LOGIC_VECTOR (15 downto 0);
-           inputB0 : out STD_LOGIC_VECTOR (15 downto 0));
+    Port 
+	( 
+		forwardOp1 : in STD_LOGIC_VECTOR (1 downto 0);
+		result : in STD_LOGIC_VECTOR (15 downto 0);
+		regWbValue : in STD_LOGIC_VECTOR (15 downto 0);
+		ryValue : in STD_LOGIC_VECTOR (15 downto 0);
+		inputB0 : out STD_LOGIC_VECTOR (15 downto 0)
+	);
 end BMux0;
 
 architecture Behavioral of BMux0 is

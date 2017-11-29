@@ -23,12 +23,15 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity ALU is
-    Port ( inputA : in  STD_LOGIC_VECTOR (15 downto 0);
-           inputB : in  STD_LOGIC_VECTOR (15 downto 0);
-           aluOp : in  STD_LOGIC_VECTOR (2 downto 0);
-           result : buffer  STD_LOGIC_VECTOR (15 downto 0);
-           aluZero : out STD_LOGIC;
-           aluSign : out STD_LOGIC);
+    Port 
+	(
+		inputA : in  STD_LOGIC_VECTOR (15 downto 0);
+		inputB : in  STD_LOGIC_VECTOR (15 downto 0);
+		aluOp : in  STD_LOGIC_VECTOR (2 downto 0);
+		result : out  STD_LOGIC_VECTOR (15 downto 0);
+		aluZero : out STD_LOGIC;
+		aluSign : out STD_LOGIC
+	);
 end ALU;
 
 architecture Behavioral of ALU is
