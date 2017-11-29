@@ -9,8 +9,8 @@ entity EX2MEM is
         rst: in STD_LOGIC;
         aluResultIn : in STD_LOGIC_VECTOR(15 downto 0);
         aluResultOut : out STD_LOGIC_VECTOR(15 downto 0);
-        inputBIn : in STD_LOGIC_VECTOR(15 downto 0);
-        inputBOut : out STD_LOGIC_VECTOR(15 downto 0);
+        inputB : in STD_LOGIC_VECTOR(15 downto 0);
+        writeData : out STD_LOGIC_VECTOR(15 downto 0);
         regWbAddrIn : in STD_LOGIC_VECTOR (3 downto 0);
         regWbAddrOut : out STD_LOGIC_VECTOR (3 downto 0);
 
@@ -32,7 +32,7 @@ begin
     begin
         if(rst = '0') then
             ALUResultOut <= "0000000000000000";
-            InputBOut <= "0000000000000000";
+            writeData <= "0000000000000000";
             regWbAddrOut <= "0000";
             MemoryModeOut <= "00";
             ResultSrcOut <= "0";
@@ -40,7 +40,7 @@ begin
 
         elsif(rising_edge(clk)) then
             aluResultOut <= aluResultIn;
-            inputBOut <= inputBIn;
+            writeData <= inputB;
             regWbAddrOut <= regWbAddrIn;
             memoryModeOut <= memoryModeIn;
             resultSrcOut <= resultSrcIn;
