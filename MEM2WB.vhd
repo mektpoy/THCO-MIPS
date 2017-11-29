@@ -7,8 +7,8 @@ entity MEM2WB is
     Port ( 
         clk: in STD_LOGIC;
         rst: in STD_LOGIC;
-        resultIn : in STD_LOGIC_VECTOR(15 downto 0);
-        resultOut : out STD_LOGIC_VECTOR(15 downto 0);
+        aluResultIn : in STD_LOGIC_VECTOR(15 downto 0);
+        aluResultOut : out STD_LOGIC_VECTOR(15 downto 0);
         readDataIn : in STD_LOGIC_VECTOR(15 downto 0);
         readDataOut : out STD_LOGIC_VECTOR(15 downto 0);
         regWbAddrIn : in STD_LOGIC_VECTOR (3 downto 0);
@@ -28,12 +28,12 @@ begin
     begin
         if(rst = '0') then
             readDataOut <= "0000000000000000";
-            resultOut <= "0000000000000000";
+            aluResultOut <= "0000000000000000";
             regWbAddrOut <= "0000";
             resultSrcOut <= "0";
             regWriteClkOut <= "0";
 
-        elsif(clk 'event and clk = '1') then
+        elsif(rising_edge(clk)) then
             readDataOut <= readDataIn;
             aluResultOut <= aluResultIn;
             regWbAddrOut <= regWbAddrIn;
