@@ -17,7 +17,7 @@ architecture Behavioral of PC is
 begin
 	process(clk, rst)
 	begin
-		if rst = '0' then
+		if (rising_edge(rst)) then
 			outPC <= X"0000";
 		elsif(rising_edge(clk)) then
 			if stayPC = '0' then

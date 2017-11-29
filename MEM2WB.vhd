@@ -17,8 +17,8 @@ entity MEM2WB is
         --W
         resultSrcIn : in STD_LOGIC;
         resultSrcOut : out STD_LOGIC;
-        regWriteClkIn : in STD_LOGIC;
-        regWriteClkOut : out STD_LOGIC
+        regWriteIn : in STD_LOGIC;
+        regWriteOut : out STD_LOGIC
     );
 end MEM2WB;
 
@@ -26,19 +26,19 @@ architecture Behavioral of MEM2WB is
 begin
     process(clk, rst)
     begin
-        if(rst = '0') then
+        if(rising_edge(rst)) then
             readDataOut <= "0000000000000000";
             aluResultOut <= "0000000000000000";
             regWbAddrOut <= "0000";
             resultSrcOut <= "0";
-            regWriteClkOut <= "0";
+            regWriteOut <= "0";
 
         elsif(rising_edge(clk)) then
             readDataOut <= readDataIn;
             aluResultOut <= aluResultIn;
             regWbAddrOut <= regWbAddrIn;
             resultSrcOut <= resultSrcIn;
-            regWriteClkOut <= regWriteClkIn;
+            regWriteOut <= regWriteIn;
         end if;
     end process;
 end Behavioral;

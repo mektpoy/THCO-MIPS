@@ -27,7 +27,8 @@ entity RegisterFile is
            ryAddr : in STD_LOGIC_VECTOR (3 downto 0);
            regWbAddr : in STD_LOGIC_VECTOR (3 downto 0);
            regWbValue : in STD_LOGIC_VECTOR (15 downto 0);
-           regWriteClk : in STD_LOGIC;
+           regWrite : in STD_LOGIC;
+           clk : in STD_LOGIC;
            rxValue : out STD_LOGIC_VECTOR (15 downto 0);
            ryValue : out STD_LOGIC_VECTOR (15 downto 0));
 end RegisterFile;
@@ -36,9 +37,9 @@ architecture Behavioral of RegisterFile is
 	type regs is array(15 downto 0) of STD_LOGIC_VECTOR(15 downto 0);
 	signal data : regs := (others => (others => '0'));
 begin
-	process (regWriteClk)
+	process (clk)
 	begin
-		if (rising_edge(regWriteClk)) then
+		if (falling_edge(clk) and regWrite = '1') then
 			data(conv_integer(regWbAddr)) <= regWbValue;
 			if (conv_integer(rxAddr) = conv_integer(regWbAddr)) then
 				rxValue <= data(conv_integer(rxAddr));
