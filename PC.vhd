@@ -6,21 +6,24 @@ USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity PC is
     port
     ( 
-		clk, rst: in std_logic;
-		PCMuxOut: in std_logic_vector(15 downto 0);
-		stayPC: in std_logic;
-		outPC: out std_logic_vector(15 downto 0)
+		clk, rst: in STD_LOGIC;
+		PCMuxOut: in STD_LOGIC_VECTOR(15 downto 0);
+		stayPC: in STD_LOGIC;
+		outPC: out STD_LOGIC_VECTOR(15 downto 0)
 	);
 end PC;
 
 architecture Behavioral of PC is
-
+	signal pcRegister : STD_LOGIC_VECTOR (15 downto 0) := X"0000";
 begin
-	process(clk)
+	outPC <= pcRegister;
+	process(rst, clk)
 	begin
-		if(rising_edge(clk)) then
+		if (rst = '0') then
+			pcRegister <= X"0000";
+		elsif(rising_edge(clk)) then
 			if stayPC = '0' then
-				outPC <= PCMuxOut;
+				pcRegister <= PCMuxOut;
 			end if;
 		end if;
 	end process;
