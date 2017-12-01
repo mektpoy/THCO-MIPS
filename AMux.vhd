@@ -44,6 +44,8 @@ begin
 				inputA <= regWbValue;
 			when "10" =>
 				inputA <= rxValue;
+			when others =>
+				inputA <= result;
 		end case;
 	end process;
 end Behavioral;

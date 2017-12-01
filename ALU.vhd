@@ -28,7 +28,7 @@ entity ALU is
 		inputA : in  STD_LOGIC_VECTOR (15 downto 0);
 		inputB : in  STD_LOGIC_VECTOR (15 downto 0);
 		aluOp : in  STD_LOGIC_VECTOR (2 downto 0);
-		result : out  STD_LOGIC_VECTOR (15 downto 0);
+		result : buffer  STD_LOGIC_VECTOR (15 downto 0);
 		aluZero : out STD_LOGIC;
 		aluSign : out STD_LOGIC
 	);
@@ -48,34 +48,29 @@ begin
 	
 	process (inputA, inputB, aluOp)
 	begin
-		case op is
+		case aluOp is
 			when "000" =>
 				result <= ('0' & inputA) + ('0' & inputB);
 			when "001" =>
 				result <= ('0' & inputA) - ('0' & inputB);
 			when "010" =>
 				result <= (inputA and inputB);
-				flag(0)<= '0';
 			when "011" =>	
 				result <= (inputA or inputB);
-				flag(0) <= '0';
 			when "100" =>
 				result <= (inputA xor inputB);
-				flag(0) <= '0';
 			when "101" => -- SLL
 				if InputB = X"0000" then
 					result <= to_stdlogicvector(to_bitvector(inputA) sll 8);
 				else
 					result <= to_stdlogicvector(to_bitvector(inputA) sll conv_integer(inputB));
 				end if;
-				flag(0) <= '0';
 			when "110" => -- SRA
 				if InputB = X"0000" then
 					result <= to_stdlogicvector(to_bitvector(inputA) srl 8);
 				else
 					result <= to_stdlogicvector(to_bitvector(inputA) srl conv_integer(inputB));
 				end if;
-				flag(0) <= '0';
 			when others =>
 				result <= X"FFFF";
 		end case;

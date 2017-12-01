@@ -1,0 +1,117 @@
+V3 94
+FL F:/THU/cpu/ALU.vhd 2017/12/01.16:44:19 P.20131013
+EN work/ALU 1512118937 FL F:/THU/cpu/ALU.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/ALU/Behavioral 1512118938 \
+      FL F:/THU/cpu/ALU.vhd EN work/ALU 1512118937
+FL F:/THU/cpu/ALUMux.vhd 2017/12/01.16:48:32 P.20131013
+EN work/ALUMux 1512118939 FL F:/THU/cpu/ALUMux.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/ALUMux/Behavioral 1512118940 \
+      FL F:/THU/cpu/ALUMux.vhd EN work/ALUMux 1512118939
+FL F:/THU/cpu/AMux.vhd 2017/12/01.16:49:02 P.20131013
+EN work/AMux 1512118941 FL F:/THU/cpu/AMux.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/AMux/Behavioral 1512118942 \
+      FL F:/THU/cpu/AMux.vhd EN work/AMux 1512118941
+FL F:/THU/cpu/BMux.vhd 2017/12/01.16:53:25 P.20131013
+EN work/BMux 1512118943 FL F:/THU/cpu/BMux.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/BMux/Behavioral 1512118944 \
+      FL F:/THU/cpu/BMux.vhd EN work/BMux 1512118943
+FL F:/THU/cpu/BMux0.vhd 2017/12/01.16:54:13 P.20131013
+EN work/BMux0 1512118945 FL F:/THU/cpu/BMux0.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/BMux0/Behavioral 1512118946 \
+      FL F:/THU/cpu/BMux0.vhd EN work/BMux0 1512118945
+FL F:/THU/cpu/BranchUnit.vhd 2017/12/01.16:54:34 P.20131013
+EN work/BranchUnit 1512118947 FL F:/THU/cpu/BranchUnit.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/BranchUnit/Behavioral 1512118948 \
+      FL F:/THU/cpu/BranchUnit.vhd EN work/BranchUnit 1512118947
+FL F:/THU/cpu/controller.vhd 2017/12/01.16:59:02 P.20131013
+EN work/Controller 1512118949 FL F:/THU/cpu/controller.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/Controller/Behavioral 1512118950 \
+      FL F:/THU/cpu/controller.vhd EN work/Controller 1512118949
+FL F:/THU/cpu/CPU.vhd 2017/12/01.16:36:35 P.20131013
+EN work/CPU 0 FL F:/THU/cpu/CPU.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/CPU/Behavioral 0 \
+      FL F:/THU/cpu/CPU.vhd EN work/CPU 0 CP ALU CP ALUMux CP AMux CP BMux CP BMux0 \
+      CP BranchUnit CP controller CP decoder CP DM CP EX2MEM CP ForwardUnit \
+      CP HazardUnit CP ID2EX CP ID_PCAdder CP IF2ID CP IF_PCAdder CP IM CP out CP inout \
+      CP in CP MEM2WB CP PC CP PCMux CP RegisterFile CP WBMux
+FL F:/THU/cpu/Decoder.vhd 2017/12/01.16:36:35 P.20131013
+EN work/Decoder 0 FL F:/THU/cpu/Decoder.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/Decoder/Behavioral 0 \
+      FL F:/THU/cpu/Decoder.vhd EN work/Decoder 0
+FL F:/THU/cpu/DM.vhd 2017/12/01.16:36:35 P.20131013
+EN work/DM 0 FL F:/THU/cpu/DM.vhd
+AR work/DM/Behavioral 0 FL F:/THU/cpu/DM.vhd \
+      EN work/DM 0
+FL F:/THU/cpu/EX2MEM.vhd 2017/12/01.16:36:35 P.20131013
+EN work/EX2MEM 0 FL F:/THU/cpu/EX2MEM.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/EX2MEM/Behavioral 0 \
+      FL F:/THU/cpu/EX2MEM.vhd EN work/EX2MEM 0
+FL F:/THU/cpu/ForwardUnit.vhd 2017/12/01.16:36:35 P.20131013
+EN work/ForwardUnit 0 FL F:/THU/cpu/ForwardUnit.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/ForwardUnit/Behavioral 0 \
+      FL F:/THU/cpu/ForwardUnit.vhd EN work/ForwardUnit 0
+FL F:/THU/cpu/HazardUnit.vhd 2017/12/01.16:36:35 P.20131013
+EN work/HazardUnit 0 FL F:/THU/cpu/HazardUnit.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/HazardUnit/Behavioral 0 \
+      FL F:/THU/cpu/HazardUnit.vhd EN work/HazardUnit 0
+FL F:/THU/cpu/ID2EX.vhd 2017/12/01.16:36:35 P.20131013
+EN work/ID2EX 0 FL F:/THU/cpu/ID2EX.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/ID2EX/Behavioral 0 \
+      FL F:/THU/cpu/ID2EX.vhd EN work/ID2EX 0
+FL F:/THU/cpu/ID_PCAdder.vhd 2017/12/01.16:36:35 P.20131013
+EN work/ID_PCAdder 0 FL F:/THU/cpu/ID_PCAdder.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/ID_PCAdder/Behavioral 0 \
+      FL F:/THU/cpu/ID_PCAdder.vhd EN work/ID_PCAdder 0
+FL F:/THU/cpu/IF2ID.vhd 2017/12/01.16:36:35 P.20131013
+EN work/IF2ID 0 FL F:/THU/cpu/IF2ID.vhd PB ieee/std_logic_1164 1381692176
+AR work/IF2ID/Behavioral 0 \
+      FL F:/THU/cpu/IF2ID.vhd EN work/IF2ID 0
+FL F:/THU/cpu/IF_PCAdder.vhd 2017/12/01.16:36:35 P.20131013
+EN work/IF_PCAdder 0 FL F:/THU/cpu/IF_PCAdder.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/IF_PCAdder/Behavioral 0 \
+      FL F:/THU/cpu/IF_PCAdder.vhd EN work/IF_PCAdder 0
+FL F:/THU/cpu/IM.vhd 2017/12/01.16:36:35 P.20131013
+EN work/IM 0 FL F:/THU/cpu/IM.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/IM/Behavioral 0 \
+      FL F:/THU/cpu/IM.vhd EN work/IM 0
+FL F:/THU/cpu/MEM2WB.vhd 2017/12/01.16:36:35 P.20131013
+EN work/MEM2WB 0 FL F:/THU/cpu/MEM2WB.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/MEM2WB/Behavioral 0 \
+      FL F:/THU/cpu/MEM2WB.vhd EN work/MEM2WB 0
+FL F:/THU/cpu/PC.vhd 2017/12/01.16:36:35 P.20131013
+EN work/PC 0 FL F:/THU/cpu/PC.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/PC/Behavioral 0 \
+      FL F:/THU/cpu/PC.vhd EN work/PC 0
+FL F:/THU/cpu/PCMux.vhd 2017/12/01.16:36:35 P.20131013
+EN work/PCMUX 0 FL F:/THU/cpu/PCMux.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/PCMux/Behavioral 0 \
+      FL F:/THU/cpu/PCMux.vhd EN work/PCMUX 0
+FL F:/THU/cpu/RegisterFile.vhd 2017/12/01.16:36:35 P.20131013
+EN work/RegisterFile 0 FL F:/THU/cpu/RegisterFile.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/RegisterFile/Behavioral 0 \
+      FL F:/THU/cpu/RegisterFile.vhd EN work/RegisterFile 0
+FL F:/THU/cpu/WBMux.vhd 2017/12/01.16:36:35 P.20131013
+EN work/WBMux 0 FL F:/THU/cpu/WBMux.vhd PB ieee/std_logic_1164 1381692176 \
+      PB ieee/std_logic_arith 1381692177 PB ieee/STD_LOGIC_UNSIGNED 1381692179
+AR work/WBMux/Behavioral 0 \
+      FL F:/THU/cpu/WBMux.vhd EN work/WBMux 0

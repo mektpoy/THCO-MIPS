@@ -8,7 +8,7 @@ entity BranchUnit is
 	(
 		jumpType : in STD_LOGIC_VECTOR(2 downto 0);
 		rxValue : in STD_LOGIC_VECTOR(15 downto 0);
-		pcSrc : out STD_LOGIC_VECTOR(1 to 0)
+		pcSrc : out STD_LOGIC_VECTOR(1 downto 0)
 	);
 end BranchUnit;
 

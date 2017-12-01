@@ -28,6 +28,8 @@ begin
 				aluResult <= result;
 			when "11" =>
 				aluResult <= inputB;
+			when others =>
+				aluResult <= result;
 		end case;
 	end process;
 end Behavioral;

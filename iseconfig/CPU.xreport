@@ -1,11 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <report-views version="2.0" >
  <header>
-  <DateModified>2017-12-01T16:29:40</DateModified>
+  <DateModified>2017-12-01T16:37:14</DateModified>
   <ModuleName>CPU</ModuleName>
   <SummaryTimeStamp>Unknown</SummaryTimeStamp>
-  <SavedFilePath>C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/iseconfig/CPU.xreport</SavedFilePath>
-  <ImplementationReportsDirectory>C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS\</ImplementationReportsDirectory>
+  <SavedFilePath>F:/THU/cpu/iseconfig/CPU.xreport</SavedFilePath>
+  <ImplementationReportsDirectory>F:/THU/cpu\</ImplementationReportsDirectory>
   <DateInitialized>2017-12-01T16:18:34</DateInitialized>
   <EnableMessageFiltering>false</EnableMessageFiltering>
  </header>

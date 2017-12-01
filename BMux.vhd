@@ -36,11 +36,13 @@ architecture Behavioral of BMux is
 begin
 	process (BMuxOp, inputB0, imme)
 	begin
-		case forwardOp1 is
-			when "0" =>
+		case BMuxOp is
+			when '0' =>
 				inputB <= inputB0;
-			when "1" =>
+			when '1' =>
 				inputB <= imme;
+			when others =>
+				inputB <= inputB0;
 		end case;
 	end process;
 end Behavioral;

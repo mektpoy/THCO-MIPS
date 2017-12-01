@@ -74,7 +74,14 @@ begin
 						imme(15 downto 0) <= (others => '0');
 						regWbAddr <= '0' & instruction(4 downto 2);
 						instrId <= "11011";
+					when others =>
+						rxAddr <= '0' & instruction(10 downto 8);
+						ryAddr <= '0' & instruction(7 downto 5);
+						imme(15 downto 0) <= X"0000";
+						regWbAddr <= '0' & instruction(4 downto 2);
+						instrId <= "00000";
 				end case;
+				
 			when "11101" => 
 				case instruction (4 downto 0) is
 					when "01100" => -- AND
@@ -109,7 +116,14 @@ begin
 						imme(15 downto 0) <= X"0000";
 						regWbAddr <= '0' & instruction(10 downto 8);
 						instrId <= "10110";
+					when others =>
+						rxAddr <= '0' & instruction(10 downto 8);
+						ryAddr <= '0' & instruction(7 downto 5);
+						imme(15 downto 0) <= X"0000";
+						regWbAddr <= '0' & instruction(4 downto 2);
+						instrId <= "00000";
 				end case;
+				
 			when "00010" => -- B
 				rxAddr <= "1111";
 				ryAddr <= "1111";
@@ -173,6 +187,13 @@ begin
 						imme(15 downto 0) <= X"0000";
 						regWbAddr <= "1010";
 						instrId <= "10011";
+					when others =>
+						rxAddr <= "0000";
+						ryAddr <= "0000";
+						imme(15 downto 0) <= X"0000";
+						regWbAddr <= "0000";
+						instrId <= "00101";
+
 				end case;
 			when "01111" => -- MOVE
 				rxAddr <= "1111";

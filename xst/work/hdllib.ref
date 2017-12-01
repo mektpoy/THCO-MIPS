@@ -1,0 +1,15 @@
+AR amux behavioral F:/THU/cpu/AMux.vhd sub00/vhpl05 1512118942
+EN bmux NULL F:/THU/cpu/BMux.vhd sub00/vhpl06 1512118943
+AR alumux behavioral F:/THU/cpu/ALUMux.vhd sub00/vhpl03 1512118940
+EN bmux0 NULL F:/THU/cpu/BMux0.vhd sub00/vhpl08 1512118945
+AR bmux behavioral F:/THU/cpu/BMux.vhd sub00/vhpl07 1512118944
+AR branchunit behavioral F:/THU/cpu/BranchUnit.vhd sub00/vhpl11 1512118948
+AR bmux0 behavioral F:/THU/cpu/BMux0.vhd sub00/vhpl09 1512118946
+EN branchunit NULL F:/THU/cpu/BranchUnit.vhd sub00/vhpl10 1512118947
+EN amux NULL F:/THU/cpu/AMux.vhd sub00/vhpl04 1512118941
+AR alu behavioral F:/THU/cpu/ALU.vhd sub00/vhpl01 1512118938
+EN decoder NULL F:/THU/cpu/Decoder.vhd sub00/vhpl14 1512118951
+EN controller NULL F:/THU/cpu/controller.vhd sub00/vhpl12 1512118949
+EN alumux NULL F:/THU/cpu/ALUMux.vhd sub00/vhpl02 1512118939
+AR controller behavioral F:/THU/cpu/controller.vhd sub00/vhpl13 1512118950
+EN alu NULL F:/THU/cpu/ALU.vhd sub00/vhpl00 1512118937
