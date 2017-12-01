@@ -40,13 +40,13 @@ begin
 	process(clk, rst)
 	begin
 		if(rst = '0') then
-			PCout <= "0000000000000000"
-			Instructionout <= "0000000000000000"
+			PCout <= "0000000000000000";
+			Instructionout <= "0000000000000000";
 
 		elsif(clk 'event and clk = '1') then
 				if(stay = '0') then
-					Instructionout <= Instructionin
-					PCout <= PCin
+					Instructionout <= Instructionin;
+					PCout <= PCin;
 				end if;
 		end if;
 	end process;

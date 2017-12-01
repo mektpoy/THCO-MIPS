@@ -3,13 +3,13 @@ Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.
 --> Parameter TMPDIR set to xst/projnav.tmp
 
 
-Total REAL time to Xst completion: 0.00 secs
+Total REAL time to Xst completion: 1.00 secs
 Total CPU time to Xst completion: 0.10 secs
  
 --> Parameter xsthdpdir set to xst
 
 
-Total REAL time to Xst completion: 0.00 secs
+Total REAL time to Xst completion: 1.00 secs
 Total CPU time to Xst completion: 0.10 secs
  
 --> Reading design: CPU.prj
@@ -104,33 +104,77 @@ Slice Utilization Ratio Delta      : 5
 =========================================================================
 *                          HDL Compilation                              *
 =========================================================================
-Compiling vhdl file "F:/THU/cpu/ALU.vhd" in Library work.
+WARNING:HDLParsers:3607 - Unit work/CPU is now defined in a different file.  It was defined in "F:/THU/cpu/CPU.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU.vhd".
+WARNING:HDLParsers:3607 - Unit work/CPU/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/CPU.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU.vhd".
+WARNING:HDLParsers:3607 - Unit work/ALU is now defined in a different file.  It was defined in "F:/THU/cpu/ALU.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/ALU.vhd".
+WARNING:HDLParsers:3607 - Unit work/ALU/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/ALU.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/ALU.vhd".
+WARNING:HDLParsers:3607 - Unit work/ALUMux is now defined in a different file.  It was defined in "F:/THU/cpu/ALUMux.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/ALUMux.vhd".
+WARNING:HDLParsers:3607 - Unit work/ALUMux/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/ALUMux.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/ALUMux.vhd".
+WARNING:HDLParsers:3607 - Unit work/AMux is now defined in a different file.  It was defined in "F:/THU/cpu/AMux.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/AMux.vhd".
+WARNING:HDLParsers:3607 - Unit work/AMux/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/AMux.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/AMux.vhd".
+WARNING:HDLParsers:3607 - Unit work/BMux is now defined in a different file.  It was defined in "F:/THU/cpu/BMux.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/BMux.vhd".
+WARNING:HDLParsers:3607 - Unit work/BMux/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/BMux.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/BMux.vhd".
+WARNING:HDLParsers:3607 - Unit work/BMux0 is now defined in a different file.  It was defined in "F:/THU/cpu/BMux0.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/BMux0.vhd".
+WARNING:HDLParsers:3607 - Unit work/BMux0/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/BMux0.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/BMux0.vhd".
+WARNING:HDLParsers:3607 - Unit work/BranchUnit is now defined in a different file.  It was defined in "F:/THU/cpu/BranchUnit.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/BranchUnit.vhd".
+WARNING:HDLParsers:3607 - Unit work/BranchUnit/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/BranchUnit.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/BranchUnit.vhd".
+WARNING:HDLParsers:3607 - Unit work/Controller is now defined in a different file.  It was defined in "F:/THU/cpu/controller.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/controller.vhd".
+WARNING:HDLParsers:3607 - Unit work/Controller/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/controller.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/controller.vhd".
+WARNING:HDLParsers:3607 - Unit work/Decoder is now defined in a different file.  It was defined in "F:/THU/cpu/Decoder.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/Decoder.vhd".
+WARNING:HDLParsers:3607 - Unit work/Decoder/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/Decoder.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/Decoder.vhd".
+WARNING:HDLParsers:3607 - Unit work/DM is now defined in a different file.  It was defined in "F:/THU/cpu/DM.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/DM.vhd".
+WARNING:HDLParsers:3607 - Unit work/DM/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/DM.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/DM.vhd".
+WARNING:HDLParsers:3607 - Unit work/EX2MEM is now defined in a different file.  It was defined in "F:/THU/cpu/EX2MEM.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/EX2MEM.vhd".
+WARNING:HDLParsers:3607 - Unit work/EX2MEM/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/EX2MEM.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/EX2MEM.vhd".
+WARNING:HDLParsers:3607 - Unit work/ForwardUnit is now defined in a different file.  It was defined in "F:/THU/cpu/ForwardUnit.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/ForwardUnit.vhd".
+WARNING:HDLParsers:3607 - Unit work/ForwardUnit/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/ForwardUnit.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/ForwardUnit.vhd".
+WARNING:HDLParsers:3607 - Unit work/HazardUnit is now defined in a different file.  It was defined in "F:/THU/cpu/HazardUnit.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/HazardUnit.vhd".
+WARNING:HDLParsers:3607 - Unit work/HazardUnit/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/HazardUnit.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/HazardUnit.vhd".
+WARNING:HDLParsers:3607 - Unit work/ID2EX is now defined in a different file.  It was defined in "F:/THU/cpu/ID2EX.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/ID2EX.vhd".
+WARNING:HDLParsers:3607 - Unit work/ID2EX/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/ID2EX.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/ID2EX.vhd".
+WARNING:HDLParsers:3607 - Unit work/ID_PCAdder is now defined in a different file.  It was defined in "F:/THU/cpu/ID_PCAdder.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/ID_PCAdder.vhd".
+WARNING:HDLParsers:3607 - Unit work/ID_PCAdder/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/ID_PCAdder.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/ID_PCAdder.vhd".
+WARNING:HDLParsers:3607 - Unit work/IF2ID is now defined in a different file.  It was defined in "F:/THU/cpu/IF2ID.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/IF2ID.vhd".
+WARNING:HDLParsers:3607 - Unit work/IF2ID/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/IF2ID.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/IF2ID.vhd".
+WARNING:HDLParsers:3607 - Unit work/IF_PCAdder is now defined in a different file.  It was defined in "F:/THU/cpu/IF_PCAdder.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/IF_PCAdder.vhd".
+WARNING:HDLParsers:3607 - Unit work/IF_PCAdder/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/IF_PCAdder.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/IF_PCAdder.vhd".
+WARNING:HDLParsers:3607 - Unit work/IM is now defined in a different file.  It was defined in "F:/THU/cpu/IM.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/IM.vhd".
+WARNING:HDLParsers:3607 - Unit work/IM/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/IM.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/IM.vhd".
+WARNING:HDLParsers:3607 - Unit work/MEM2WB is now defined in a different file.  It was defined in "F:/THU/cpu/MEM2WB.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/MEM2WB.vhd".
+WARNING:HDLParsers:3607 - Unit work/MEM2WB/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/MEM2WB.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/MEM2WB.vhd".
+WARNING:HDLParsers:3607 - Unit work/PC is now defined in a different file.  It was defined in "F:/THU/cpu/PC.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/PC.vhd".
+WARNING:HDLParsers:3607 - Unit work/PC/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/PC.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/PC.vhd".
+WARNING:HDLParsers:3607 - Unit work/PCMUX is now defined in a different file.  It was defined in "F:/THU/cpu/PCMux.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/PCMux.vhd".
+WARNING:HDLParsers:3607 - Unit work/PCMux/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/PCMux.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/PCMux.vhd".
+WARNING:HDLParsers:3607 - Unit work/RegisterFile is now defined in a different file.  It was defined in "F:/THU/cpu/RegisterFile.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/RegisterFile.vhd".
+WARNING:HDLParsers:3607 - Unit work/RegisterFile/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/RegisterFile.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/RegisterFile.vhd".
+WARNING:HDLParsers:3607 - Unit work/WBMux is now defined in a different file.  It was defined in "F:/THU/cpu/WBMux.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/WBMux.vhd".
+WARNING:HDLParsers:3607 - Unit work/WBMux/Behavioral is now defined in a different file.  It was defined in "F:/THU/cpu/WBMux.vhd", and is now defined in "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/WBMux.vhd".
+Compiling vhdl file "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/ALU.vhd" in Library work.
 Architecture behavioral of Entity alu is up to date.
-Compiling vhdl file "F:/THU/cpu/ALUMux.vhd" in Library work.
+Compiling vhdl file "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/ALUMux.vhd" in Library work.
 Architecture behavioral of Entity alumux is up to date.
-Compiling vhdl file "F:/THU/cpu/AMux.vhd" in Library work.
+Compiling vhdl file "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/AMux.vhd" in Library work.
 Architecture behavioral of Entity amux is up to date.
-Compiling vhdl file "F:/THU/cpu/BMux.vhd" in Library work.
+Compiling vhdl file "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/BMux.vhd" in Library work.
 Architecture behavioral of Entity bmux is up to date.
-Compiling vhdl file "F:/THU/cpu/BMux0.vhd" in Library work.
+Compiling vhdl file "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/BMux0.vhd" in Library work.
 Architecture behavioral of Entity bmux0 is up to date.
-Compiling vhdl file "F:/THU/cpu/BranchUnit.vhd" in Library work.
+Compiling vhdl file "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/BranchUnit.vhd" in Library work.
 Architecture behavioral of Entity branchunit is up to date.
-Compiling vhdl file "F:/THU/cpu/controller.vhd" in Library work.
+Compiling vhdl file "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/controller.vhd" in Library work.
 Architecture behavioral of Entity controller is up to date.
-Compiling vhdl file "F:/THU/cpu/Decoder.vhd" in Library work.
-Entity <decoder> compiled.
-ERROR:HDLParsers:813 - "F:/THU/cpu/Decoder.vhd" Line 178. Enumerated value U is missing in case.
-ERROR:HDLParsers:812 - "F:/THU/cpu/Decoder.vhd" Line 212. A value is missing in case.
-ERROR:HDLParsers:804 - "F:/THU/cpu/Decoder.vhd" Line 244. Size of instruction is different than size of the target.
-ERROR:HDLParsers:812 - "F:/THU/cpu/Decoder.vhd" Line 255. A value is missing in case.
-ERROR:HDLParsers:804 - "F:/THU/cpu/Decoder.vhd" Line 264. Size of instruction is different than size of the target.
-ERROR:HDLParsers:811 - "F:/THU/cpu/Decoder.vhd" Line 148. Choice 00101 duplicated in case.
+Compiling vhdl file "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/Decoder.vhd" in Library work.
+ERROR:HDLParsers:812 - "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/Decoder.vhd" Line 219. A value is missing in case.
+ERROR:HDLParsers:804 - "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/Decoder.vhd" Line 251. Size of instruction is different than size of the target.
+ERROR:HDLParsers:812 - "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/Decoder.vhd" Line 262. A value is missing in case.
+ERROR:HDLParsers:804 - "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/Decoder.vhd" Line 271. Size of instruction is different than size of the target.
+ERROR:HDLParsers:811 - "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/Decoder.vhd" Line 148. Choice 00101 duplicated in case.
 --> 
 
-Total memory usage is 289048 kilobytes
+Total memory usage is 322380 kilobytes
 
-Number of errors   :    6 (   0 filtered)
-Number of warnings :    0 (   0 filtered)
+Number of errors   :    5 (   0 filtered)
+Number of warnings :   46 (   0 filtered)
 Number of infos    :    0 (   0 filtered)
 

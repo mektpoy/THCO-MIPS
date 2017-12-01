@@ -224,7 +224,7 @@ architecture Behavioral of CPU is
 		stay: in STD_LOGIC;
 		PCin : in  STD_LOGIC_VECTOR (15 downto 0);
 		PCout : out STD_LOGIC_VECTOR (15 downto 0);
-		Instructionin : in  STD_LOGIC_VECTOR (15 downto 0));
+		Instructionin : in  STD_LOGIC_VECTOR (15 downto 0);
 		Instructionout : out  STD_LOGIC_VECTOR (15 downto 0)
 	);
     end component;
@@ -248,6 +248,7 @@ architecture Behavioral of CPU is
 		OE : out  STD_LOGIC;
 		WE : out  STD_LOGIC;
 		CLK : in  STD_LOGIC;
+		MODE : in  STD_LOGIC_VECTOR (1 downto 0)
 		MODE : in  STD_LOGIC_VECTOR (1 downto 0)
 	); --"00" Disabled; "01" Read; "10" Write; "11" Enabled;
     end component;
@@ -324,7 +325,7 @@ architecture Behavioral of CPU is
     signal offsetJump : STD_LOGIC_VECTOR (15 downto 0);
     signal regJump : STD_LOGIC_VECTOR (15 downto 0);
     signal pcSrc : STD_LOGIC_VECTOR (1 downto 0);
-    signal IFInstruction (15 downto 0);
+    signal IFInstruction : STD_LOGIC_VECTOR(15 downto 0);
 
     signal IDPCIn : STD_LOGIC_VECTOR (15 downto 0);
     signal IDImme : STD_LOGIC_VECTOR (15 downto 0);
@@ -378,7 +379,6 @@ architecture Behavioral of CPU is
     signal WBRegWrite : STD_LOGIC;
     signal WBResultSrc : STD_LOGIC;
     signal WBValue : STD_LOGIC_VECTOR (15 downto 0);
-    signal 
     signal WBRegWbAddr : STD_LOGIC_VECTOR (3 downto 0);
     signal WBReadData : STD_LOGIC_VECTOR (15 downto 0);
     signal WBAluResult : STD_LOGIC_VECTOR (15 downto 0);

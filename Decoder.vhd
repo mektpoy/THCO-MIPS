@@ -223,6 +223,12 @@ begin
 						imme(15 downto 3) <= (others => '0');
 						regWbAddr <= '0' & instruction(10 downto 8);
 						instrId <= "11010";
+					when others =>
+						rxAddr <= "1111";
+						ryAddr <= "1111";
+						imme <= "0000000000000000";
+						regWbAddr <= "1111";
+						instrId <= "00000";
 				end case;
 			when "11101" => -- SLT
 				rxAddr <= '0' & instruction(10 downto 8);

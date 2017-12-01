@@ -8,55 +8,40 @@
 <!-- Copyright (c) 1995-2013 Xilinx, Inc.  All rights reserved.    -->
 
 <messages>
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;F:/THU/cpu/CPU.vhd&quot; into library work</arg>
+<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU.vhd&quot; into library work</arg>
 </msg>
 
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/THU/cpu/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">228</arg>. <arg fmt="%s" index="3">Syntax error near &quot;Instructionout&quot;.</arg>
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">252</arg>. <arg fmt="%s" index="3">Syntax error near &quot;MODE&quot;.</arg>
 </msg>
 
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/THU/cpu/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">327</arg>. <arg fmt="%s" index="3">Syntax error near &quot;(&quot;.</arg>
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">590</arg>. <arg fmt="%s" index="3">Syntax error near &quot;:&quot;.</arg>
 </msg>
 
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/THU/cpu/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">382</arg>. <arg fmt="%s" index="3">Syntax error near &quot;signal&quot;.</arg>
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">591</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
 </msg>
 
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/THU/cpu/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">590</arg>. <arg fmt="%s" index="3">Syntax error near &quot;:&quot;.</arg>
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">592</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
 </msg>
 
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/THU/cpu/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">591</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">593</arg>. <arg fmt="%s" index="3">Syntax error near &quot;inout&quot;.</arg>
 </msg>
 
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/THU/cpu/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">592</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">594</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
 </msg>
 
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/THU/cpu/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">593</arg>. <arg fmt="%s" index="3">Syntax error near &quot;inout&quot;.</arg>
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">595</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
 </msg>
 
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/THU/cpu/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">594</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">596</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
 </msg>
 
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/THU/cpu/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">595</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">597</arg>. <arg fmt="%s" index="3">Syntax error near &quot;in&quot;.</arg>
 </msg>
 
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/THU/cpu/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">596</arg>. <arg fmt="%s" index="3">Syntax error near &quot;out&quot;.</arg>
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">598</arg>. <arg fmt="%s" index="3">Syntax error near &quot;in&quot;.</arg>
 </msg>
 
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/THU/cpu/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">597</arg>. <arg fmt="%s" index="3">Syntax error near &quot;in&quot;.</arg>
-</msg>
-
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/THU/cpu/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">598</arg>. <arg fmt="%s" index="3">Syntax error near &quot;in&quot;.</arg>
-</msg>
-
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/THU/cpu/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">599</arg>. <arg fmt="%s" index="3">Syntax error near &quot;)&quot;.</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;F:/THU/cpu/Decoder.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="info" file="ProjectMgmt" num="1061" ><arg fmt="%s" index="1">Parsing VHDL file &quot;F:/THU/cpu/IF2ID.vhd&quot; into library work</arg>
-</msg>
-
-<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">F:/THU/cpu/IF2ID.vhd</arg>&quot; Line <arg fmt="%d" index="2">44</arg>. <arg fmt="%s" index="3">Syntax error near &quot;Instructionout&quot;.</arg>
+<msg type="error" file="ProjectMgmt" num="806" >&quot;<arg fmt="%s" index="1">C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU.vhd</arg>&quot; Line <arg fmt="%d" index="2">599</arg>. <arg fmt="%s" index="3">Syntax error near &quot;)&quot;.</arg>
 </msg>
 
 </messages>

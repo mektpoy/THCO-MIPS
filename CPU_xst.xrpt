@@ -5,14 +5,14 @@
     The structure and the elements are likely to change over the next few releases.
     This means code written to parse this file will need to be revisited each subsequent release.-->
 
-  <application stringID="Xst" timeStamp="Fri Dec 01 17:02:16 2017">
+  <application stringID="Xst" timeStamp="Fri Dec 01 17:15:18 2017">
     <section stringID="User_Env">
       <table stringID="User_EnvVar">
         <column stringID="variable"/>
         <column stringID="value"/>
         <row stringID="row" value="0">
           <item stringID="variable" value="Path"/>
-          <item stringID="value" value="E:\software\Xilinx\14.7\ISE_DS\ISE\\lib\nt64;E:\software\Xilinx\14.7\ISE_DS\ISE\\bin\nt64;C:\ProgramData\Oracle\Java\javapath;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Windows\System32;C:\Windows;C:\Windows\System32\wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\Java\jdk1.8.0_60\bin;C:\Program Files\MySQL\MySQL Server 5.0\bin;E:\software\Dev-Cpp\MinGW64\bin;C:\Program Files\Microsoft\Web Platform Installer\;C:\Program Files (x86)\Microsoft ASP.NET\ASP.NET Web Pages\v1.0\;C:\Program Files (x86)\Windows Kits\8.0\Windows Performance Toolkit\;C:\Program Files\Microsoft SQL Server\110\Tools\Binn\;E:\Python;E:\Python\Scripts;C:\Program Files\Git LFS;E:\software\cmake\bin;E:\software\ssh\bin;E:\Python\Lib\site-packages\Django-1.8.4-py2.7.egg\django\bin;C:\Program Files\Git\cmd;E:\software\matlab\runtime\win64;E:\software\matlab\bin;E:\software\opencv\build\x64\vc14\bin;E:\software\matlab\polyspace\bin;C:\Program Files (x86)\Google\Chrome\Application;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT.;C:\Users\Kyle\AppData\Local\Programs\Git\cmd;C:\Users\Kyle\AppData\Local\Microsoft\WindowsApps"/>
+          <item stringID="value" value="D:\Xilinx\14.7\ISE_DS\ISE\\lib\nt64;D:\Xilinx\14.7\ISE_DS\ISE\\bin\nt64;D:\Xilinx\14.7\ISE_DS\ISE\bin\nt64;D:\Xilinx\14.7\ISE_DS\ISE\lib\nt64;D:\Xilinx\14.7\ISE_DS\ISE\..\..\..\DocNav;D:\Xilinx\14.7\ISE_DS\PlanAhead\bin;D:\Xilinx\14.7\ISE_DS\EDK\bin\nt64;D:\Xilinx\14.7\ISE_DS\EDK\lib\nt64;D:\Xilinx\14.7\ISE_DS\EDK\gnu\microblaze\nt\bin;D:\Xilinx\14.7\ISE_DS\EDK\gnu\powerpc-eabi\nt\bin;D:\Xilinx\14.7\ISE_DS\EDK\gnuwin\bin;D:\Xilinx\14.7\ISE_DS\EDK\gnu\arm\nt\bin;D:\Xilinx\14.7\ISE_DS\EDK\gnu\microblaze\linux_toolchain\nt64_be\bin;D:\Xilinx\14.7\ISE_DS\EDK\gnu\microblaze\linux_toolchain\nt64_le\bin;D:\Xilinx\14.7\ISE_DS\common\bin\nt64;D:\Xilinx\14.7\ISE_DS\common\lib\nt64;C:\Program Files (x86)\Intel\iCLS Client\;C:\Program Files\Intel\iCLS Client\;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files\Intel\Intel(R) Management Engine Components\DAL;C:\Program Files (x86)\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files\Intel\Intel(R) Management Engine Components\IPT;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\Condusiv Technologies\ExpressCache\;C:\Program Files\Microsoft SQL Server\130\Tools\Binn\;C:\Program Files\Git\cmd;G:\latex\bin\win32;C:\Program Files (x86)\Windows Kits\8.1\Windows Performance Toolkit\;C:\Program Files\Intel\WiFi\bin\;C:\Program Files\Common Files\Intel\WirelessCommon\;d:\quartus\installation\quartus\bin;D:\matlab\runtime\win64;D:\matlab\bin;D:\matlab\polyspace\bin;E:\opencv\opencv\build\x64\vc14\bin;C:\Program Files (x86)\OpenSSH\bin;E:\textlive\bin\win32;C:\Program Files\MySQL\MySQL Utilities 1.6\;C:\Program Files\nodejs\;C:\Users\cdogemaru\AppData\Local\Programs\Python\Python35\Scripts\;C:\Users\cdogemaru\AppData\Local\Programs\Python\Python35\;D:\java\bin;D:\java\jre\bin;C:\MinGW\bin;C:\Python27;C:\Python27\Scripts;C:\Program Files\MySQL\MySQL Server 5.7\bin;C:\Users\cdogemaru\AppData\Roaming\npm;C:\Users\cdogemaru\AppData\Local\Microsoft\WindowsApps"/>
         </row>
         <row stringID="row" value="1">
           <item stringID="variable" value="PATHEXT"/>
@@ -20,20 +20,32 @@
         </row>
         <row stringID="row" value="2">
           <item stringID="variable" value="XILINX"/>
-          <item stringID="value" value="E:\software\Xilinx\14.7\ISE_DS\ISE\"/>
+          <item stringID="value" value="D:\Xilinx\14.7\ISE_DS\ISE\"/>
+        </row>
+        <row stringID="row" value="3">
+          <item stringID="variable" value="XILINX_DSP"/>
+          <item stringID="value" value="D:\Xilinx\14.7\ISE_DS\ISE"/>
+        </row>
+        <row stringID="row" value="4">
+          <item stringID="variable" value="XILINX_EDK"/>
+          <item stringID="value" value="D:\Xilinx\14.7\ISE_DS\EDK"/>
+        </row>
+        <row stringID="row" value="5">
+          <item stringID="variable" value="XILINX_PLANAHEAD"/>
+          <item stringID="value" value="D:\Xilinx\14.7\ISE_DS\PlanAhead"/>
         </row>
       </table>
       <item stringID="User_EnvOs" value="OS Information">
         <item stringID="User_EnvOsname" value="Microsoft , 64-bit"/>
         <item stringID="User_EnvOsrelease" value="major release  (build 9200)"/>
       </item>
-      <item stringID="User_EnvHost" value="WIN-718PLUK0302"/>
+      <item stringID="User_EnvHost" value="DESKTOP-NJPLHIQ"/>
       <table stringID="User_EnvCpu">
         <column stringID="arch"/>
         <column stringID="speed"/>
         <row stringID="row" value="0">
-          <item stringID="arch" value="Intel(R) Core(TM) i7-4710MQ CPU @ 2.50GHz"/>
-          <item stringID="speed" value="2494 MHz"/>
+          <item stringID="arch" value="Intel(R) Core(TM) i7-5500U CPU @ 2.40GHz"/>
+          <item stringID="speed" value="2394 MHz"/>
         </row>
       </table>
     </section>
@@ -94,8 +106,8 @@
       <item DEFAULT="0%" label="-slice_utilization_ratio_maxmargin" stringID="XST_SLICEUTILIZATIONRATIOMAXMARGIN" value="5"/>
     </section>
     <section stringID="XST_ERRORS_STATISTICS">
-      <item dataType="int" filtered="0" stringID="XST_NUMBER_OF_ERRORS" value="6"/>
-      <item dataType="int" filtered="0" stringID="XST_NUMBER_OF_WARNINGS" value="0"/>
+      <item dataType="int" filtered="0" stringID="XST_NUMBER_OF_ERRORS" value="5"/>
+      <item dataType="int" filtered="0" stringID="XST_NUMBER_OF_WARNINGS" value="46"/>
       <item dataType="int" filtered="0" stringID="XST_NUMBER_OF_INFOS" value="0"/>
     </section>
   </application>
