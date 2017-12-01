@@ -1,15 +1,15 @@
 entity DM is
-    Port 
-    ( 
-      writeData : in  STD_LOGIC_VECTOR (15 downto 0);
-      addr : in  STD_LOGIC_VECTOR (15 downto 0);
-      clk, rst : in  STD_LOGIC;
-      memoryMode : in  STD_LOGIC_VECTOR (1 downto 0);
-      ramAddr : out STD_LOGIC_VECTOR (15 downto 0);
-      ramData : inout STD_LOGIC_VECTOR (15 downto 0);
-      readData : out STD_LOGIC_VECTOR (15 downto 0);
-      oe, we : out  STD_LOGIC
-    ); --"00" Disabled; "01" Read; "10" Write; "11" Enabled;
+	Port 
+	( 
+		writeData : in  STD_LOGIC_VECTOR (15 downto 0);
+		addr : in  STD_LOGIC_VECTOR (15 downto 0);
+		clk, rst : in  STD_LOGIC;
+		memoryMode : in  STD_LOGIC_VECTOR (1 downto 0);
+		ramAddr : out STD_LOGIC_VECTOR (15 downto 0);
+		ramData : inout STD_LOGIC_VECTOR (15 downto 0);
+		readData : out STD_LOGIC_VECTOR (15 downto 0);
+		oe, we : out  STD_LOGIC
+	); --"00" Disabled; "01" Read; "10" Write; "11" Enabled;
 end DM;
 
 architecture Behavioral of DM is

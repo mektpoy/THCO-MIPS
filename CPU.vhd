@@ -11,7 +11,6 @@ entity CPU is
 end CPU;
 
 architecture Behavioral of CPU is
-begin
 	component ALU is
 	Port 
 	(
@@ -81,6 +80,7 @@ begin
 	Port 
     ( 
 		instrId : in STD_LOGIC_VECTOR (4 downto 0);
+		stay : in STD_LOGIC;
 		aluOp : out STD_LOGIC_VECTOR (2 downto 0);
 		BMuxOp : out STD_LOGIC;
 		jumpType : out STD_LOGIC_VECTOR (2 downto 0);
@@ -310,6 +310,9 @@ begin
     signal normal : STD_LOGIC_VECTOR (15 downto 0);
     signal offsetJump : STD_LOGIC_VECTOR (15 downto 0);
     signal regJump : STD_LOGIC_VECTOR (15 downto 0);
+    signal pcSrc : STD_LOGIC_VECTOR (1 downto 0);
+    signal IFInstruction (15 downto 0);
+
     signal IDPCIn : STD_LOGIC_VECTOR (15 downto 0);
     signal IDImme : STD_LOGIC_VECTOR (15 downto 0);
     signal IDRxAddr : STD_LOGIC_VECTOR (3 downto 0);
@@ -319,11 +322,145 @@ begin
     signal IDRyValue : STD_LOGIC_VECTOR (15 downto 0);
     signal instrId : STD_LOGIC_VECTOR (15 downto 0);
     signal jumpType : STD_LOGIC_VECTOR (2 downto 0);
-    signal IDAluOp : STD_LOGIC;
+    signal IDAluOp : STD_LOGIC(2 downto 0);
     signal IDBMuxOp : STD_LOGIC;
     signal IDResultSrc : STD_LOGIC;
-    signal IDMemoryMode : out STD_LOGIC_VECTOR (1 downto 0);
-    signal IDAluResultSrc : out STD_LOGIC_VECTOR (1 downto 0);
-    signal IDRegWrite : out STD_LOGIC;
+    signal IDMemoryRead : STD_LOGIC;
+    signal IDMemoryMode : STD_LOGIC_VECTOR (1 downto 0);
+    signal IDAluResultSrc : STD_LOGIC_VECTOR (1 downto 0);
+    signal IDRegWrite : STD_LOGIC;
+    signal IDInstuction : STD_LOGIC_VECTOR (15 downto 0);
+
+    signal EXRxValue : STD_LOGIC_VECTOR (15 downto 0);
+    signal EXRyValue : STD_LOGIC_VECTOR (15 downto 0);
+    signal EXImme : STD_LOGIC_VECTOR (15 downto 0);
+    signal EXRegWbAddr : STD_LOGIC_VECTOR (15 downto 0);
+    signal aluOp : STD_LOGIC_VECTOR (2 downto 0);
+    signal BMuxOp : STD_LOGIC;
+    signal aluResultSrc : STD_LOGIC_VECTOR (1 downto 0);
+    signal EXMemoryMode : STD_LOGIC_VECTOR (1 downto 0);
+    signal EXResultSrc : STD_LOGIC;
+    signal EXRegWrite : STD_LOGIC;
+    signal aluZero : STD_LOGIC;
+    signal aluSign : STD_LOGIC;
+    signal result : STD_LOGIC_VECTOR (15 downto 0);
+    signal inputA : STD_LOGIC_VECTOR (15 downto 0);
+    signal inputB : STD_LOGIC_VECTOR (15 downto 0);
+    signal inputB0 : STD_LOGIC_VECTOR (15 downto 0);
+    signal aluResult : STD_LOGIC_VECTOR (15 downto 0);
+    signal EXRxAddr : STD_LOGIC_VECTOR (3 downto 0);
+    signal EXRyAddr : STD_LOGIC_VECTOR (3 downto 0);
+    signal memoryRead : STD_LOGIC;
+    signal forwardOp0 : STD_LOGIC_VECTOR (1 downto 0);
+    signal forwardOp1 : STD_LOGIC_VECTOR (1 downto 0);
+
+    signal MEMAluResult : STD_LOGIC_VECTOR (15 downto 0);
+    signal MEMRegWbAddr : STD_LOGIC_VECTOR (3 downto 0);
+    signal writeDate : STD_LOGIC_VECTOR (15 downto 0);
+    signal readData : STD_LOGIC_VECTOR (15 downto 0);
+    signal MEMMoemoryMode : STD_LOGIC_VECTOR (1 downto 0);
+    signal MEMResultSrc : STD_LOGIC;
+    signal MEMRegWrite : STD_LOGIC;
+
+    signal WBRegWrite : STD_LOGIC;
+    signal WBResultSrc : STD_LOGIC;
+    signal WBValue : STD_LOGIC_VECTOR (15 downto 0);
+    signal WBRegWbAddr : STD_LOGIC_VECTOR (3 downto 0);
+
+begin
+	u0 : ALU port map
+	(
+		inputA => inputA,
+		inputB => inputB,
+		aluOp => aluOp,
+
+		result => result,
+		aluZero => aluZero,
+		aluSign => aluSign
+	);
+
+	u1 : ALUMux port map
+	(
+		aluZero => aluZero,
+		aluSign => aluSign,
+		result => result,
+		inputB => inputB,
+		aluResultSrc => aluResultSrc,
+
+		aluResult => aluResult
+	);
+
+	u2 : AMux port map
+	(
+		forwardOp0 => forwardOp0,
+		result => result,
+		regWbValue => WBValue,
+		rxValue => EXRxValue,
+
+		inputA => inputA
+	);
+
+	u3 : BMux port map
+	(
+		BMuxOp => BMuxOp,
+		inputB0 => inputB0,
+		imme => EXImme,
+
+		inputB => inputB
+	);
+
+	u4 : BMux0 port map
+	(
+		forwardOp1 => forwardOp1,
+		result => result,
+		regWbValue => WBValue,
+		ryValue => EXRyValue,
+
+		inputB0 => inputB0
+	);
+
+	u5 : BranchUnit port map
+	(
+		jumpType => jumpType,
+		rxValue => IDRxValue,
+		pcSrc => pcSrc
+	);
+
+	u6 : controller port map
+	(
+		instrId => instrId,
+		stay => stay,
+
+		aluOp => IDAluOp,
+		BMuxOp => IDBMuxOp,
+		jumpType => jumpType,
+		resultSrc => IDResultSrc,
+		memoryMode => IDMemoryMode,
+		aluResultSrc => IDAluResultSrc,
+		regWrite => IDRegWrite,
+		memoryRead => IDMemoryRead
+	);
+
+	u7 : decoder port map
+	(
+		instruction => IDInstuction,
+		rxAddr => IDRxAddr,
+		ryAddr => IDRyAddr,
+		imme => IDImme,
+		regWbAddr => IDRegWbAddr,
+		instrId => instrId
+	);
+
+	u8 : dm port map
+	(
+		writeData : in  STD_LOGIC_VECTOR (15 downto 0);
+		addr : in  STD_LOGIC_VECTOR (15 downto 0);
+		clk, rst : in  STD_LOGIC;
+		memoryMode : in  STD_LOGIC_VECTOR (1 downto 0);
+		ramAddr : out STD_LOGIC_VECTOR (15 downto 0);
+		ramData : inout STD_LOGIC_VECTOR (15 downto 0);
+		readData : out STD_LOGIC_VECTOR (15 downto 0);
+		oe, we : out  STD_LOGIC
+	);
 end Behavioral;
 
