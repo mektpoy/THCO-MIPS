@@ -6,7 +6,18 @@ USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity CPU is
     Port ( 
     		clk : in STD_LOGIC;
-			rst : in STD_LOGIC
+			rst : in STD_LOGIC;
+			ram1Addr : out STD_LOGIC_VECTOR (17 downto 0);
+			ram1En : out STD_LOGIC;
+			ram1We : out STD_LOGIC;
+			ram1Oe : out STD_LOGIC;
+			ram1Data : inout STD_LOGIC_VECTOR (15 downto 0);
+
+			ram2Addr : out STD_LOGIC_VECTOR (17 downto 0);
+			ram2En : out STD_LOGIC;
+			ram2We : out STD_LOGIC;
+			ram2Oe : out STD_LOGIC;
+			ram2Data : inout STD_LOGIC_VECTOR (15 downto 0)
          );
 end CPU;
 
@@ -463,10 +474,11 @@ begin
 		clk => clk,
 		rst => rst,
 		memoryMode => MEMMoemoryMode,
-		ramAddr : out STD_LOGIC_VECTOR (15 downto 0);
-		ramData : inout STD_LOGIC_VECTOR (15 downto 0);
+		ramAddr => ram1Addr,
+		ramData => ram1Data,
 		readData => readData,
-		oe, we : out  STD_LOGIC
+		oe => ram1Oe,
+		we => ram1We
 	);
 
 	u9 : EX2MEM port map
@@ -526,7 +538,6 @@ begin
         ryAddrOut => EXRyAddr,
         regWbAddrIn => IDRegWbAddr,
         regWbAddrOut => EXRegWbAddr,
-
 
         --control signals
         --E
