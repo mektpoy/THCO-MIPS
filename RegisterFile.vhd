@@ -21,21 +21,17 @@ architecture Behavioral of RegisterFile is
 	type regs is array(15 downto 0) of STD_LOGIC_VECTOR(15 downto 0);
 	signal data : regs := (others => (others => '0'));
 begin
-	process (clk)
+	process (clk, rxAddr, ryAddr)
 	begin
 		if (falling_edge(clk) and regWrite = '1') then
 			data(conv_integer(regWbAddr)) <= regWbValue;
-			if (conv_integer(rxAddr) = conv_integer(regWbAddr)) then
-				rxValue <= data(conv_integer(rxAddr));
-			end if;
-			if (conv_integer(ryAddr) = conv_integer(regWbAddr)) then
-				ryValue <= data(conv_integer(ryAddr));
-			end if;
+			--if (conv_integer(rxAddr) = conv_integer(regWbAddr)) then
+			--	rxValue <= data(conv_integer(rxAddr));
+			--end if;
+			--if (conv_integer(ryAddr) = conv_integer(regWbAddr)) then
+			--	ryValue <= data(conv_integer(ryAddr));
+			--end if;
 		end if;
-	end process;
-	
-	process (rxAddr, ryAddr)
-	begin
 		rxValue <= data(conv_integer(rxAddr));
 		ryValue <= data(conv_integer(ryAddr));
 	end process;

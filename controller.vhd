@@ -21,13 +21,17 @@ end Controller;
 
 architecture Behavioral of Controller is
 begin
-	process (instrId)
+	process (instrId, stay)
 	begin
 		if (stay = '1') then
 			aluOp <= "111";
+			BMuxOp <= '0';
 			jumpType <= "000";
+			resultSrc <= '1';
 			memoryMode <= "00";
+			aluResultSrc <= "10";
 			regWrite <= '0';
+			memoryRead <= '0';
 		else
 			case instrId is
 				when "00001" =>
@@ -85,19 +89,39 @@ begin
 					regWrite <= '1';
 					memoryRead <= '0';
 				when "00111" =>
+					aluOp <= "111";
+					BMuxOp <= '1';
 					jumpType <= "001";
+					resultSrc <= '1';
+					memoryMode <= "00";
+					aluResultSrc <= "10";
 					regWrite <= '0';
 					memoryRead <= '0';
 				when "01000" =>
+					aluOp <= "111";
+					BMuxOp <= '1';
 					jumpType <= "010";
+					resultSrc <= '1';
+					memoryMode <= "00";
+					aluResultSrc <= "10";
 					regWrite <= '0';
 					memoryRead <= '0';
 				when "01001" =>
+					aluOp <= "111";
+					BMuxOp <= '1';
 					jumpType <= "011";
+					resultSrc <= '1';
+					memoryMode <= "00";
+					aluResultSrc <= "10";
 					regWrite <= '0';
 					memoryRead <= '0';
 				when "01010" =>
+					aluOp <= "111";
+					BMuxOp <= '1';
 					jumpType <= "010";
+					resultSrc <= '1';
+					memoryMode <= "00";
+					aluResultSrc <= "10";
 					regWrite <= '0';
 					memoryRead <= '0';
 				when "01011" =>
@@ -110,7 +134,12 @@ begin
 					regWrite <= '1';
 					memoryRead <= '0';
 				when "01100" =>
+					aluOp <= "100";
+					BMuxOp <= '0';
 					jumpType <= "100";
+					resultSrc <= '1';
+					memoryMode <= "00";
+					aluResultSrc <= "10";
 					regWrite <= '0';
 					memoryRead <= '0';
 				when "01101" =>
@@ -187,8 +216,12 @@ begin
 					memoryRead <= '0';
 				when "10101" =>
 					aluOp <= "111";
+					BMuxOp <= '0';
 					jumpType <= "000";
+					resultSrc <= '1';
 					memoryMode <= "00";
+					aluResultSrc <= "10";
+					regWrite <= '0';
 					memoryRead <= '0';
 				when "10110" =>
 					aluOp <= "011";
@@ -272,15 +305,14 @@ begin
 					regWrite <= '0';
 					memoryRead <= '0';
 				when others =>
-					aluOp <= "000";
+					aluOp <= "111";
 					BMuxOp <= '0';
 					jumpType <= "000";
-					resultSrc <= '0';
+					resultSrc <= '1';
 					memoryMode <= "00";
-					aluResultSrc <= "00";
+					aluResultSrc <= "10";
 					regWrite <= '0';
 					memoryRead <= '0';
-
 			end case;
 		end if;
 	end process;

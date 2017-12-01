@@ -28,18 +28,14 @@ architecture Behavioral of CPU is
 		inputA : in  STD_LOGIC_VECTOR (15 downto 0);
 		inputB : in  STD_LOGIC_VECTOR (15 downto 0);
 		aluOp : in  STD_LOGIC_VECTOR (2 downto 0);
-		result : out  STD_LOGIC_VECTOR (15 downto 0);
-		aluZero : out STD_LOGIC;
-		aluSign : out STD_LOGIC
+		result : out  STD_LOGIC_VECTOR (16 downto 0)
 	);
 	end component;
 
 	component ALUMux is
 	Port 
 	( 
-		aluZero : in STD_LOGIC;
-		aluSign : in STD_LOGIC;
-		result : in STD_LOGIC_VECTOR (15 downto 0);
+		result : in STD_LOGIC_VECTOR (16 downto 0);
 		inputB : in STD_LOGIC_VECTOR (15 downto 0);
 		aluResultSrc : in STD_LOGIC_VECTOR (1 downto 0);
 		aluResult : out STD_LOGIC_VECTOR (15 downto 0)
@@ -83,7 +79,7 @@ architecture Behavioral of CPU is
 	(
 		jumpType : in STD_LOGIC_VECTOR(2 downto 0);
 		rxValue : in STD_LOGIC_VECTOR(15 downto 0);
-		pcSrc : out STD_LOGIC_VECTOR(1 to 0)
+		pcSrc : out STD_LOGIC_VECTOR(1 downto 0)
 	);
 	end component;
 
@@ -98,7 +94,8 @@ architecture Behavioral of CPU is
 		resultSrc : out STD_LOGIC;
 		memoryMode : out STD_LOGIC_VECTOR (1 downto 0);
 		aluResultSrc : out STD_LOGIC_VECTOR (1 downto 0);
-		regWriteClk : out STD_LOGIC
+		regWrite : out STD_LOGIC;
+		memoryRead : out STD_LOGIC
 	);
 	end component;
 
@@ -119,12 +116,12 @@ architecture Behavioral of CPU is
     (
 		writeData : in  STD_LOGIC_VECTOR (15 downto 0);
 		addr : in  STD_LOGIC_VECTOR (15 downto 0);
-		clk, rst : in  STD_LOGIC;
+		clk : in  STD_LOGIC;
 		memoryMode : in  STD_LOGIC_VECTOR (1 downto 0);
-		ramAddr : out STD_LOGIC_VECTOR (15 downto 0);
+		ramAddr : out STD_LOGIC_VECTOR (17 downto 0);
 		ramData : inout STD_LOGIC_VECTOR (15 downto 0);
 		readData : out STD_LOGIC_VECTOR (15 downto 0);
-		oe, we : out  STD_LOGIC
+		en, oe, we : out  STD_LOGIC
     );
     end component;
 
@@ -152,16 +149,28 @@ architecture Behavioral of CPU is
     );
     end component;
 
+    component ForwardUnit is
+    Port 
+	( 
+		resultAddr : in STD_LOGIC_VECTOR (3 downto 0);
+		regWbAddr : in STD_LOGIC_VECTOR (3 downto 0);
+		rxAddr : in STD_LOGIC_VECTOR (3 downto 0);
+		ryAddr : in STD_LOGIC_VECTOR (3 downto 0);
+
+		forwardOp0 : out STD_LOGIC_VECTOR (1 downto 0);
+		forwardOp1 : out STD_LOGIC_VECTOR (1 downto 0)
+	);
+	end component;
+
     component HazardUnit is
     Port 
 	( 
 		memoryRead : in STD_LOGIC;
 		regWbAddr : in STD_LOGIC_VECTOR (3 downto 0);
-		rxAddr : in STD_LOGIC_VECTOR (15 downto 0);
-		ryAddr : in STD_LOGIC_VECTOR (15 downto 0);
-		stayPC : out STD_LOGIC;
-		stayIF2ID : out STD_LOGIC;
-		dataSetZero : out STD_LOGIC
+		rxAddr : in STD_LOGIC_VECTOR (3 downto 0);
+		ryAddr : in STD_LOGIC_VECTOR (3 downto 0);
+
+		stay : out STD_LOGIC
 	);
     end component;
 
@@ -322,7 +331,6 @@ architecture Behavioral of CPU is
     signal outPC : STD_LOGIC_VECTOR (15 downto 0);
     signal normal : STD_LOGIC_VECTOR (15 downto 0);
     signal offsetJump : STD_LOGIC_VECTOR (15 downto 0);
-    signal regJump : STD_LOGIC_VECTOR (15 downto 0);
     signal pcSrc : STD_LOGIC_VECTOR (1 downto 0);
     signal IFInstruction : STD_LOGIC_VECTOR(15 downto 0);
 
@@ -333,9 +341,9 @@ architecture Behavioral of CPU is
     signal IDRegWbAddr : STD_LOGIC_VECTOR (3 downto 0);
     signal IDRxValue : STD_LOGIC_VECTOR (15 downto 0);
     signal IDRyValue : STD_LOGIC_VECTOR (15 downto 0);
-    signal instrId : STD_LOGIC_VECTOR (15 downto 0);
+    signal instrId : STD_LOGIC_VECTOR (4 downto 0);
     signal jumpType : STD_LOGIC_VECTOR (2 downto 0);
-    signal IDAluOp : STD_LOGIC(2 downto 0);
+    signal IDAluOp : STD_LOGIC_VECTOR (2 downto 0);
     signal IDBMuxOp : STD_LOGIC;
     signal IDResultSrc : STD_LOGIC;
     signal IDMemoryRead : STD_LOGIC;
@@ -347,16 +355,14 @@ architecture Behavioral of CPU is
     signal EXRxValue : STD_LOGIC_VECTOR (15 downto 0);
     signal EXRyValue : STD_LOGIC_VECTOR (15 downto 0);
     signal EXImme : STD_LOGIC_VECTOR (15 downto 0);
-    signal EXRegWbAddr : STD_LOGIC_VECTOR (15 downto 0);
+    signal EXRegWbAddr : STD_LOGIC_VECTOR (3 downto 0);
     signal aluOp : STD_LOGIC_VECTOR (2 downto 0);
     signal BMuxOp : STD_LOGIC;
     signal aluResultSrc : STD_LOGIC_VECTOR (1 downto 0);
     signal EXMemoryMode : STD_LOGIC_VECTOR (1 downto 0);
     signal EXResultSrc : STD_LOGIC;
     signal EXRegWrite : STD_LOGIC;
-    signal aluZero : STD_LOGIC;
-    signal aluSign : STD_LOGIC;
-    signal result : STD_LOGIC_VECTOR (15 downto 0);
+    signal result : STD_LOGIC_VECTOR (16 downto 0);
     signal inputA : STD_LOGIC_VECTOR (15 downto 0);
     signal inputB : STD_LOGIC_VECTOR (15 downto 0);
     signal inputB0 : STD_LOGIC_VECTOR (15 downto 0);
@@ -369,7 +375,7 @@ architecture Behavioral of CPU is
 
     signal MEMAluResult : STD_LOGIC_VECTOR (15 downto 0);
     signal MEMRegWbAddr : STD_LOGIC_VECTOR (3 downto 0);
-    signal writeDate : STD_LOGIC_VECTOR (15 downto 0);
+    signal writeData : STD_LOGIC_VECTOR (15 downto 0);
     signal readData : STD_LOGIC_VECTOR (15 downto 0);
     signal MEMMoemoryMode : STD_LOGIC_VECTOR (1 downto 0);
     signal MEMResultSrc : STD_LOGIC;
@@ -389,15 +395,11 @@ begin
 		inputB => inputB,
 		aluOp => aluOp,
 
-		result => result,
-		aluZero => aluZero,
-		aluSign => aluSign
+		result => result
 	);
 
 	u1 : ALUMux port map
 	(
-		aluZero => aluZero,
-		aluSign => aluSign,
 		result => result,
 		inputB => inputB,
 		aluResultSrc => aluResultSrc,
@@ -408,7 +410,7 @@ begin
 	u2 : AMux port map
 	(
 		forwardOp0 => forwardOp0,
-		result => result,
+		result => MEMAluResult,
 		regWbValue => WBValue,
 		rxValue => EXRxValue,
 
@@ -427,7 +429,7 @@ begin
 	u4 : BMux0 port map
 	(
 		forwardOp1 => forwardOp1,
-		result => result,
+		result => MEMAluResult,
 		regWbValue => WBValue,
 		ryValue => EXRyValue,
 
@@ -471,11 +473,11 @@ begin
 		writeData => writeData,
 		addr => MEMAluResult,
 		clk => clk,
-		rst => rst,
 		memoryMode => MEMMoemoryMode,
 		ramAddr => ram1Addr,
 		ramData => ram1Data,
 		readData => readData,
+		en => ram1En,
 		oe => ram1Oe,
 		we => ram1We
 	);
@@ -628,7 +630,7 @@ begin
 	(
 		pcSrc => pcSrc,
 		normal => normal,
-		regJump => regJump,
+		regJump => IDRxValue,
 		offsetJump => offsetJump,
 		PCMuxOut => PCMuxOut
 	);

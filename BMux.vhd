@@ -39,10 +39,8 @@ begin
 		case BMuxOp is
 			when '0' =>
 				inputB <= inputB0;
-			when '1' =>
-				inputB <= imme;
 			when others =>
-				inputB <= inputB0;
+				inputB <= imme;
 		end case;
 	end process;
 end Behavioral;

@@ -180,19 +180,12 @@ begin
 						imme(15 downto 0) <= X"0000";
 						regWbAddr <= '0' & instruction(10 downto 8);
 						instrId <= "10000";
-					when '1' => -- MTIH
+					when others => -- MTIH
 						rxAddr <= "1111";
 						ryAddr <= '0' & instruction(10 downto 8);
 						imme(15 downto 0) <= X"0000";
 						regWbAddr <= "1010";
 						instrId <= "10011";
-					when others =>
-						rxAddr <= "0000";
-						ryAddr <= "0000";
-						imme(15 downto 0) <= X"0000";
-						regWbAddr <= "0000";
-						instrId <= "00101";
-
 				end case;
 			when "01111" => -- MOVE
 				rxAddr <= "1111";

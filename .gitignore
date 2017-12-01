@@ -35,3 +35,8 @@ iseconfig/CPU.projectmgr
 *.xst
 *.stx
 *.lso
+netgen/synthesis/CPU_synthesis.vhd
+*.nlf
+*.ngc
+*.xmsgs
+*.ngr

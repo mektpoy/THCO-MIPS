@@ -6,9 +6,7 @@ USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity ALUMux is
     Port 
 	( 
-		aluZero : in STD_LOGIC;
-		aluSign : in STD_LOGIC;
-		result : in STD_LOGIC_VECTOR (15 downto 0);
+		result : in STD_LOGIC_VECTOR (16 downto 0);
 		inputB : in STD_LOGIC_VECTOR (15 downto 0);
 		aluResultSrc : in STD_LOGIC_VECTOR (1 downto 0);
 		aluResult : out STD_LOGIC_VECTOR (15 downto 0)
@@ -17,19 +15,21 @@ end ALUMux;
 
 architecture Behavioral of ALUMux is
 begin
-	process (aluZero, aluSign, result, inputB, aluResultSrc)
+	process (result, inputB, aluResultSrc)
 	begin
 		case aluResultSrc is
 			when "00" =>
-				aluResult <= X"000" & "000" & aluZero;
+				if (result = X"0000" & '0') then
+					aluResult <= result (15 downto 0);
+				else
+					aluResult <= X"000" & "0001";
+				end if;
 			when "01" =>
-				aluResult <= X"000" & "000" & aluSign;
+				aluResult <= X"000" & "000" & result(15);
 			when "10" =>
-				aluResult <= result;
-			when "11" =>
-				aluResult <= inputB;
+				aluResult <= result (15 downto 0);
 			when others =>
-				aluResult <= result;
+				aluResult <= inputB;
 		end case;
 	end process;
 end Behavioral;

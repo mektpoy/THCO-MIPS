@@ -15,7 +15,7 @@ entity IM is
 		we : out  STD_LOGIC;
 		clk : in STD_LOGIC;
 		rst : in STD_LOGIC
-	); --"00" Disabled; "01" Read; "10" Write; "11" Enabled;
+	);
 end IM;
 
 architecture Behavioral of IM is
@@ -23,21 +23,9 @@ begin
 	en <= '0'; --enable the ram
 	we <= '1'; --disable writing
 	process(clk)
-	begin
-		if(rising_edge(clk))then			--prepare the signals needed for reading the ram on the rising edge.
-			we <= '1';
-			oe <= '0';
-			ramAddr <= "00" & readAddr;
-			ramData <= "ZZZZZZZZZZZZZZZZ";
-		end if;
-	end process;
-	
-	process(clk)
-	begin
-		if(falling_edge(clk)) then			--assign the read out data to the instr signal on the falling edge.
-			instr <= ramdata;
-			we <= '1';
-			oe <= '1';			--disable reading after finishing.
-		end if;
+	begin			--prepare the signals needed for reading the ram on the rising edge.
+		oe <= not clk;
+		ramAddr <= "00" & readAddr;
+		instr <= ramData;
 	end process;
 end Behavioral;

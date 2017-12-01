@@ -16,11 +16,9 @@ end PC;
 architecture Behavioral of PC is
 
 begin
-	process(clk, rst)
+	process(clk)
 	begin
-		if (rising_edge(rst)) then
-			outPC <= X"0000";
-		elsif(rising_edge(clk)) then
+		if(rising_edge(clk)) then
 			if stayPC = '0' then
 				outPC <= PCMuxOut;
 			end if;

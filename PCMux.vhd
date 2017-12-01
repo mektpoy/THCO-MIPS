@@ -25,8 +25,6 @@ begin
 				PCMuxOut <= offsetJump;
 			when "10" =>
 				PCMuxOut <= normal;
-			when "11" =>
-				PCMuxOut <= normal;
 			when others =>
 				PCMuxOut <= normal;
 		end case;

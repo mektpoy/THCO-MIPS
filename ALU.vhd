@@ -28,37 +28,26 @@ entity ALU is
 		inputA : in  STD_LOGIC_VECTOR (15 downto 0);
 		inputB : in  STD_LOGIC_VECTOR (15 downto 0);
 		aluOp : in  STD_LOGIC_VECTOR (2 downto 0);
-		result : buffer  STD_LOGIC_VECTOR (15 downto 0);
-		aluZero : out STD_LOGIC;
-		aluSign : out STD_LOGIC
+		result : out STD_LOGIC_VECTOR (16 downto 0)
 	);
 end ALU;
 
 architecture Behavioral of ALU is
 begin
-	aluSign <= result(15);--sign bit
-	process (result) --zero bit
-	begin
-		if (result = X"0000") then
-			aluZero <= '1';
-		else
-			aluZero <= '0';
-		end if;
-	end process;
 	
 	process (inputA, inputB, aluOp)
 	begin
 		case aluOp is
 			when "000" =>
-				result <= ('0' & inputA) + ('0' & inputB);
+				result <= (inputA(15) & inputA) + (inputB(15) & inputB);
 			when "001" =>
-				result <= ('0' & inputA) - ('0' & inputB);
+				result <= (inputA(15) & inputA) - (inputB(15) & inputB);
 			when "010" =>
-				result <= (inputA and inputB);
+				result <= '0' & (inputA and inputB);
 			when "011" =>	
-				result <= (inputA or inputB);
+				result <= '0' & (inputA or  inputB);
 			when "100" =>
-				result <= (inputA xor inputB);
+				result <= '0' & (inputA xor inputB);
 			when "101" => -- SLL
 				if InputB = X"0000" then
 					result <= to_stdlogicvector(to_bitvector(inputA) sll 8);
@@ -72,7 +61,7 @@ begin
 					result <= to_stdlogicvector(to_bitvector(inputA) srl conv_integer(inputB));
 				end if;
 			when others =>
-				result <= X"FFFF";
+				result <= X"0000" & '0';
 		end case;
 	end process;
 end Behavioral;

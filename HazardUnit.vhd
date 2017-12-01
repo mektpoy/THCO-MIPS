@@ -8,8 +8,8 @@ entity HazardUnit is
 	( 
 		memoryRead : in STD_LOGIC;
 		regWbAddr : in STD_LOGIC_VECTOR (3 downto 0);
-		rxAddr : in STD_LOGIC_VECTOR (15 downto 0);
-		ryAddr : in STD_LOGIC_VECTOR (15 downto 0);
+		rxAddr : in STD_LOGIC_VECTOR (3 downto 0);
+		ryAddr : in STD_LOGIC_VECTOR (3 downto 0);
 		stay : out STD_LOGIC
 	);
 end HazardUnit;
@@ -24,6 +24,8 @@ architecture Behavioral of HazardUnit is
 			else
 				stay <= '0';
 			end if;
+		else
+			stay <= '0';
 		end if;
 	end process;
 	end Behavioral;
