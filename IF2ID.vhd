@@ -28,7 +28,7 @@ entity IF2ID is
 		stay: in STD_LOGIC;
 		PCin : in  STD_LOGIC_VECTOR (15 downto 0);
 		PCout : out STD_LOGIC_VECTOR (15 downto 0);
-		Instructionin : in  STD_LOGIC_VECTOR (15 downto 0));
+		Instructionin : in  STD_LOGIC_VECTOR (15 downto 0);
 		Instructionout : out  STD_LOGIC_VECTOR (15 downto 0)
 	);
 end IF2ID;

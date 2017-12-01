@@ -23,12 +23,15 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity ForwardUnit is
-    Port ( resultAddr : in STD_LOGIC_VECTOR (3 downto 0);
-    	   regWbAddr : in STD_LOGIC_VECTOR (3 downto 0);
-    	   rxAddr : in STD_LOGIC_VECTOR (3 downto 0);
-    	   ryAddr : in STD_LOGIC_VECTOR (3 downto 0);
-           forwardOp0 : out STD_LOGIC_VECTOR (1 downto 0);
-           forwardOp1 : out STD_LOGIC_VECTOR (1 downto 0));
+	Port 
+	( 
+		resultAddr : in STD_LOGIC_VECTOR (3 downto 0);
+		regWbAddr : in STD_LOGIC_VECTOR (3 downto 0);
+		rxAddr : in STD_LOGIC_VECTOR (3 downto 0);
+		ryAddr : in STD_LOGIC_VECTOR (3 downto 0);
+		forwardOp0 : out STD_LOGIC_VECTOR (1 downto 0);
+		forwardOp1 : out STD_LOGIC_VECTOR (1 downto 0)
+	);
 end ForwardUnit;
 
 architecture Behavioral of ForwardUnit is

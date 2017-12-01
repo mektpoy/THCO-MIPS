@@ -49,6 +49,9 @@ entity ID2EX is
         aluOpOut : out STD_LOGIC_VECTOR(2 downto 0);
         aluResultSrcIn : in STD_LOGIC_VECTOR(1 downto 0);
         aluResultSrcOut : out STD_LOGIC_VECTOR(1 downto 0);
+        memoryReadIn : in STD_LOGIC;
+        memoryReadOut : out STD_LOGIC;
+
 
         --M
         memoryModeIn : in STD_LOGIC_VECTOR(1 downto 0);
@@ -76,6 +79,7 @@ begin
             BMuxOut <= "0";
             ALUOpOut <= "0000";
             ALUResultSrcOut <= "00";
+            memoryReadOut <= "0";
             MemoryModeOut <= "00";
             ResultSrcOut <= "0";
             RegWriteClkOut <= "0";
@@ -91,6 +95,7 @@ begin
             BMuxOpOut <= BMuxOpIn;
             aluOpOut <= aluOpIn;
             aluResultSrcOut <= aluResultSrcIn;
+            memoryReadOut <= memoryReadIn;
             memoryModeOut <= memoryModeIn;
             resultSrcOut <= resultSrcIn;
             regWriteClkOut <= regWriteClkIn;

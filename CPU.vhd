@@ -181,6 +181,8 @@ architecture Behavioral of CPU is
         aluOpOut : out STD_LOGIC_VECTOR(2 downto 0);
         aluResultSrcIn : in STD_LOGIC_VECTOR(1 downto 0);
         aluResultSrcOut : out STD_LOGIC_VECTOR(1 downto 0);
+        memoryReadIn : in STD_LOGIC;
+        memoryReadOut : out STD_LOGIC;
 
         --M
         memoryModeIn : in STD_LOGIC_VECTOR(1 downto 0);
@@ -365,7 +367,10 @@ architecture Behavioral of CPU is
     signal WBRegWrite : STD_LOGIC;
     signal WBResultSrc : STD_LOGIC;
     signal WBValue : STD_LOGIC_VECTOR (15 downto 0);
+    signal 
     signal WBRegWbAddr : STD_LOGIC_VECTOR (3 downto 0);
+    signal WBReadData : STD_LOGIC_VECTOR (15 downto 0);
+    signal WBAluResult : STD_LOGIC_VECTOR (15 downto 0);
 
 begin
 	u0 : ALU port map
@@ -451,16 +456,191 @@ begin
 		instrId => instrId
 	);
 
-	u8 : dm port map
+	u8 : DM port map
 	(
-		writeData : in  STD_LOGIC_VECTOR (15 downto 0);
-		addr : in  STD_LOGIC_VECTOR (15 downto 0);
-		clk, rst : in  STD_LOGIC;
-		memoryMode : in  STD_LOGIC_VECTOR (1 downto 0);
+		writeData => writeData,
+		addr => MEMAluResult,
+		clk => clk,
+		rst => rst,
+		memoryMode => MEMMoemoryMode,
 		ramAddr : out STD_LOGIC_VECTOR (15 downto 0);
 		ramData : inout STD_LOGIC_VECTOR (15 downto 0);
-		readData : out STD_LOGIC_VECTOR (15 downto 0);
+		readData => readData,
 		oe, we : out  STD_LOGIC
+	);
+
+	u9 : EX2MEM port map
+	(
+		clk => clk,
+        rst => rst,
+        aluResultIn => aluResult,
+        aluResultOut => MEMAluResult,
+        inputB => inputB,
+        writeData => writeData,
+        regWbAddrIn => EXRegWbAddr,
+        regWbAddrOut => MEMRegWbAddr,
+
+        --M
+        memoryModeIn => EXMemoryMode,
+        memoryModeOut => MEMMoemoryMode,
+
+        --W
+        resultSrcIn => EXResultSrc,
+        resultSrcOut => MEMResultSrc,
+        regWriteClkIn => EXRegWrite,
+        regWriteClkOut => MEMRegWrite
+	);
+
+	u10 : ForwardUnit port map
+	(
+		resultAddr => MEMRegWbAddr,
+		regWbAddr => WBRegWbAddr,
+		rxAddr => EXRxAddr,
+		ryAddr => EXRyAddr,
+		forwardOp0 => forwardOp0,
+		forwardOp1 => forwardOp1
+	);
+
+	u11 : HazardUnit port map
+	(
+		memoryRead => memoryRead,
+		regWbAddr => EXRegWbAddr,
+		rxAddr => IDRxAddr,
+		ryAddr => IDRyAddr,
+		stay => stay
+	);
+
+	u12 : ID2EX port map
+	(
+		clk => clk,
+        rst => rst,
+        rxValueIn => IDRxValue,
+        rxValueOut => EXRxValue,
+        ryValueIn => IDRyValue,
+        ryValueOut => EXRyValue,
+        immeIn => IDImme,
+        immeOut => EXImme,
+        rxAddrIn => IDRxAddr,
+        rxAddrOut => EXRxAddr,
+        ryAddrIn => IDRyAddr,
+        ryAddrOut => EXRyAddr,
+        regWbAddrIn => IDRegWbAddr,
+        regWbAddrOut => EXRegWbAddr,
+
+
+        --control signals
+        --E
+        BMuxOpIn => IDBMuxOp,
+        BMuxOpOut => BMuxOp,
+        aluOpIn => IDAluOp,
+        aluOpOut => aluOp,
+        aluResultSrcIn => IDAluResultSrc,
+        aluResultSrcOut => aluResultSrc,
+        memoryReadIn => IDMemoryRead,
+        memoryReadOut => memoryRead,
+
+        --M
+        memoryModeIn => IDMemoryMode,
+        memoryModeOut => EXMemoryMode,
+
+        --W
+        resultSrcIn => IDResultSrc,
+        resultSrcOut => EXResultSrc,
+        regWriteClkIn => IDRegWrite,
+        regWriteClkOut => EXRegWrite
+	);
+
+	u13 : ID_PCAdder port map
+	(
+		ID_PC_in => IDPCIn,
+		imme => IDImme,
+		ID_PC_out => offsetJump
+	);
+
+	u14 : IF2ID port map
+	(
+		clk => clk,
+		rst => rst,
+		stay => stay,
+		PCin => normal,
+		PCout => IDPCIn,
+		Instructionin => IFInstruction,
+		Instructionout => IDInstuction
+	);
+
+	u15 : IF_PCAdder port map
+	(
+		IF_PC_in => outPC,
+		IF_PC_out => normal
+	);
+
+	u16 : IM port map
+	(
+		ReadAddress : in STD_LOGIC_VECTOR (15 downto 0);
+		Instruction : out STD_LOGIC_VECTOR (15 downto 0);
+		ADDR : out  STD_LOGIC_VECTOR (17 downto 0);
+		DATA : inout  STD_LOGIC_VECTOR (15 downto 0);
+		EN : out  STD_LOGIC;
+		OE : out  STD_LOGIC;
+		WE : out  STD_LOGIC;
+		CLK : in  STD_LOGIC;
+		MODE : in  STD_LOGIC_VECTOR (1 downto 0)
+	);
+
+	u17 : MEM2WB port map
+	(
+		clk => clk,
+		rst => rst,
+		aluResultIn => MEMAluResult,
+		aluResultOut => WBAluResult,
+		readDataIn => readData,
+		readDataOut => WBReadData,
+		regWbAddrIn => MEMRegWbAddr,
+		regWbAddrOut => WBRegWbAddr,
+
+		--W
+		resultSrcIn => MEMResultSrc,
+		resultSrcOut => WBResultSrc,
+		regWriteIn => MEMRegWrite,
+		regWriteOut => WBRegWrite
+	);
+
+	u18 : PC port map
+	(
+		clk => clk,
+		rst => rst,
+		PCMuxOut => PCMuxOut,
+		stayPC => stay,
+		outPC => outPC
+	);
+
+	u19 : PCMux port map
+	(
+		pcSrc => pcSrc,
+		normal => normal,
+		regJump => regJump,
+		offsetJump => offsetJump,
+		PCMuxOut => PCMuxOut
+	);
+
+	u20 : RegisterFile port map
+	(
+		rxAddr => IDRxAddr,
+		ryAddr => IDRyAddr,
+		regWbAddr => WBRegWbAddr,
+		regWbValue => WBValue,
+		regWrite => WBRegWrite,
+		clk => clk,
+		rxValue => IDRxValue,
+		ryValue => IDRyValue
+	);
+
+	u21 : WBMux port map
+	(
+		readData => WBReadData,
+		aluResult => WBAluResult,
+		resultSrc =>  WBResultSrc,
+		regWbValue => WBValue
 	);
 end Behavioral;
 

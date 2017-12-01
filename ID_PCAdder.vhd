@@ -6,9 +6,9 @@ use IEEE.std_logic_unsigned.all;
 entity ID_PCAdder is
     Port 
     ( 
-        ID_PC_in : in STD_LOGIC_VECTOR(15 downto 0);
-        imme : in STD_LOGIC_VECTOR(15 downto 0);
-        ID_PC_out : out STD_LOGIC_VECTOR(15 downto 0)
+		ID_PC_in : in STD_LOGIC_VECTOR(15 downto 0);
+		imme : in STD_LOGIC_VECTOR(15 downto 0);
+		ID_PC_out : out STD_LOGIC_VECTOR(15 downto 0)
     );
 end ID_PCAdder;
 
