@@ -20,24 +20,24 @@ end IM;
 
 architecture Behavioral of IM is
 begin
-	en<='0'; --enable the ram
-	we<='1'; --disable writing
+	en <= '0'; --enable the ram
+	we <= '1'; --disable writing
 	process(clk)
 	begin
 		if(rising_edge(clk))then			--prepare the signals needed for reading the ram on the rising edge.
-			we<='1';
-			oe<='0';
-			ramAddr<="00"&readAddr;
-			ramData<="ZZZZZZZZZZZZZZZZ";
+			we <= '1';
+			oe <= '0';
+			ramAddr <= "00" & readAddr;
+			ramData <= "ZZZZZZZZZZZZZZZZ";
 		end if;
 	end process;
 	
 	process(clk)
 	begin
 		if(falling_edge(clk)) then			--assign the read out data to the instr signal on the falling edge.
-			instr<=ramdata;
-			we<='1';
-			oe<='1';			--disable reading after finishing.
+			instr <= ramdata;
+			we <= '1';
+			oe <= '1';			--disable reading after finishing.
 		end if;
 	end process;
 end Behavioral;

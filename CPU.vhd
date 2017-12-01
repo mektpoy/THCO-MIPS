@@ -240,15 +240,15 @@ architecture Behavioral of CPU is
     component IM is
     Port 
 	( 
-		ReadAddress : in STD_LOGIC_VECTOR (15 downto 0);
-		Instruction : out STD_LOGIC_VECTOR (15 downto 0);
-		ADDR : out  STD_LOGIC_VECTOR (17 downto 0);
-		DATA : inout  STD_LOGIC_VECTOR (15 downto 0);
-		EN : out  STD_LOGIC;
-		OE : out  STD_LOGIC;
-		WE : out  STD_LOGIC;
-		CLK : in  STD_LOGIC;
-		MODE : in  STD_LOGIC_VECTOR (1 downto 0)
+		readAddr : in STD_LOGIC_VECTOR (15 downto 0);
+		instr : out STD_LOGIC_VECTOR (15 downto 0);
+		ramAddr : out  STD_LOGIC_VECTOR (17 downto 0);
+		ramData : inout STD_LOGIC_VECTOR (15 downto 0);
+		en : out  STD_LOGIC;
+		oe : out  STD_LOGIC;
+		we : out  STD_LOGIC;
+		clk : in STD_LOGIC;
+		rst : in STD_LOGIC
 	); --"00" Disabled; "01" Read; "10" Write; "11" Enabled;
     end component;
 
@@ -586,15 +586,15 @@ begin
 
 	u16 : IM port map
 	(
-		ReadAddress : in STD_LOGIC_VECTOR (15 downto 0);
-		Instruction : out STD_LOGIC_VECTOR (15 downto 0);
-		ADDR : out  STD_LOGIC_VECTOR (17 downto 0);
-		DATA : inout  STD_LOGIC_VECTOR (15 downto 0);
-		EN : out  STD_LOGIC;
-		OE : out  STD_LOGIC;
-		WE : out  STD_LOGIC;
-		CLK : in  STD_LOGIC;
-		MODE : in  STD_LOGIC_VECTOR (1 downto 0)
+		readAddr => outPC,
+		instr => IFInstruction,
+		ramAddr => ram2Addr,
+		ramData => ram2Data,
+		en => ram2En,
+		oe => ram2Oe,
+		we => ram2We,
+		clk => clk,
+		rst => rst
 	);
 
 	u17 : MEM2WB port map
