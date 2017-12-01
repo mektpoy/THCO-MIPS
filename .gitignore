@@ -30,3 +30,8 @@ CPU.gise
 CPU.cmd_log
 CPU.prj
 iseconfig/CPU.projectmgr
+*.vho
+*.prj
+*.xst
+*.stx
+*.lso

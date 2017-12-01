@@ -36,8 +36,8 @@ begin
             writeData <= "0000000000000000";
             regWbAddrOut <= "0000";
             MemoryModeOut <= "00";
-            ResultSrcOut <= "0";
-            RegWriteClkOut <= "0";
+            ResultSrcOut <= '0';
+            RegWriteClkOut <= '0';
 
         elsif(rising_edge(clk)) then
             aluResultOut <= aluResultIn;

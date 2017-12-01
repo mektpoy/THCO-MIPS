@@ -84,6 +84,12 @@ begin
 				
 			when "11101" => 
 				case instruction (4 downto 0) is
+					when "00010" => -- SLT
+						rxAddr <= '0' & instruction(10 downto 8);
+						ryAddr <= '0' & instruction(7 downto 5);
+						imme(15 downto 0) <= X"0000";
+						regWbAddr <= "1100";
+						instrId <= "11000";
 					when "01100" => -- AND
 						rxAddr <= '0' & instruction(10 downto 8);
 						ryAddr <= '0' & instruction(7 downto 5);
@@ -145,13 +151,6 @@ begin
 				imme(15 downto 8) <= (others => instruction(7));
 				regWbAddr <= "1111";
 				instrId <= "01001";
-			when "00101" => -- BTEQZ
-				rxAddr <= '0' & instruction(10 downto 8);
-				ryAddr <= "1111";
-				imme(7 downto 0) <= instruction(7 downto 0);
-				imme(15 downto 8) <= (others => instruction(7));
-				regWbAddr <= "1111";
-				instrId <= "01010";
 			when "01101" => -- LI
 				rxAddr <= "1111";
 				ryAddr <= "1111";
@@ -230,12 +229,6 @@ begin
 						regWbAddr <= "1111";
 						instrId <= "00000";
 				end case;
-			when "11101" => -- SLT
-				rxAddr <= '0' & instruction(10 downto 8);
-				ryAddr <= '0' & instruction(7 downto 5);
-				imme(15 downto 0) <= X"0000";
-				regWbAddr <= "1100";
-				instrId <= "11000";
 			when "01010" => -- SLTI
 				rxAddr <= '0' & instruction(10 downto 8);
 				ryAddr <= "1111";
@@ -252,6 +245,13 @@ begin
 				instrId <= "11100";
 			when "01100" =>
 				case instruction(10 downto 8) is
+					when "000" => -- BTEQZ
+						rxAddr <= '0' & instruction(10 downto 8);
+						ryAddr <= "1111";
+						imme(7 downto 0) <= instruction(7 downto 0);
+						imme(15 downto 8) <= (others => instruction(7));
+						regWbAddr <= "1111";
+						instrId <= "01010";
 					when "100" => -- MTSP
 						rxAddr <= "1111";
 						ryAddr <= '0' & instruction(7 downto 5);
@@ -272,14 +272,27 @@ begin
 						imme(15 downto 8) <= (others => instruction(7));
 						regWbAddr <= "1111";
 						instrId <= "00100";
+					when others =>
+						rxAddr <= "1001";
+						ryAddr <= "1111";
+						imme(7 downto 0) <= instruction(7 downto 0);
+						imme(15 downto 8) <= (others => instruction(7));
+						regWbAddr <= "1111";
+						instrId <= "00100";
 				end case;
 			when "11010" => -- SW_SP
-				rxAddr <= instruction(10 downto 8);
+				rxAddr <= '0' & instruction(10 downto 8);
 				ryAddr <= "1111";
 				imme(7 downto 0) <= instruction(7 downto 0);
 				imme(15 downto 8) <= (others => instruction(7));
 				regWbAddr <= "1111";
 				instrId <= "11110";
+			when others => 
+				rxAddr <= "1111";
+				ryAddr <= "1111";
+				imme(15 downto 0) <= X"0000";
+				regWbAddr <= "1111";
+				instrId <= "10101";
 		end case;
 	end process;
 end Behavioral;

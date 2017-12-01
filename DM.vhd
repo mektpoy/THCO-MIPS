@@ -1,3 +1,8 @@
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
 entity DM is
 	Port 
 	( 
@@ -14,14 +19,9 @@ end DM;
 
 architecture Behavioral of DM is
 begin
-	en <= memoryMode(0) xor memoryMode(1);
-	we <= memoryMode(0) or not clk;
-	oe <= memoryMode(1) or not clk;
-	memoryAddr <= addr;
-
 	readData <= ramData when memoryMode(0) = '1' else X"0000";
 	ramData <= writeData when memoryMode(1) = '1' else "ZZZZZZZZZZZZZZZZ";
 	ramAddr <= addr;
-	oe <= "0" when memoryMode(0) = '0' and clk = '0' else '1';
+	oe <= '0' when memoryMode(0) = '0' and clk = '0' else '1';
 	we <= (not memoryMode(0)) or clk;
 end Behavioral;
