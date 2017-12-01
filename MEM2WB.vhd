@@ -31,8 +31,8 @@ begin
 			readDataOut <= "0000000000000000";
 			aluResultOut <= "0000000000000000";
 			regWbAddrOut <= "0000";
-			resultSrcOut <= "0";
-			regWriteOut <= "0";
+			resultSrcOut <= '0';
+			regWriteOut <= '0';
 
 		elsif(rising_edge(clk)) then
 			readDataOut <= readDataIn;

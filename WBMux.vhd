@@ -37,10 +37,12 @@ begin
 	process (readData, aluResult, resultSrc)
 	begin
 		case resultSrc is
-			when "0" =>
-				aluResult <= readData;
-			when "1" =>
-				aluResult <= aluResult;
+			when '0' =>
+				regWbValue <= readData;
+			when '1' =>
+				regWbValue <= aluResult;
+			when others =>
+				regWbValue <= aluResult;
 		end case;
 	end process;
 end Behavioral;

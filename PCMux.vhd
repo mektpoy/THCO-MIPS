@@ -27,6 +27,8 @@ begin
 				PCMuxOut <= normal;
 			when "11" =>
 				PCMuxOut <= normal;
+			when others =>
+				PCMuxOut <= normal;
 		end case;
 	end process;
 end Behavioral;

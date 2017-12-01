@@ -76,14 +76,13 @@ begin
             regWbAddrOut <= "0000";
             rxAddrOut <= "0000";
             ryAddrOut <= "0000";
-            BMuxOut <= "0";
-            ALUOpOut <= "0000";
+            BMuxOpOut <= '0';
+            ALUOpOut <= "000";
             ALUResultSrcOut <= "00";
-            memoryReadOut <= "0";
+            memoryReadOut <= '0';
             MemoryModeOut <= "00";
-            ResultSrcOut <= "0";
-            RegWriteClkOut <= "0";
-            RegWriteOut <= "0";
+            ResultSrcOut <= '0';
+            RegWriteClkOut <= '0';
 
         elsif(rising_edge(clk)) then
             rxValueOut <= rxValueIn;

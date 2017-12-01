@@ -20,9 +20,9 @@ architecture Behavioral of HazardUnit is
 	begin
 		if (memoryRead = '1') then
 			if (rxAddr = regWbAddr or ryAddr = regWbAddr) then
-				stay <= 1;
+				stay <= '1';
 			else
-				stay <= 0;
+				stay <= '0';
 			end if;
 		end if;
 	end process;
