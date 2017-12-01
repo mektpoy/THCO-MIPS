@@ -25,9 +25,15 @@ end MEM2WB;
 
 architecture Behavioral of MEM2WB is
 begin
-	process(clk)
+	process(rst, clk)
 	begin
-		if(rising_edge(clk)) then
+		if (rst = '0') then
+			readDataOut <= X"0000";
+			aluResultOut <= X"0000";
+			regWbAddrOut <= "0000";
+			resultSrcOut <= '0';
+			regWriteOut <= '0';
+		elsif (rising_edge(clk)) then
 			readDataOut <= readDataIn;
 			aluResultOut <= aluResultIn;
 			regWbAddrOut <= regWbAddrIn;

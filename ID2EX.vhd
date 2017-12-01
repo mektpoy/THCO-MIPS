@@ -70,9 +70,9 @@ begin
     process(clk, rst)
     begin
         if(rst = '0') then
-            rxValueOut <= "0000000000000000";
-            ryValueOut <= "0000000000000000";
-            immeOut <= "0000000000000000";
+            rxValueOut <= X"0000";
+            ryValueOut <= X"0000";
+            immeOut <= X"0000";
             regWbAddrOut <= "0000";
             rxAddrOut <= "0000";
             ryAddrOut <= "0000";

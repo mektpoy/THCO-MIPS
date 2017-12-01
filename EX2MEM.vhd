@@ -32,8 +32,8 @@ begin
     process(clk, rst)
     begin
         if(rst = '0') then
-            ALUResultOut <= "0000000000000000";
-            writeData <= "0000000000000000";
+            ALUResultOut <= X"0000";
+            writeData <= X"0000";
             regWbAddrOut <= "0000";
             MemoryModeOut <= "00";
             ResultSrcOut <= '0';
