@@ -254,7 +254,7 @@ begin
 				case instruction(10 downto 8) is
 					when "100" => -- MTSP
 						rxAddr <= "1111";
-						ryAddr <= instruction(7 downto 5);
+						ryAddr <= '0' & instruction(7 downto 5);
 						imme(15 downto 0) <= (others => '0');
 						regWbAddr <= "1001";
 						instrId <= "10100";
