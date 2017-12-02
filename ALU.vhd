@@ -34,7 +34,6 @@ end ALU;
 
 architecture Behavioral of ALU is
 begin
-	
 	process (inputA, inputB, aluOp)
 	begin
 		case aluOp is
