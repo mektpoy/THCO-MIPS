@@ -15,14 +15,32 @@ entity DM is
 		readData : out STD_LOGIC_VECTOR (15 downto 0);
 		en, oe, we : out  STD_LOGIC
 	); --"00" Disabled; "01" Read; "10" Write; "11" Enabled;
+	-- 0 Read 1 Write
 end DM;
 
 architecture Behavioral of DM is
 begin
-	readData <= ramData when memoryMode(0) = '1' else X"0000";
-	ramData <= writeData when memoryMode(1) = '1' else "ZZZZZZZZZZZZZZZZ";
-	ramAddr <= "00" & addr;
-	oe <= '0' when memoryMode(0) = '0' and clk = '0' else '1';
-	we <= (not memoryMode(0)) or clk;
-	en <= '0';
+	process (clk, memoryMode)
+	begin
+		if (memoryMode(0) = '1') then
+			readData <= X"0000";
+		else
+			readData <= ramData;
+		end if;
+		if (memoryMode(1) = '1') then
+			ramData <= writeData;
+		else
+			ramData <= "ZZZZZZZZZZZZZZZZ";
+		end if;
+		ramAddr <= "00" & addr;
+		if (clk = '0') then
+			oe <= memoryMode(0);
+			we <= memoryMode(1);
+			en <= '0';
+		elsif (clk = '1') then
+			oe <= '1';
+			we <= '1';
+			en <= '1';
+		end if;
+	end process;
 end Behavioral;

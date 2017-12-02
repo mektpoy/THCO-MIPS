@@ -13,8 +13,7 @@ entity IM is
 		en : out  STD_LOGIC;
 		oe : out  STD_LOGIC;
 		we : out  STD_LOGIC;
-		clk : in STD_LOGIC;
-		rst : in STD_LOGIC
+		clk : in STD_LOGIC
 	);
 end IM;
 
@@ -24,7 +23,11 @@ begin
 	we <= '1'; --disable writing
 	process(clk)
 	begin			--prepare the signals needed for reading the ram on the rising edge.
-		oe <= not clk;
+		if (clk = '0') then
+			oe <= '1';
+		else
+			oe <= '0';
+		end if;
 		ramAddr <= "00" & readAddr;
 		instr <= ramData;
 	end process;

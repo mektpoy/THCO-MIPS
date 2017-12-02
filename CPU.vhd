@@ -17,7 +17,9 @@ entity CPU is
 			ram2En : out STD_LOGIC;
 			ram2We : out STD_LOGIC;
 			ram2Oe : out STD_LOGIC;
-			ram2Data : inout STD_LOGIC_VECTOR (15 downto 0)
+			ram2Data : inout STD_LOGIC_VECTOR (15 downto 0);
+
+			ledOut : out STD_LOGIC_VECTOR (15 downto 0)
          );
 end CPU;
 
@@ -256,9 +258,16 @@ architecture Behavioral of CPU is
 		en : out  STD_LOGIC;
 		oe : out  STD_LOGIC;
 		we : out  STD_LOGIC;
-		clk : in STD_LOGIC;
-		rst : in STD_LOGIC
+		clk : in STD_LOGIC
 	); --"00" Disabled; "01" Read; "10" Write; "11" Enabled;
+    end component;
+
+    component LED is
+    Port
+    (    	
+		ledIn : in STD_LOGIC_VECTOR (15 downto 0);
+		ledOut : out STD_LOGIC_VECTOR (15 downto 0)
+    );
     end component;
 
     component MEM2WB is
@@ -596,8 +605,7 @@ begin
 		en => ram2En,
 		oe => ram2Oe,
 		we => ram2We,
-		clk => clk,
-		rst => rst
+		clk => clk
 	);
 
 	u17 : MEM2WB port map
@@ -656,6 +664,12 @@ begin
 		aluResult => WBAluResult,
 		resultSrc =>  WBResultSrc,
 		regWbValue => WBValue
+	);
+
+	u22 : LED port map
+	(
+		ledIn => IFInstruction,
+		ledOut => ledOut
 	);
 end Behavioral;
 
