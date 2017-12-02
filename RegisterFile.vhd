@@ -10,6 +10,7 @@ entity RegisterFile is
 		ryAddr : in STD_LOGIC_VECTOR (3 downto 0);
 		regWbAddr : in STD_LOGIC_VECTOR (3 downto 0);
 		regWbValue : in STD_LOGIC_VECTOR (15 downto 0);
+		pcValue : in STD_LOGIC_VECTOR (15 downto 0);
 		regWrite : in STD_LOGIC;
 		clk, rst : in STD_LOGIC;
 		rxValue : out STD_LOGIC_VECTOR (15 downto 0);
@@ -30,8 +31,11 @@ begin
 			data(i) <= X"0000";
 			end loop;
 			data(9) <= "1011111011111111";
-		elsif (falling_edge(clk) and regWrite = '1') then
-			data(conv_integer(regWbAddr)) <= regWbValue;
+		elsif (falling_edge(clk)) then
+			if (regWrite = '1') then
+				data(conv_integer(regWbAddr)) <= regWbValue;
+			end if;
+			data(8) <= pcValue;
 		end if;
 	end process;
 end Behavioral;

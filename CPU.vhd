@@ -312,7 +312,8 @@ architecture Behavioral of CPU is
 		regWrite : in STD_LOGIC;
 		clk, rst : in STD_LOGIC;
 		rxValue : out STD_LOGIC_VECTOR (15 downto 0);
-		ryValue : out STD_LOGIC_VECTOR (15 downto 0)
+		ryValue : out STD_LOGIC_VECTOR (15 downto 0);
+		pcValue : in STD_LOGIC_VECTOR (15 downto 0)
 	);
     end component;
 
@@ -645,7 +646,8 @@ begin
 		clk => clk,
 		rst => rst,
 		rxValue => IDRxValue,
-		ryValue => IDRyValue
+		ryValue => IDRyValue,
+		pcValue => IDPCIn
 	);
 
 	u21 : WBMux port map
