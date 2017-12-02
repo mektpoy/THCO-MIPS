@@ -27,7 +27,7 @@ NET "ram2Data[9]" LOC = R10;
 NET "ram2Data[8]" LOC = R11;
 NET "ram2Data[7]" LOC = R12;
 NET "ram2Data[6]" LOC = R14;
-NET "ram2Data[5]" LOC = P13;
+NET "ram2Data[5]" LOC = R13;
 NET "ram2Data[4]" LOC = T12;
 NET "ram2Data[3]" LOC = T14;
 NET "ram2Data[2]" LOC = T15;
@@ -41,7 +41,7 @@ NET "ram2Oe" LOC = R9;
 
 NET "ram1Addr[17]" LOC = H17;
 NET "ram1Addr[16]" LOC = H16;
-NET "ram1Addr[15]" LOC = H15
+NET "ram1Addr[15]" LOC = H15;
 NET "ram1Addr[14]" LOC = H14;
 NET "ram1Addr[13]" LOC = G16;
 NET "ram1Addr[12]" LOC = G15;
@@ -79,5 +79,5 @@ NET "ram1En" LOC = M15;
 NET "ram1We" LOC = M18;
 NET "ram1Oe" LOC = M16;
 
-NET "clk" LOC = B9;
+NET "clk" LOC = U9;
 NET "rst" LOC = U10;
