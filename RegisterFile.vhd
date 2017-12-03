@@ -14,7 +14,8 @@ entity RegisterFile is
 		regWrite : in STD_LOGIC;
 		clk, rst : in STD_LOGIC;
 		rxValue : out STD_LOGIC_VECTOR (15 downto 0);
-		ryValue : out STD_LOGIC_VECTOR (15 downto 0)
+		ryValue : out STD_LOGIC_VECTOR (15 downto 0);
+		debugR1 : out STD_LOGIC_VECTOR (15 downto 0)
 	);
 end RegisterFile;
 
@@ -24,6 +25,7 @@ architecture Behavioral of RegisterFile is
 begin
 	rxValue <= data(conv_integer(rxAddr));
 	ryValue <= data(conv_integer(ryAddr));
+	debugR1 <= data(1);
 	process (rst, clk)
 	begin
 		if (rst = '0') then
@@ -35,7 +37,7 @@ begin
 			if (regWrite = '1') then
 				data(conv_integer(regWbAddr)) <= regWbValue;
 			end if;
-			data(8) <= pcValue - 1;
+			data(8) <= pcValue;
 		end if;
 	end process;
 end Behavioral;

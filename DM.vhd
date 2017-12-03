@@ -27,9 +27,9 @@ begin
 	process (clk, memoryMode)
 	begin
 		if (memoryMode(1) = '1') then
-			readData <= X"0000";
-		else
 			readData <= ramData;
+		else
+			readData <= X"0000";
 		end if;
 		if (memoryMode(0) = '1') then
 			ramData <= writeData;

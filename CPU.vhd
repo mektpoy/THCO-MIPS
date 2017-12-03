@@ -326,7 +326,8 @@ architecture Behavioral of CPU is
 		clk, rst : in STD_LOGIC;
 		rxValue : out STD_LOGIC_VECTOR (15 downto 0);
 		ryValue : out STD_LOGIC_VECTOR (15 downto 0);
-		pcValue : in STD_LOGIC_VECTOR (15 downto 0)
+		pcValue : in STD_LOGIC_VECTOR (15 downto 0);
+		debugR1 : out STD_LOGIC_VECTOR (15 downto 0)
 	);
     end component;
 
@@ -401,6 +402,9 @@ architecture Behavioral of CPU is
     signal WBRegWbAddr : STD_LOGIC_VECTOR (3 downto 0);
     signal WBReadData : STD_LOGIC_VECTOR (15 downto 0);
     signal WBAluResult : STD_LOGIC_VECTOR (15 downto 0);
+	 
+	 --debug
+	 signal debugR1 : STD_LOGIC_VECTOR (15 downto 0);
 
 begin
 	u0 : ALU port map
@@ -506,7 +510,7 @@ begin
         rst => rst,
         aluResultIn => aluResult,
         aluResultOut => MEMAluResult,
-        inputB => inputB,
+        inputB => inputB0,
         writeData => writeData,
         regWbAddrIn => EXRegWbAddr,
         regWbAddrOut => MEMRegWbAddr,
@@ -663,7 +667,8 @@ begin
 		rst => rst,
 		rxValue => IDRxValue,
 		ryValue => IDRyValue,
-		pcValue => IDPCIn
+		pcValue => IDPCIn,
+		debugR1 => debugR1
 	);
 
 	u21 : WBMux port map
@@ -676,7 +681,8 @@ begin
 
 	u22 : LED port map
 	(
-		ledIn => IDInstruction,
+		ledIn(15 downto 2) => IDInstruction(15 downto 2),
+		ledIn(1 downto 0) => PCSrc(1 downto 0),
 		ledOut => ledOut
 	);
 end Behavioral;
