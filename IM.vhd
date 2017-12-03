@@ -23,7 +23,7 @@ begin
 	we <= '1'; --disable writing
 	process(clk)
 	begin			--prepare the signals needed for reading the ram on the rising edge.
-		if (clk = '0') then
+		if (clk = '1') then
 			oe <= '1';
 		else
 			oe <= '0';

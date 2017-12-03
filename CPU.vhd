@@ -15,7 +15,6 @@ entity CPU is
 			rdn, wrn : out STD_LOGIC;
 			tbre, tsre : in STD_LOGIC;
 			
-
 			ram2Addr : out STD_LOGIC_VECTOR (17 downto 0);
 			ram2En : out STD_LOGIC;
 			ram2We : out STD_LOGIC;
@@ -677,8 +676,7 @@ begin
 
 	u22 : LED port map
 	(
-		ledIn(14 downto 0) => IDInstruction(14 downto 0),
-		ledIn(15) => stay,
+		ledIn => IDInstruction,
 		ledOut => ledOut
 	);
 end Behavioral;

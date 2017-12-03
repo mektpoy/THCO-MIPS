@@ -35,7 +35,7 @@ begin
 			if (regWrite = '1') then
 				data(conv_integer(regWbAddr)) <= regWbValue;
 			end if;
-			data(8) <= pcValue;
+			data(8) <= pcValue - 1;
 		end if;
 	end process;
 end Behavioral;
