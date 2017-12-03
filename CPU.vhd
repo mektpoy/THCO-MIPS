@@ -12,6 +12,9 @@ entity CPU is
 			ram1We : out STD_LOGIC;
 			ram1Oe : out STD_LOGIC;
 			ram1Data : inout STD_LOGIC_VECTOR (15 downto 0);
+			rdn, wrn : out STD_LOGIC;
+			tbre, tsre : in STD_LOGIC;
+			
 
 			ram2Addr : out STD_LOGIC_VECTOR (17 downto 0);
 			ram2En : out STD_LOGIC;
@@ -123,7 +126,9 @@ architecture Behavioral of CPU is
 		ramAddr : out STD_LOGIC_VECTOR (17 downto 0);
 		ramData : inout STD_LOGIC_VECTOR (15 downto 0);
 		readData : out STD_LOGIC_VECTOR (15 downto 0);
-		en, oe, we : out  STD_LOGIC
+		en, oe, we : out  STD_LOGIC;
+		rdn, wrn : out STD_LOGIC;
+		tbre, tsre : in STD_LOGIC
     );
     end component;
 
@@ -360,7 +365,7 @@ architecture Behavioral of CPU is
     signal IDMemoryMode : STD_LOGIC_VECTOR (1 downto 0);
     signal IDAluResultSrc : STD_LOGIC_VECTOR (1 downto 0);
     signal IDRegWrite : STD_LOGIC;
-    signal IDInstuction : STD_LOGIC_VECTOR (15 downto 0);
+    signal IDInstruction : STD_LOGIC_VECTOR (15 downto 0);
 
     signal EXRxValue : STD_LOGIC_VECTOR (15 downto 0);
     signal EXRyValue : STD_LOGIC_VECTOR (15 downto 0);
@@ -470,7 +475,7 @@ begin
 
 	u7 : decoder port map
 	(
-		instruction => IDInstuction,
+		instruction => IDInstruction,
 		rxAddr => IDRxAddr,
 		ryAddr => IDRyAddr,
 		imme => IDImme,
@@ -489,7 +494,11 @@ begin
 		readData => readData,
 		en => ram1En,
 		oe => ram1Oe,
-		we => ram1We
+		we => ram1We,
+		wrn => wrn,
+		rdn => rdn,
+		tbre => tbre,
+		tsre => tsre
 	);
 
 	u9 : EX2MEM port map
@@ -587,7 +596,7 @@ begin
 		PCin => normal,
 		PCout => IDPCIn,
 		Instructionin => IFInstruction,
-		Instructionout => IDInstuction
+		Instructionout => IDInstruction
 	);
 
 	u15 : IF_PCAdder port map
@@ -668,7 +677,8 @@ begin
 
 	u22 : LED port map
 	(
-		ledIn => IFInstruction,
+		ledIn(14 downto 0) => IDInstruction(14 downto 0),
+		ledIn(15) => stay,
 		ledOut => ledOut
 	);
 end Behavioral;

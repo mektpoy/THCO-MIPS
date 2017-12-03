@@ -13,13 +13,17 @@ entity DM is
 		ramAddr : out STD_LOGIC_VECTOR (17 downto 0);
 		ramData : inout STD_LOGIC_VECTOR (15 downto 0);
 		readData : out STD_LOGIC_VECTOR (15 downto 0);
-		en, oe, we : out  STD_LOGIC
+		en, oe, we : out  STD_LOGIC;
+		rdn, wrn : out STD_LOGIC;
+		tbre, tsre : in STD_LOGIC
 	); --"00" Disabled; "01" Read; "10" Write; "11" Enabled;
 	-- 0 Read 1 Write
 end DM;
 
 architecture Behavioral of DM is
 begin
+	rdn <= '1';
+	wrn <= '1';
 	process (clk, memoryMode)
 	begin
 		if (memoryMode(0) = '1') then

@@ -39,12 +39,17 @@ begin
 
 	process(clk, rst)
 	begin
-		if(rst = '0' or stay = '1') then
-			PCout <= X"0000";
-			Instructionout <= X"0000";
-		elsif(rising_edge(clk)) then
-			Instructionout <= Instructionin;
+		if(rst = '0') then
 			PCout <= PCin;
+			Instructionout <= "0000100000000000";
+		elsif(rising_edge(clk)) then
+			if (stay = '1') then
+				PCout <= PCin;
+				Instructionout <= "0000100000000000";
+			else
+				Instructionout <= Instructionin;
+				PCout <= PCin;
+			end if;
 		end if;
 	end process;
 end Behavioral;
