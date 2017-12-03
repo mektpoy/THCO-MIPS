@@ -16,8 +16,8 @@ entity DM is
 		en, oe, we : out  STD_LOGIC;
 		rdn, wrn : out STD_LOGIC;
 		tbre, tsre : in STD_LOGIC
-	); --"00" Disabled; "01" Read; "10" Write; "11" Enabled;
-	-- 0 Read 1 Write
+	); --"00" Disabled; "01" Write; "10" Read; "11" Enabled;
+	-- 0 Write 1 Read
 end DM;
 
 architecture Behavioral of DM is
@@ -26,20 +26,20 @@ begin
 	wrn <= '1';
 	process (clk, memoryMode)
 	begin
-		if (memoryMode(0) = '1') then
+		if (memoryMode(1) = '1') then
 			readData <= X"0000";
 		else
 			readData <= ramData;
 		end if;
-		if (memoryMode(1) = '1') then
+		if (memoryMode(0) = '1') then
 			ramData <= writeData;
 		else
 			ramData <= "ZZZZZZZZZZZZZZZZ";
 		end if;
 		ramAddr <= "00" & addr;
 		if (clk = '0') then
-			oe <= memoryMode(0);
-			we <= memoryMode(1);
+			oe <= memoryMode(1);
+			we <= memoryMode(0);
 			en <= '0';
 		elsif (clk = '1') then
 			oe <= '1';
