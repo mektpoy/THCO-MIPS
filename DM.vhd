@@ -38,13 +38,13 @@ begin
 		end if;
 		ramAddr <= "00" & addr;
 		if (clk = '0') then
-			oe <= memoryMode(1);
-			we <= memoryMode(0);
+			oe <= not memoryMode(1);
+			we <= not memoryMode(0);
 			en <= '0';
 		elsif (clk = '1') then
 			oe <= '1';
 			we <= '1';
-			en <= '1';
+			en <= '0';
 		end if;
 	end process;
 end Behavioral;
