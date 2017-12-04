@@ -39,6 +39,8 @@ entity ID2EX is
         ryAddrOut : out STD_LOGIC_VECTOR (3 downto 0);
         regWbAddrIn : in STD_LOGIC_VECTOR (3 downto 0);
         regWbAddrOut : out STD_LOGIC_VECTOR (3 downto 0);
+        pcIn : in STD_LOGIC_VECTOR (15 downto 0);
+        pcOut : out STD_LOGIC_VECTOR (15 downto 0);
 
 
         --control signals
@@ -51,6 +53,8 @@ entity ID2EX is
         aluResultSrcOut : out STD_LOGIC_VECTOR(1 downto 0);
         memoryReadIn : in STD_LOGIC;
         memoryReadOut : out STD_LOGIC;
+        jumpTypeIn : in STD_LOGIC_VECTOR (2 downto 0);
+        jumpTypeOut : out STD_LOGIC_VECTOR (2 downto 0);
 
 
         --M
@@ -76,10 +80,12 @@ begin
             regWbAddrOut <= "0000";
             rxAddrOut <= "0000";
             ryAddrOut <= "0000";
+            pcOut <= X"0000";
             BMuxOpOut <= '0';
             ALUOpOut <= "000";
             ALUResultSrcOut <= "00";
             memoryReadOut <= '0';
+            jumpTypeOut <= "000";
             MemoryModeOut <= "00";
             ResultSrcOut <= '0';
             RegWriteClkOut <= '0';
@@ -91,10 +97,12 @@ begin
             regWbAddrOut <= regWbAddrIn;
             rxAddrOut <= rxAddrIn;
             ryAddrOut <= ryAddrIn;
+            pcOut <= pcIn;
             BMuxOpOut <= BMuxOpIn;
             aluOpOut <= aluOpIn;
             aluResultSrcOut <= aluResultSrcIn;
             memoryReadOut <= memoryReadIn;
+            jumpTypeOut <= jumpTypeIn;
             memoryModeOut <= memoryModeIn;
             resultSrcOut <= resultSrcIn;
             regWriteClkOut <= regWriteClkIn;

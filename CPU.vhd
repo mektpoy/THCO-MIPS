@@ -197,7 +197,8 @@ architecture Behavioral of CPU is
         ryAddrOut : out STD_LOGIC_VECTOR (3 downto 0);
         regWbAddrIn : in STD_LOGIC_VECTOR (3 downto 0);
         regWbAddrOut : out STD_LOGIC_VECTOR (3 downto 0);
-
+        pcIn : in STD_LOGIC_VECTOR (15 downto 0);
+        pcOut : out STD_LOGIC_VECTOR (15 downto 0);
 
         --control signals
         --E
@@ -209,6 +210,8 @@ architecture Behavioral of CPU is
         aluResultSrcOut : out STD_LOGIC_VECTOR(1 downto 0);
         memoryReadIn : in STD_LOGIC;
         memoryReadOut : out STD_LOGIC;
+        jumpTypeIn : in STD_LOGIC_VECTOR (2 downto 0);
+        jumpTypeOut : out STD_LOGIC_VECTOR (2 downto 0);
 
         --M
         memoryModeIn : in STD_LOGIC_VECTOR(1 downto 0);
@@ -222,12 +225,12 @@ architecture Behavioral of CPU is
     );
     end component;
 
-    component ID_PCAdder is
+    component EX_PCAdder is
     Port 
     ( 
-        ID_PC_in : in STD_LOGIC_VECTOR(15 downto 0);
-        imme : in STD_LOGIC_VECTOR(15 downto 0);
-        ID_PC_out : out STD_LOGIC_VECTOR(15 downto 0)
+		EXPC : in STD_LOGIC_VECTOR(15 downto 0);
+		EXImme : in STD_LOGIC_VECTOR(15 downto 0);
+		offsetJump : out STD_LOGIC_VECTOR(15 downto 0)
     );
     end component;
 
@@ -357,7 +360,7 @@ architecture Behavioral of CPU is
     signal IDRxValue : STD_LOGIC_VECTOR (15 downto 0);
     signal IDRyValue : STD_LOGIC_VECTOR (15 downto 0);
     signal instrId : STD_LOGIC_VECTOR (4 downto 0);
-    signal jumpType : STD_LOGIC_VECTOR (2 downto 0);
+    signal IDJumpType : STD_LOGIC_VECTOR (2 downto 0);
     signal IDAluOp : STD_LOGIC_VECTOR (2 downto 0);
     signal IDBMuxOp : STD_LOGIC;
     signal IDResultSrc : STD_LOGIC;
@@ -377,6 +380,7 @@ architecture Behavioral of CPU is
     signal EXMemoryMode : STD_LOGIC_VECTOR (1 downto 0);
     signal EXResultSrc : STD_LOGIC;
     signal EXRegWrite : STD_LOGIC;
+    signal EXJumpType : STD_LOGIC_VECTOR (2 downto 0);
     signal result : STD_LOGIC_VECTOR (16 downto 0);
     signal inputA : STD_LOGIC_VECTOR (15 downto 0);
     signal inputB : STD_LOGIC_VECTOR (15 downto 0);
@@ -456,8 +460,8 @@ begin
 
 	u5 : BranchUnit port map
 	(
-		jumpType => jumpType,
-		rxValue => IDRxValue,
+		jumpType => EXJumpType,
+		rxValue => aluResult,
 		pcSrc => pcSrc
 	);
 
@@ -468,7 +472,7 @@ begin
 
 		aluOp => IDAluOp,
 		BMuxOp => IDBMuxOp,
-		jumpType => jumpType,
+		jumpType => IDJumpType,
 		resultSrc => IDResultSrc,
 		memoryMode => IDMemoryMode,
 		aluResultSrc => IDAluResultSrc,
@@ -561,6 +565,8 @@ begin
         ryAddrOut => EXRyAddr,
         regWbAddrIn => IDRegWbAddr,
         regWbAddrOut => EXRegWbAddr,
+        pcIn => IDPC,
+        pcOut => EXPC,
 
         --control signals
         --E
@@ -572,6 +578,8 @@ begin
         aluResultSrcOut => aluResultSrc,
         memoryReadIn => IDMemoryRead,
         memoryReadOut => memoryRead,
+        jumpTypeIn => IDJumpType,
+        jumpTypeOut => EXJumpType
 
         --M
         memoryModeIn => IDMemoryMode,
@@ -584,11 +592,11 @@ begin
         regWriteClkOut => EXRegWrite
 	);
 
-	u13 : ID_PCAdder port map
+	u13 : EX_PCAdder port map
 	(
-		ID_PC_in => IDPCIn,
-		imme => IDImme,
-		ID_PC_out => offsetJump
+		EXPC => EXPC,
+		EXImme => EXImme,
+		offsetJump => offsetJump
 	);
 
 	u14 : IF2ID port map
@@ -650,8 +658,8 @@ begin
 	u19 : PCMux port map
 	(
 		pcSrc => pcSrc,
-		normal => normal,
-		regJump => IDRxValue,
+		normal => IDPC,
+		regJump => inputA,
 		offsetJump => offsetJump,
 		PCMuxOut => PCMuxOut
 	);
