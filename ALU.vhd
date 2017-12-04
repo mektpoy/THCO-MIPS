@@ -49,15 +49,15 @@ begin
 				result <= '0' & (inputA xor inputB);
 			when "101" => -- SLL
 				if InputB = X"0000" then
-					result <= to_stdlogicvector(to_bitvector(inputA) sll 8);
-				else
-					result <= to_stdlogicvector(to_bitvector(inputA) sll conv_integer(inputB));
+					result <= '0' & to_stdlogicvector(to_bitvector(inputA) sll 8);
+				else  
+					result <= '0' & to_stdlogicvector(to_bitvector(inputA) sll conv_integer(inputB));
 				end if;
 			when "110" => -- SRA
 				if InputB = X"0000" then
-					result <= to_stdlogicvector(to_bitvector(inputA) srl 8);
+					result <= '0' & to_stdlogicvector(to_bitvector(inputA) srl 8);
 				else
-					result <= to_stdlogicvector(to_bitvector(inputA) srl conv_integer(inputB));
+					result <= '0' & to_stdlogicvector(to_bitvector(inputA) srl conv_integer(inputB));
 				end if;
 			when others =>
 				result <= X"0000" & '0';

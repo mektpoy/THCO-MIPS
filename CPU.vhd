@@ -13,7 +13,7 @@ entity CPU is
 			ram1Oe : out STD_LOGIC;
 			ram1Data : inout STD_LOGIC_VECTOR (15 downto 0);
 			rdn, wrn : out STD_LOGIC;
-			tbre, tsre : in STD_LOGIC;
+			-- tbre, tsre : in STD_LOGIC;
 			
 			ram2Addr : out STD_LOGIC_VECTOR (17 downto 0);
 			ram2En : out STD_LOGIC;
@@ -126,8 +126,8 @@ architecture Behavioral of CPU is
 		ramData : inout STD_LOGIC_VECTOR (15 downto 0);
 		readData : out STD_LOGIC_VECTOR (15 downto 0);
 		en, oe, we : out  STD_LOGIC;
-		rdn, wrn : out STD_LOGIC;
-		tbre, tsre : in STD_LOGIC
+		rdn, wrn : out STD_LOGIC
+		-- tbre, tsre : in STD_LOGIC
     );
     end component;
 
@@ -504,9 +504,9 @@ begin
 		oe => ram1Oe,
 		we => ram1We,
 		wrn => wrn,
-		rdn => rdn,
-		tbre => tbre,
-		tsre => tsre
+		rdn => rdn
+		-- tbre => tbre,
+		-- tsre => tsre
 	);
 
 	u9 : EX2MEM port map

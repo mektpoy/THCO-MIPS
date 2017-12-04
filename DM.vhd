@@ -14,8 +14,7 @@ entity DM is
 		ramData : inout STD_LOGIC_VECTOR (15 downto 0);
 		readData : out STD_LOGIC_VECTOR (15 downto 0);
 		en, oe, we : out  STD_LOGIC;
-		rdn, wrn : out STD_LOGIC;
-		tbre, tsre : in STD_LOGIC
+		rdn, wrn : out STD_LOGIC
 	); --"00" Disabled; "01" Write; "10" Read; "11" Enabled;
 	-- 0 Write 1 Read
 end DM;
