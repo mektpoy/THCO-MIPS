@@ -32,14 +32,14 @@ architecture Behavioral of CPU is
 		inputA : in  STD_LOGIC_VECTOR (15 downto 0);
 		inputB : in  STD_LOGIC_VECTOR (15 downto 0);
 		aluOp : in  STD_LOGIC_VECTOR (2 downto 0);
-		result : out  STD_LOGIC_VECTOR (16 downto 0)
+		result : out  STD_LOGIC_VECTOR (15 downto 0)
 	);
 	end component;
 
 	component ALUMux is
 	Port 
 	( 
-		result : in STD_LOGIC_VECTOR (16 downto 0);
+		result : in STD_LOGIC_VECTOR (15 downto 0);
 		inputB : in STD_LOGIC_VECTOR (15 downto 0);
 		aluResultSrc : in STD_LOGIC_VECTOR (1 downto 0);
 		aluResult : out STD_LOGIC_VECTOR (15 downto 0)
@@ -381,7 +381,7 @@ architecture Behavioral of CPU is
     signal EXResultSrc : STD_LOGIC;
     signal EXRegWrite : STD_LOGIC;
     signal EXJumpType : STD_LOGIC_VECTOR (2 downto 0);
-    signal result : STD_LOGIC_VECTOR (16 downto 0);
+    signal result : STD_LOGIC_VECTOR (15 downto 0);
     signal inputA : STD_LOGIC_VECTOR (15 downto 0);
     signal inputB : STD_LOGIC_VECTOR (15 downto 0);
     signal inputB0 : STD_LOGIC_VECTOR (15 downto 0);

@@ -28,7 +28,7 @@ entity ALU is
 		inputA : in  STD_LOGIC_VECTOR (15 downto 0);
 		inputB : in  STD_LOGIC_VECTOR (15 downto 0);
 		aluOp : in  STD_LOGIC_VECTOR (2 downto 0);
-		result : out STD_LOGIC_VECTOR (16 downto 0)
+		result : out STD_LOGIC_VECTOR (15 downto 0)
 	);
 end ALU;
 
@@ -38,29 +38,29 @@ begin
 	begin
 		case aluOp is
 			when "000" =>
-				result <= (inputA(15) & inputA) + (inputB(15) & inputB);
+				result <= (inputA + inputB);
 			when "001" =>
-				result <= (inputA(15) & inputA) - (inputB(15) & inputB);
+				result <= (inputA - inputB);
 			when "010" =>
-				result <= '0' & (inputA and inputB);
+				result <= (inputA and inputB);
 			when "011" =>	
-				result <= '0' & (inputA or  inputB);
+				result <= (inputA or  inputB);
 			when "100" =>
-				result <= '0' & (inputA xor inputB);
+				result <= (inputA xor inputB);
 			when "101" => -- SLL
 				if InputB = X"0000" then
-					result <= '0' & to_stdlogicvector(to_bitvector(inputA) sll 8);
+					result <= to_stdlogicvector(to_bitvector(inputA) sll 8);
 				else  
-					result <= '0' & to_stdlogicvector(to_bitvector(inputA) sll conv_integer(inputB));
+					result <= to_stdlogicvector(to_bitvector(inputA) sll conv_integer(inputB));
 				end if;
 			when "110" => -- SRA
 				if InputB = X"0000" then
-					result <= '0' & to_stdlogicvector(to_bitvector(inputA) srl 8);
+					result <= to_stdlogicvector(to_bitvector(inputA) srl 8);
 				else
-					result <= '0' & to_stdlogicvector(to_bitvector(inputA) srl conv_integer(inputB));
+					result <= to_stdlogicvector(to_bitvector(inputA) srl conv_integer(inputB));
 				end if;
 			when others =>
-				result <= X"0000" & '0';
+				result <= X"0000";
 		end case;
 	end process;
 end Behavioral;
