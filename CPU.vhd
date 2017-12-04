@@ -347,12 +347,10 @@ architecture Behavioral of CPU is
     signal stay : STD_LOGIC;
     signal PCMuxOut : STD_LOGIC_VECTOR (15 downto 0);
     signal outPC : STD_LOGIC_VECTOR (15 downto 0);
-    signal normal : STD_LOGIC_VECTOR (15 downto 0);
-    signal offsetJump : STD_LOGIC_VECTOR (15 downto 0);
+    signal IFPC : STD_LOGIC_VECTOR (15 downto 0);
     signal pcSrc : STD_LOGIC_VECTOR (1 downto 0);
     signal IFInstruction : STD_LOGIC_VECTOR(15 downto 0);
 
-    signal IDPCIn : STD_LOGIC_VECTOR (15 downto 0);
     signal IDImme : STD_LOGIC_VECTOR (15 downto 0);
     signal IDRxAddr : STD_LOGIC_VECTOR (3 downto 0);
     signal IDRyAddr : STD_LOGIC_VECTOR (3 downto 0);
@@ -369,7 +367,9 @@ architecture Behavioral of CPU is
     signal IDAluResultSrc : STD_LOGIC_VECTOR (1 downto 0);
     signal IDRegWrite : STD_LOGIC;
     signal IDInstruction : STD_LOGIC_VECTOR (15 downto 0);
+    signal IDPC : STD_LOGIC_VECTOR (15 downto 0);
 
+    signal offsetJump : STD_LOGIC_VECTOR (15 downto 0);
     signal EXRxValue : STD_LOGIC_VECTOR (15 downto 0);
     signal EXRyValue : STD_LOGIC_VECTOR (15 downto 0);
     signal EXImme : STD_LOGIC_VECTOR (15 downto 0);
@@ -391,6 +391,7 @@ architecture Behavioral of CPU is
     signal memoryRead : STD_LOGIC;
     signal forwardOp0 : STD_LOGIC_VECTOR (1 downto 0);
     signal forwardOp1 : STD_LOGIC_VECTOR (1 downto 0);
+    signal EXPC : STD_LOGIC_VECTOR (15 downto 0);
 
     signal MEMAluResult : STD_LOGIC_VECTOR (15 downto 0);
     signal MEMRegWbAddr : STD_LOGIC_VECTOR (3 downto 0);
@@ -579,7 +580,7 @@ begin
         memoryReadIn => IDMemoryRead,
         memoryReadOut => memoryRead,
         jumpTypeIn => IDJumpType,
-        jumpTypeOut => EXJumpType
+        jumpTypeOut => EXJumpType,
 
         --M
         memoryModeIn => IDMemoryMode,
@@ -604,8 +605,8 @@ begin
 		clk => clk,
 		rst => rst,
 		stay => stay,
-		PCin => normal,
-		PCout => IDPCIn,
+		PCin => IFPC,
+		PCout => IDPC,
 		Instructionin => IFInstruction,
 		Instructionout => IDInstruction
 	);
@@ -613,7 +614,7 @@ begin
 	u15 : IF_PCAdder port map
 	(
 		IF_PC_in => outPC,
-		IF_PC_out => normal
+		IF_PC_out => IFPC
 	);
 
 	u16 : IM port map
@@ -675,7 +676,7 @@ begin
 		rst => rst,
 		rxValue => IDRxValue,
 		ryValue => IDRyValue,
-		pcValue => IDPCIn,
+		pcValue => IDPC,
 		debugR1 => debugR1
 	);
 

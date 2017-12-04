@@ -245,7 +245,7 @@ begin
 						ryAddr <= "1111";
 						imme(7 downto 0) <= instruction(7 downto 0);
 						imme(15 downto 8) <= (others => instruction(7));
-						regWbAddr <= instruction(10 downto 8);
+						regWbAddr <= '0' & instruction(10 downto 8);
 						instrId <= "00100";
 				end case;
 			when "11010" => -- SW_SP
