@@ -26,6 +26,7 @@ entity IF2ID is
 		clk: in STD_LOGIC;
 		rst: in STD_LOGIC;
 		stay: in STD_LOGIC;
+		branchBubble : in STD_LOGIC;
 		PCin : in  STD_LOGIC_VECTOR (15 downto 0);
 		PCout : out STD_LOGIC_VECTOR (15 downto 0);
 		Instructionin : in  STD_LOGIC_VECTOR (15 downto 0);
@@ -36,10 +37,9 @@ end IF2ID;
 architecture Behavioral of IF2ID is
 
 begin
-
 	process(clk, rst)
 	begin
-		if(rst = '0') then
+		if(rst = '0' or stay = '1' or branchBubble = '1') then
 			PCout <= X"0000";
 			Instructionout <= "0000100000000000";
 		elsif(rising_edge(clk)) then

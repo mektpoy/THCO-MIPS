@@ -83,7 +83,8 @@ architecture Behavioral of CPU is
 	(
 		jumpType : in STD_LOGIC_VECTOR(2 downto 0);
 		rxValue : in STD_LOGIC_VECTOR(15 downto 0);
-		pcSrc : out STD_LOGIC_VECTOR(1 downto 0)
+		pcSrc : out STD_LOGIC_VECTOR(1 downto 0);
+		branchBubble : out STD_LOGIC
 	);
 	end component;
 
@@ -240,6 +241,7 @@ architecture Behavioral of CPU is
 		clk: in STD_LOGIC;
 		rst: in STD_LOGIC;
 		stay: in STD_LOGIC;
+		branchBubble : in STD_LOGIC;
 		PCin : in  STD_LOGIC_VECTOR (15 downto 0);
 		PCout : out STD_LOGIC_VECTOR (15 downto 0);
 		Instructionin : in  STD_LOGIC_VECTOR (15 downto 0);
@@ -377,6 +379,7 @@ architecture Behavioral of CPU is
     signal aluOp : STD_LOGIC_VECTOR (2 downto 0);
     signal BMuxOp : STD_LOGIC;
     signal aluResultSrc : STD_LOGIC_VECTOR (1 downto 0);
+	 signal branchBubble : STD_LOGIC;
     signal EXMemoryMode : STD_LOGIC_VECTOR (1 downto 0);
     signal EXResultSrc : STD_LOGIC;
     signal EXRegWrite : STD_LOGIC;
@@ -463,7 +466,8 @@ begin
 	(
 		jumpType => EXJumpType,
 		rxValue => aluResult,
-		pcSrc => pcSrc
+		pcSrc => pcSrc,
+		branchBubble => branchBubble
 	);
 
 	u6 : controller port map
@@ -608,7 +612,8 @@ begin
 		PCin => IFPC,
 		PCout => IDPC,
 		Instructionin => IFInstruction,
-		Instructionout => IDInstruction
+		Instructionout => IDInstruction,
+		branchBubble => branchBubble
 	);
 
 	u15 : IF_PCAdder port map
