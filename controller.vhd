@@ -103,7 +103,7 @@ begin
 					jumpType <= "010";
 					resultSrc <= '1';
 					memoryMode <= "00";
-					aluResultSrc <= "00";
+					aluResultSrc <= "11";
 					regWrite <= '0';
 					memoryRead <= '0';
 				when "01001" =>
@@ -112,7 +112,7 @@ begin
 					jumpType <= "011";
 					resultSrc <= '1';
 					memoryMode <= "00";
-					aluResultSrc <= "00";
+					aluResultSrc <= "11";
 					regWrite <= '0';
 					memoryRead <= '0';
 				when "01010" =>
@@ -121,7 +121,7 @@ begin
 					jumpType <= "010";
 					resultSrc <= '1';
 					memoryMode <= "00";
-					aluResultSrc <= "00";
+					aluResultSrc <= "11";
 					regWrite <= '0';
 					memoryRead <= '0';
 				when "01011" =>
