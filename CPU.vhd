@@ -659,7 +659,7 @@ begin
 	u19 : PCMux port map
 	(
 		pcSrc => pcSrc,
-		normal => IDPC,
+		normal => IFPC,
 		regJump => inputA,
 		offsetJump => offsetJump,
 		PCMuxOut => PCMuxOut
@@ -690,8 +690,10 @@ begin
 
 	u22 : LED port map
 	(
-		ledIn(15 downto 2) => IDInstruction(15 downto 2),
-		ledIn(1 downto 0) => PCSrc(1 downto 0),
+		ledIn(3 downto 0) => IDPC(3 downto 0),
+		ledIn(7 downto 4) => IFPC(3 downto 0),
+		ledIn(11 downto 8) => PCMuxOut(3 downto 0),
+		ledIn(15 downto 12) => outPC(3 downto 0),
 		ledOut => ledOut
 	);
 end Behavioral;
