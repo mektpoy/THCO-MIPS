@@ -40,7 +40,7 @@ begin
 	process(clk, rst)
 	begin
 		if(rst = '0') then
-			PCout <= PCin;
+			PCout <= X"0000";
 			Instructionout <= "0000100000000000";
 		elsif(rising_edge(clk)) then
 			if (stay = '1') then

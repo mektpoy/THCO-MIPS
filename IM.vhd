@@ -21,7 +21,7 @@ architecture Behavioral of IM is
 begin
 	en <= '0'; --enable the ram
 	we <= '1'; --disable writing
-	process(clk)
+	process(clk, readAddr)
 	begin			--prepare the signals needed for reading the ram on the rising edge.
 		if (clk = '1') then
 			oe <= '1';
