@@ -695,10 +695,8 @@ begin
 
 	u22 : LED port map
 	(
-		ledIn(3 downto 0) => IDPC(3 downto 0),
-		ledIn(7 downto 4) => IFPC(3 downto 0),
-		ledIn(11 downto 8) => PCMuxOut(3 downto 0),
-		ledIn(15 downto 12) => outPC(3 downto 0),
+		ledIn(15 downto 8) => IDInstruction(15 downto 8),
+		ledIn(7 downto 0) => IDPC(7 downto 0),
 		ledOut => ledOut
 	);
 end Behavioral;

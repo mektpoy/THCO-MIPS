@@ -39,16 +39,17 @@ architecture Behavioral of IF2ID is
 begin
 	process(clk, rst)
 	begin
-		if(rst = '0' or stay = '1' or branchBubble = '1') then
+		if(rst = '0') then
 			PCout <= X"0000";
 			Instructionout <= "0000100000000000";
 		elsif(rising_edge(clk)) then
-			if (stay = '1') then
-				PCout <= PCin;
-				Instructionout <= "0000100000000000";
-			else
+			if (stay = '0') then
 				Instructionout <= Instructionin;
 				PCout <= PCin;
+			end if;
+			if (branchBubble = '1') then
+				PCout <= X"0000";
+				Instructionout <= "0000100000000000";
 			end if;
 		end if;
 	end process;

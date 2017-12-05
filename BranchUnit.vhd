@@ -32,23 +32,25 @@ begin
 			when "010" =>
 				if (rxValue = X"0000") then
 					pcSrc <= "01";
+					branchBubble <= '1';
 				else
 					pcSrc <= "11";
+					branchBubble <= '0';
 				end if;
-				branchBubble <= '1';
 			when "011" =>
 				if (rxValue = X"0000") then
 					pcSrc <= "11";
+					branchBubble <= '0';
 				else
 					pcSrc <= "01";
+					branchBubble <= '1';
 				end if;
-				branchBubble <= '1';
 			when "100" =>
 				PCsrc <= "00";
 				branchBubble <= '1';
 			when others =>
 				PCsrc <= "10";
-				branchBubble <= '1';
+				branchBubble <= '0';
 		end case;
 	end process;
 end Behavioral;
