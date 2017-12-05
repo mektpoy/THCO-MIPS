@@ -1,1 +1,0 @@
--intstyle "ise" -incremental -o "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU_isim_beh.exe" -prj "C:/Users/cdogemaru/Desktop/THINPAD/THCO-MIPS/CPU_beh.prj" "work.CPU" 
