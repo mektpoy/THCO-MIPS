@@ -17,8 +17,9 @@ entity DM is
 		tsre, tbre : in STD_LOGIC;
 		dataReady : in STD_LOGIC;
 		rdn, wrn : out STD_LOGIC;
-		writeInstruction : out STD_LOGIC_VECTOR(16 downto 0);
-		writeIMAddr : out STD_LOGIC_VECTOR(15 downto 0)
+		writeInstruction : out STD_LOGIC;
+		IMValue : out STD_LOGIC_VECTOR(15 downto 0);
+		IMAddr : out STD_LOGIC_VECTOR(15 downto 0)
 		--16 : write instruction or not
 		--15 downto 0 : instruction to write
 	); --"00" Disabled; "01" Write; "10" Read; "11" Enabled;
@@ -34,10 +35,8 @@ architecture Behavioral of DM is
 	signal tempRam1We : STD_LOGIC;
 	signal tempRam1Rdn : STD_LOGIC;
 	signal tempRam1Wrn : STD_LOGIC;
-	signal tempWriteInstruction : STD_LOGIC_VECTOR(16 downto 0);
-	signal tempWriteIMAddr : STD_LOGIC_VECTOR(15 downto 0);
-begin
 
+begin
 	process (tbre, tsre, addr, dataReady)
 	VARIABLE temp : STD_LOGIC_VECTOR (15 downto 0);
 	begin
@@ -73,8 +72,11 @@ begin
 	process (addr, memoryMode, tempRam1Src, writeData, tempMemData)
 	begin
 		ramAddr <= "00" & addr;
-		tempWriteInstruction <= '0' & X"0000";
+		WriteInstruction <= '0';
+		IMAddr <= X"0000";
+		IMValue <= X"0000";
 		if (memoryMode(1) = '1') then -- Read
+			WriteInstruction <= '0';
 			if (tempRam1Src = "01") then -- Port Status
 				ramData <= tempMemData;
 			else -- Port / Read Memory
@@ -83,8 +85,9 @@ begin
 		elsif (memoryMode(0) = '1') then -- Write
 			if (tempRam1Src = "11") then -- IM
 				ramData <= "ZZZZZZZZZZZZZZZZ";
-				tempWriteInstruction <= '1' & writeData;
-				tempWriteIMAddr <= addr;
+				WriteInstruction <= '1';
+				IMAddr <= addr;
+				IMValue <= readData;
 			elsif (tempRam1Src = "01") then -- Port Status
 				ramData <= "ZZZZZZZZZZZZZZZZ";
 			else -- Port / Write Memory
@@ -95,8 +98,6 @@ begin
 		end if;
 	end process;
 	
-	writeIMAddr <= tempWriteIMAddr;
-	writeInstruction <= tempWriteInstruction;
 	en <= tempRam1En;
 	oe <= tempRam1Oe;
 	we <= tempRam1We;
