@@ -17,7 +17,8 @@ entity DM is
 		tsre, tbre : in STD_LOGIC;
 		dataReady : in STD_LOGIC;
 		rdn, wrn : out STD_LOGIC;
-		writeInstruction : out STD_LOGIC;
+		visitIM : out STD_LOGIC_VECTOR(1 downto 0); -- 01 writeIM 10 readIM
+		IMReadData : in STD_LOGIC_VECTOR(15 downto 0); --used to send the IM value to the DM
 		IMValue : out STD_LOGIC_VECTOR(15 downto 0);
 		IMAddr : out STD_LOGIC_VECTOR(15 downto 0)
 		--16 : write instruction or not
@@ -72,12 +73,16 @@ begin
 	process (addr, memoryMode, tempRam1Src, writeData, tempMemData)
 	begin
 		ramAddr <= "00" & addr;
-		WriteInstruction <= '0';
+		visitIM <= '00';
 		IMAddr <= X"0000";
 		IMValue <= X"0000";
 		if (memoryMode(1) = '1') then -- Read
-			WriteInstruction <= '0';
-			if (tempRam1Src = "01") then -- Port Status
+
+			if (tempRam1Src = "11") then -- IM
+				ramData <= "ZZZZZZZZZZZZZZZZ";
+				visitIM <= '10';
+				IMAddr <= addr;
+			elsif (tempRam1Src = "01") then -- Port Status
 				ramData <= tempMemData;
 			else -- Port / Read Memory
 				ramData <= "ZZZZZZZZZZZZZZZZ";
@@ -85,15 +90,16 @@ begin
 		elsif (memoryMode(0) = '1') then -- Write
 			if (tempRam1Src = "11") then -- IM
 				ramData <= "ZZZZZZZZZZZZZZZZ";
-				WriteInstruction <= '1';
+				visitIM <= '01';
 				IMAddr <= addr;
-				IMValue <= readData;
+				IMValue <= writeData;
 			elsif (tempRam1Src = "01") then -- Port Status
 				ramData <= "ZZZZZZZZZZZZZZZZ";
 			else -- Port / Write Memory
 				ramData <= writeData;
 			end if;
 		else
+			visitIM <= '0';
 			ramData <= "ZZZZZZZZZZZZZZZZ";
 		end if;
 	end process;
@@ -106,8 +112,13 @@ begin
 
 	process (clk, addr, memoryMode, tempRam1Src)
 	begin
+		-- 不知道对不对
 		if (memoryMode(1) = '1') then
-			readData <= ramData;
+			if(tempRam1Src == "11") then
+				readData <= IMReadData;
+			else 
+				readData <= ramData;
+			end if;
 		else
 			readData <= X"0000";
 		end if;
@@ -147,4 +158,5 @@ begin
 			tempRam1Wrn <= '1';
 		end if;
 	end process;
+
 end Behavioral;

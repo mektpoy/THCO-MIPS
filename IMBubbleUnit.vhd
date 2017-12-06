@@ -9,13 +9,14 @@ entity IMBubbleUnit is
 		IMStay : out STD_LOGIC;
 		--0 : not stay
 		--1 : stay
-		writeInstruction : in STD_LOGIC
+		visitIM : in STD_LOGIC_VECTOR(1 downto 0)
 	);
 end IMBubbleUnit;
 
 architecture Behavioral of IMBubbleUnit is
 begin
-	process (writeInstruction)
-		IMStay <= writeInstruction;
+	process (visitIM)
 	begin
+		IMStay <= visitIM(0) or visitIM(1);
+	end process;
 end Behavioral;

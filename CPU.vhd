@@ -39,8 +39,8 @@ architecture Behavioral of CPU is
 	component IMBubbleUnit is
 	Port 
 	( 
-		IMStay : out STD_LOGIC;
-		WriteInstruction : in STD_LOGIC
+		IMstay : out STD_LOGIC;
+		visitIM : in STD_LOGIC_VECTOR (1 downto 0)
 	);
 	end component;
 
@@ -127,6 +127,7 @@ architecture Behavioral of CPU is
     component DM is
     Port
     (
+    	IMReadData : in STD_LOGIC_VECTOR(15 downto 0);
 		writeData : in  STD_LOGIC_VECTOR (15 downto 0);
 		addr : in  STD_LOGIC_VECTOR (15 downto 0);
 		rst, clk : in  STD_LOGIC;
@@ -138,7 +139,7 @@ architecture Behavioral of CPU is
 		tsre, tbre : in STD_LOGIC;
 		dataReady : in STD_LOGIC;
 		rdn, wrn : out STD_LOGIC;
-		writeInstruction : out STD_LOGIC;
+		visitIM : out STD_LOGIC_VECTOR(1 downto 0);
 		IMValue : out STD_LOGIC_VECTOR(15 downto 0);
 		IMAddr : out STD_LOGIC_VECTOR(15 downto 0)
     );
@@ -253,7 +254,7 @@ architecture Behavioral of CPU is
 		clk: in STD_LOGIC;
 		rst: in STD_LOGIC;
 		stay: in STD_LOGIC;
-		IMstay : std_logic;
+		IMstay : in STD_LOGIC;
 		branchBubble : in STD_LOGIC;
 		PCin : in  STD_LOGIC_VECTOR (15 downto 0);
 		PCout : out STD_LOGIC_VECTOR (15 downto 0);
@@ -273,7 +274,8 @@ architecture Behavioral of CPU is
     component IM is
     Port 
 	( 
-		WriteInstruction : in STD_LOGIC;
+		IMReadData : out STD_LOGIC_VECTOR(15 downto 0);
+		visitIM : in STD_LOGIC_VECTOR (1 downto 0);
 		IMValue : in STD_LOGIC_VECTOR (15 downto 0);
 		IMAddr : in STD_LOGIC_VECTOR(15 downto 0);
 		readAddr : in STD_LOGIC_VECTOR (15 downto 0);
@@ -362,10 +364,11 @@ architecture Behavioral of CPU is
 		regWbValue : out STD_LOGIC_VECTOR (15 downto 0)
 	);
     end component;
+    signal IMReadData : STD_LOGIC_VECTOR(15 downto 0);
     signal IMstay : STD_LOGIC;
     signal IMAddr : STD_LOGIC_VECTOR (15 downto 0);
     signal IMValue : STD_LOGIC_VECTOR (15 downto 0);
-    signal WriteInstruction : STD_LOGIC;
+    signal visitIM : STD_LOGIC_VECTOR (1 downto 0);
     signal stay : STD_LOGIC;
     signal PCMuxOut : STD_LOGIC_VECTOR (15 downto 0);
     signal outPC : STD_LOGIC_VECTOR (15 downto 0);
@@ -517,12 +520,14 @@ begin
 
 	u8 : DM port map
 	(
-		writeInstruction => writeInstruction,
+		IMReadData => IMReadData,
+		visitIM => visitIM,
 		IMAddr => IMAddr,
 		IMValue => IMValue,
 		writeData => writeData,
 		addr => MEMAluResult,
 		clk => clk,
+		rst => rst,
 		memoryMode => MEMMoemoryMode,
 		ramAddr => ram1Addr,
 		ramData => ram1Data,
@@ -649,7 +654,8 @@ begin
 
 	u16 : IM port map
 	(
-		WriteInstruction => WriteInstruction,
+		IMReadData => IMReadData,
+		visitIM => visitIM,
 		IMAddr => IMAddr,
 		IMValue => IMValue,
 		readAddr => outPC,
@@ -731,8 +737,8 @@ begin
 
 	u23 : IMBubbleUnit port map
 	( 
-		IMStay => IMstay,
-		WriteInstruction => WriteInstruction
+		IMstay => IMstay,
+		visitIM => visitIM
 	);
 end Behavioral;
 
