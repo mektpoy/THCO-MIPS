@@ -79,12 +79,13 @@ NET "ram1En" LOC = M15;
 NET "ram1We" LOC = M18;
 NET "ram1Oe" LOC = M16;
 
-NET "clk" LOC = U9; //B8 11mhz U9 hand
+NET "clk" LOC = B8; //B8 11mhz U9 hand
 NET "rst" LOC = U10;
 NET "wrn" LOC = U5;
 NET "rdn" LOC = C14;
-// NET "tsre" LOC = N9;
-// NET "tbre" LOC = D14;
+NET "tsre" LOC = N9;
+NET "tbre" LOC = D14;
+NET "dataReady" LOC = A16;
 NET "ledOut[15]" LOC = A14;
 NET "ledOut[14]" LOC = E13;
 NET "ledOut[13]" LOC = D13;

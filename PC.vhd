@@ -9,6 +9,7 @@ entity PC is
 		clk, rst: in STD_LOGIC;
 		PCMuxOut: in STD_LOGIC_VECTOR(15 downto 0);
 		stayPC: in STD_LOGIC;
+		IMstay : in STD_LOGIC;
 		outPC: out STD_LOGIC_VECTOR(15 downto 0)
 	);
 end PC;
@@ -22,7 +23,7 @@ begin
 		if (rst = '0') then
 			pcRegister <= X"0000";
 		elsif(rising_edge(clk)) then
-			if stayPC = '0' then
+			if (stayPC = '0') and (IMstay = '0') then
 				pcRegister <= PCMuxOut;
 			end if;
 		end if;

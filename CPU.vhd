@@ -13,7 +13,7 @@ entity CPU is
 			ram1Oe : out STD_LOGIC;
 			ram1Data : inout STD_LOGIC_VECTOR (15 downto 0);
 			rdn, wrn : out STD_LOGIC;
-			-- tbre, tsre : in STD_LOGIC;
+			dataReady, tbre, tsre : in STD_LOGIC;
 			
 			ram2Addr : out STD_LOGIC_VECTOR (17 downto 0);
 			ram2En : out STD_LOGIC;
@@ -34,6 +34,15 @@ architecture Behavioral of CPU is
 		aluOp : in  STD_LOGIC_VECTOR (2 downto 0);
 		result : out  STD_LOGIC_VECTOR (15 downto 0)
 	);
+	end component;
+
+	component IMBubbleUnit is
+	Port 
+	( 
+		IMStay : out STD_LOGIC;
+		WriteInstruction : in STD_LOGIC_VECTOR(16 downto 0)
+	); --"00" Disabled; "01" Write; "10" Read; "11" Enabled;
+	-- 0 Write 1 Read
 	end component;
 
 	component ALUMux is
@@ -127,8 +136,11 @@ architecture Behavioral of CPU is
 		ramData : inout STD_LOGIC_VECTOR (15 downto 0);
 		readData : out STD_LOGIC_VECTOR (15 downto 0);
 		en, oe, we : out  STD_LOGIC;
-		rdn, wrn : out STD_LOGIC
-		-- tbre, tsre : in STD_LOGIC
+		rdn, wrn : out STD_LOGIC;
+		tbre, tsre : in STD_LOGIC;
+		dataReady : in STD_LOGIC;
+		writeInstruction : out STD_LOGIC_VECTOR(16 downto 0);
+		writeIMAddr : out STD_LOGIC_VECTOR(15 downto 0)
     );
     end component;
 
@@ -241,6 +253,7 @@ architecture Behavioral of CPU is
 		clk: in STD_LOGIC;
 		rst: in STD_LOGIC;
 		stay: in STD_LOGIC;
+		IMstay : std_logic;
 		branchBubble : in STD_LOGIC;
 		PCin : in  STD_LOGIC_VECTOR (15 downto 0);
 		PCout : out STD_LOGIC_VECTOR (15 downto 0);
@@ -260,6 +273,8 @@ architecture Behavioral of CPU is
     component IM is
     Port 
 	( 
+		WriteInstruction : in STD_LOGIC_VECTOR(16 downto 0);
+		WriteIMAddr : in STD_LOGIC_VECTOR(15 downto 0);
 		readAddr : in STD_LOGIC_VECTOR (15 downto 0);
 		instr : out STD_LOGIC_VECTOR (15 downto 0);
 		ramAddr : out  STD_LOGIC_VECTOR (17 downto 0);
@@ -305,6 +320,7 @@ architecture Behavioral of CPU is
 		clk, rst: in std_logic;
 		PCMuxOut: in std_logic_vector(15 downto 0);
 		stayPC: in std_logic;
+		IMstay : in STD_LOGIC;
 		outPC: out std_logic_vector(15 downto 0)
 	);
     end component;
@@ -345,7 +361,9 @@ architecture Behavioral of CPU is
 		regWbValue : out STD_LOGIC_VECTOR (15 downto 0)
 	);
     end component;
-
+    signal IMstay : STD_LOGIC;
+    signal WriteIMAddr : STD_LOGIC_VECTOR(15 downto 0);
+    signal WriteInstruction : STD_LOGIC_VECTOR(16 downto 0);
     signal stay : STD_LOGIC;
     signal PCMuxOut : STD_LOGIC_VECTOR (15 downto 0);
     signal outPC : STD_LOGIC_VECTOR (15 downto 0);
@@ -497,6 +515,8 @@ begin
 
 	u8 : DM port map
 	(
+		WriteInstruction => WriteInstruction,
+		writeIMAddr => writeIMAddr,
 		writeData => writeData,
 		addr => MEMAluResult,
 		clk => clk,
@@ -508,9 +528,10 @@ begin
 		oe => ram1Oe,
 		we => ram1We,
 		wrn => wrn,
-		rdn => rdn
-		-- tbre => tbre,
-		-- tsre => tsre
+		rdn => rdn,
+		tbre => tbre,
+		tsre => tsre,
+		dataReady => dataReady
 	);
 
 	u9 : EX2MEM port map
@@ -609,6 +630,7 @@ begin
 		clk => clk,
 		rst => rst,
 		stay => stay,
+		IMstay => IMstay,
 		PCin => IFPC,
 		PCout => IDPC,
 		Instructionin => IFInstruction,
@@ -624,6 +646,8 @@ begin
 
 	u16 : IM port map
 	(
+		WriteInstruction => WriteInstruction,
+		writeIMAddr => writeIMAddr,
 		readAddr => outPC,
 		instr => IFInstruction,
 		ramAddr => ram2Addr,
@@ -658,7 +682,8 @@ begin
 		rst => rst,
 		PCMuxOut => PCMuxOut,
 		stayPC => stay,
-		outPC => outPC
+		outPC => outPC,
+		IMstay => IMstay
 	);
 
 	u19 : PCMux port map
@@ -696,8 +721,13 @@ begin
 	u22 : LED port map
 	(
 		ledIn(15 downto 8) => IDInstruction(15 downto 8),
-		ledIn(7 downto 0) => IDPC(7 downto 0),
+		ledIn(7 downto 0) => debugR1(7 downto 0),
 		ledOut => ledOut
+	);
+	u23 : IMBubbleUnit port map
+	( 
+		IMStay => IMstay,
+		WriteInstruction => WriteInstruction
 	);
 end Behavioral;
 

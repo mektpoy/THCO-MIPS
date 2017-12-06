@@ -6,6 +6,8 @@ USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 entity IM is
 	Port 
 	( 
+		WriteInstruction : in STD_LOGIC_VECTOR(16 downto 0);
+		WriteIMAddr : in STD_LOGIC_VECTOR(15 downto 0);
 		readAddr : in STD_LOGIC_VECTOR (15 downto 0);
 		instr : out STD_LOGIC_VECTOR (15 downto 0);
 		ramAddr : out  STD_LOGIC_VECTOR (17 downto 0);
@@ -20,15 +22,36 @@ end IM;
 architecture Behavioral of IM is
 begin
 	en <= '0'; --enable the ram
-	we <= '1'; --disable writing
-	process(clk, readAddr)
-	begin			--prepare the signals needed for reading the ram on the rising edge.
-		if (clk = '1') then
-			oe <= '1';
+	process(readAddr, WriteInstruction, WriteIMAddr)
+	begin
+		if(WriteInstruction(16) = '1') then
+			ramAddr <= "00" & WriteIMAddr;
+			ramData <= WriteInstruction(15 downto 0);
 		else
-			oe <= '0';
+			ramAddr <= "00" & readAddr;
+			ramData <= "ZZZZZZZZZZZZZZZZ";
 		end if;
-		ramAddr <= "00" & readAddr;
-		instr <= ramData;
+	end process;
+
+	process(clk, readAddr, WriteInstruction, WriteIMAddr)
+	begin			--prepare the signals needed for reading the ram on the rising edge.
+		if (clk = '0') then
+			if(WriteInstruction(16) = '1') then
+				we <= '0';
+				oe <= '1';
+			else
+				we <= '1';
+				oe <= '0';
+			end if;
+		else
+			oe <= '1';
+			we <= '1'; --disable writing
+		end if;
+
+		if(WriteInstruction(16) = '1') then 
+			instr <= X"0000";
+		else
+			instr <= ramData;
+		end if;
 	end process;
 end Behavioral;

@@ -222,7 +222,7 @@ begin
 				case instruction(10 downto 8) is
 					when "000" => -- BTEQZ
 						rxAddr <= "1111";
-						ryAddr <= '0' & instruction(10 downto 8);
+						ryAddr <= "1100";
 						imme(7 downto 0) <= instruction(7 downto 0);
 						imme(15 downto 8) <= (others => instruction(7));
 						regWbAddr <= "1111";

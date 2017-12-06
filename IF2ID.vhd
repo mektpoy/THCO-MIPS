@@ -26,6 +26,7 @@ entity IF2ID is
 		clk: in STD_LOGIC;
 		rst: in STD_LOGIC;
 		stay: in STD_LOGIC;
+		IMstay : in STD_LOGIC;
 		branchBubble : in STD_LOGIC;
 		PCin : in  STD_LOGIC_VECTOR (15 downto 0);
 		PCout : out STD_LOGIC_VECTOR (15 downto 0);
@@ -43,7 +44,7 @@ begin
 			PCout <= X"0000";
 			Instructionout <= "0000100000000000";
 		elsif(rising_edge(clk)) then
-			if (stay = '0') then
+			if (stay = '0' and IMstay = '0') then
 				Instructionout <= Instructionin;
 				PCout <= PCin;
 			end if;

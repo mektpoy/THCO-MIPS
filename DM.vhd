@@ -15,7 +15,12 @@ entity DM is
 		readData : out STD_LOGIC_VECTOR (15 downto 0);
 		en, oe, we : out  STD_LOGIC;
 		tsre, tbre : in STD_LOGIC;
-		rdn, wrn : out STD_LOGIC
+		dataReady : in STD_LOGIC;
+		rdn, wrn : out STD_LOGIC;
+		writeInstruction : out STD_LOGIC_VECTOR(16 downto 0);
+		writeIMAddr : out STD_LOGIC_VECTOR(15 downto 0)
+		--16 : write instruction or not
+		--15 downto 0 : instruction to write
 	); --"00" Disabled; "01" Write; "10" Read; "11" Enabled;
 	-- 0 Write 1 Read
 end DM;
@@ -29,19 +34,9 @@ architecture Behavioral of DM is
 	signal tempRam1We : STD_LOGIC;
 	signal tempRam1Rdn : STD_LOGIC;
 	signal tempRam1Wrn : STD_LOGIC;
-
+	signal tempWriteInstruction : STD_LOGIC_VECTOR(16 downto 0);
+	signal tempWriteIMAddr : STD_LOGIC_VECTOR(15 downto 0);
 begin
-	rdn <= '1';
-	wrn <= '1';
-	process (rst)
-	begin
-		if (rst = '0') then
-			wrn <= '1';
-			oe <= '1';
-			en <= '1';
-			we <= '1';
-		end if;
-	end process;
 
 	process (tbre, tsre, addr, dataReady)
 	VARIABLE temp : STD_LOGIC_VECTOR (15 downto 0);
@@ -61,7 +56,9 @@ begin
 	process (addr, memoryMode)
 	begin
 		if (memoryMode(1) = '1' or memoryMode(0) = '1') then -- Read or Write
-			if (addr = X"BF01") then    -- Port Status
+			if((X"3999" < addr) and (addr < X"8000")) then --IM
+				tempRam1Src <= "11";
+			elsif (addr = X"BF01") then    -- Port Status
 				tempRam1Src <= "01";
 			elsif (addr = X"BF00") then -- Port
 				tempRam1Src <= "10";
@@ -76,6 +73,7 @@ begin
 	process (addr, memoryMode, tempRam1Src, writeData, tempMemData)
 	begin
 		ramAddr <= "00" & addr;
+		tempWriteInstruction <= '0' & X"0000";
 		if (memoryMode(1) = '1') then -- Read
 			if (tempRam1Src = "01") then -- Port Status
 				ramData <= tempMemData;
@@ -83,7 +81,11 @@ begin
 				ramData <= "ZZZZZZZZZZZZZZZZ";
 			end if;
 		elsif (memoryMode(0) = '1') then -- Write
-			if (tempRam1Src = "01") then -- Port Status
+			if (tempRam1Src = "11") then -- IM
+				ramData <= "ZZZZZZZZZZZZZZZZ";
+				tempWriteInstruction <= '1' & writeData;
+				tempWriteIMAddr <= addr;
+			elsif (tempRam1Src = "01") then -- Port Status
 				ramData <= "ZZZZZZZZZZZZZZZZ";
 			else -- Port / Write Memory
 				ramData <= writeData;
@@ -92,7 +94,9 @@ begin
 			ramData <= "ZZZZZZZZZZZZZZZZ";
 		end if;
 	end process;
-
+	
+	writeIMAddr <= tempWriteIMAddr;
+	writeInstruction <= tempWriteInstruction;
 	en <= tempRam1En;
 	oe <= tempRam1Oe;
 	we <= tempRam1We;
@@ -101,33 +105,26 @@ begin
 
 	process (clk, addr, memoryMode, tempRam1Src)
 	begin
-		--if (memoryMode(1) = '1') then
-		--	readData <= ramData;
-		--else
-		--	readData <= X"0000";
-		--end if;
-		--if (memoryMode(0) = '1') then
-		--	ramData <= writeData;
-		--else
-		--	ramData <= "ZZZZZZZZZZZZZZZZ";
-		--end if;
-		--ramAddr <= "00" & addr;
+		if (memoryMode(1) = '1') then
+			readData <= ramData;
+		else
+			readData <= X"0000";
+		end if;
 		if (clk = '0') then
-			--oe <= not memoryMode(1);
-			--we <= not memoryMode(0);
-			--if (memoryMode /= "00") then
-			--	en <= '0';
-			--else
-			--	en <= '1';
-			--end if;
-			if (addr = X"BF00") then
+			if((X"3999" < addr) and (addr < X"8000")) then
+				tempRam1Rdn <= '1';
+				tempRam1Wrn <= '1';
 				tempRam1En <= '1';
 				tempRam1Oe <= '1';
 				tempRam1We <= '1';
-				if (memoryMode(1) = '1') -- Read
+			elsif (addr = X"BF00") then
+				tempRam1En <= '1';
+				tempRam1Oe <= '1';
+				tempRam1We <= '1';
+				if (memoryMode(1) = '1') then-- Read
 					tempRam1Rdn <= '0';
 					tempRam1Wrn <= '1';
-				elsif (memoryMode(0) = '1') -- Write
+				elsif (memoryMode(0) = '1') then -- Write
 					tempRam1Rdn <= '1';
 					tempRam1Wrn <= '0';
 				else
@@ -135,7 +132,7 @@ begin
 					tempRam1Wrn <= '1';
 				end if;
 			else
-				tempRam1En <= (not memoryMode(0)) and (not memoryMode(1));
+				tempRam1En <= '0';
 				tempRam1Oe <= not memoryMode(1);
 				tempRam1We <= not memoryMode(0);
 				tempRam1Rdn <= '1';
