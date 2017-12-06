@@ -63,3 +63,8 @@ netgen/synthesis/CPU_synthesis.vhd
 *.xwbt
 *.xpi
 *.unroutes
+*.html
+*.bit
+*.bgn
+*.xise
+*.drc
