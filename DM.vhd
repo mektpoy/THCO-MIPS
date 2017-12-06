@@ -8,7 +8,7 @@ entity DM is
 	( 
 		writeData : in  STD_LOGIC_VECTOR (15 downto 0);
 		addr : in  STD_LOGIC_VECTOR (15 downto 0);
-		rst, clk : in  STD_LOGIC;
+		clk : in  STD_LOGIC;
 		memoryMode : in  STD_LOGIC_VECTOR (1 downto 0);
 		ramAddr : out STD_LOGIC_VECTOR (17 downto 0);
 		ramData : inout STD_LOGIC_VECTOR (15 downto 0);
@@ -84,10 +84,10 @@ begin
 			end if;
 		elsif (memoryMode(0) = '1') then -- Write
 			if (tempRam1Src = "11") then -- IM
-				ramData <= "ZZZZZZZZZZZZZZZZ";
+				ramData <= writeData;
 				WriteInstruction <= '1';
 				IMAddr <= addr;
-				IMValue <= readData;
+				IMValue <= writeData;
 			elsif (tempRam1Src = "01") then -- Port Status
 				ramData <= "ZZZZZZZZZZZZZZZZ";
 			else -- Port / Write Memory
@@ -112,13 +112,7 @@ begin
 			readData <= X"0000";
 		end if;
 		if (clk = '0') then
-			if((X"3999" < addr) and (addr < X"8000")) then
-				tempRam1Rdn <= '1';
-				tempRam1Wrn <= '1';
-				tempRam1En <= '1';
-				tempRam1Oe <= '1';
-				tempRam1We <= '1';
-			elsif (addr = X"BF00") then
+			if (addr = X"BF00") then
 				tempRam1En <= '1';
 				tempRam1Oe <= '1';
 				tempRam1We <= '1';

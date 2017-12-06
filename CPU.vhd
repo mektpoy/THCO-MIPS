@@ -129,7 +129,7 @@ architecture Behavioral of CPU is
     (
 		writeData : in  STD_LOGIC_VECTOR (15 downto 0);
 		addr : in  STD_LOGIC_VECTOR (15 downto 0);
-		rst, clk : in  STD_LOGIC;
+		clk : in  STD_LOGIC;
 		memoryMode : in  STD_LOGIC_VECTOR (1 downto 0);
 		ramAddr : out STD_LOGIC_VECTOR (17 downto 0);
 		ramData : inout STD_LOGIC_VECTOR (15 downto 0);
@@ -253,7 +253,7 @@ architecture Behavioral of CPU is
 		clk: in STD_LOGIC;
 		rst: in STD_LOGIC;
 		stay: in STD_LOGIC;
-		IMstay : std_logic;
+		IMstay : in std_logic;
 		branchBubble : in STD_LOGIC;
 		PCin : in  STD_LOGIC_VECTOR (15 downto 0);
 		PCout : out STD_LOGIC_VECTOR (15 downto 0);

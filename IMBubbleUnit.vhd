@@ -16,6 +16,7 @@ end IMBubbleUnit;
 architecture Behavioral of IMBubbleUnit is
 begin
 	process (writeInstruction)
-		IMStay <= writeInstruction;
 	begin
+		IMStay <= writeInstruction;
+	end process;
 end Behavioral;
