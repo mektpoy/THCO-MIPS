@@ -5,7 +5,7 @@ USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity CPU is
     Port ( 
-    		clk : in STD_LOGIC;
+    		clockin : in STD_LOGIC;
 			rst : in STD_LOGIC;
 			ram1Addr : out STD_LOGIC_VECTOR (17 downto 0);
 			ram1En : out STD_LOGIC;
@@ -26,6 +26,14 @@ entity CPU is
 end CPU;
 
 architecture Behavioral of CPU is
+	component ClockModule is
+	Port
+	(
+		clockin : in STD_LOGIC;
+		clockout : out STD_LOGIC
+	);
+	end component;
+
 	component ALU is
 	Port 
 	(
@@ -40,7 +48,9 @@ architecture Behavioral of CPU is
 	Port 
 	( 
 		IMStay : out STD_LOGIC;
-		WriteInstruction : in STD_LOGIC
+		PCStay : out STD_LOGIC;
+		branchBubble : in STD_LOGIC;
+		writeInstruction : in STD_LOGIC
 	);
 	end component;
 
@@ -254,7 +264,6 @@ architecture Behavioral of CPU is
 		rst: in STD_LOGIC;
 		stay: in STD_LOGIC;
 		IMstay : in std_logic;
-		branchBubble : in STD_LOGIC;
 		PCin : in  STD_LOGIC_VECTOR (15 downto 0);
 		PCout : out STD_LOGIC_VECTOR (15 downto 0);
 		Instructionin : in  STD_LOGIC_VECTOR (15 downto 0);
@@ -362,7 +371,9 @@ architecture Behavioral of CPU is
 		regWbValue : out STD_LOGIC_VECTOR (15 downto 0)
 	);
     end component;
+    signal clk : STD_LOGIC;
     signal IMstay : STD_LOGIC;
+    signal PCstay : STD_LOGIC;
     signal IMAddr : STD_LOGIC_VECTOR (15 downto 0);
     signal IMValue : STD_LOGIC_VECTOR (15 downto 0);
     signal WriteInstruction : STD_LOGIC;
@@ -637,8 +648,7 @@ begin
 		PCin => IFPC,
 		PCout => IDPC,
 		Instructionin => IFInstruction,
-		Instructionout => IDInstruction,
-		branchBubble => branchBubble
+		Instructionout => IDInstruction
 	);
 
 	u15 : IF_PCAdder port map
@@ -687,7 +697,7 @@ begin
 		PCMuxOut => PCMuxOut,
 		stayPC => stay,
 		outPC => outPC,
-		IMstay => IMstay
+		IMstay => PCStay
 	);
 
 	u19 : PCMux port map
@@ -725,14 +735,22 @@ begin
 	u22 : LED port map
 	(
 		ledIn(15 downto 8) => IDInstruction(15 downto 8),
-		ledIn(7 downto 0) => debugR1(7 downto 0),
+		ledIn(7 downto 0) => aluresult(7 downto 0),
 		ledOut => ledOut
 	);
 
 	u23 : IMBubbleUnit port map
 	( 
 		IMStay => IMstay,
-		WriteInstruction => WriteInstruction
+		PCStay => PCstay,
+		WriteInstruction => WriteInstruction,
+		branchBubble => branchBubble
+	);
+
+	u24: ClockModule port map
+	( 
+		clockin => clockin,
+		clockout => clk
 	);
 end Behavioral;
 

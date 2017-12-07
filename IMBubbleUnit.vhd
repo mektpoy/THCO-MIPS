@@ -7,16 +7,28 @@ entity IMBubbleUnit is
 	Port 
 	( 
 		IMStay : out STD_LOGIC;
-		--0 : not stay
-		--1 : stay
+		PCStay : out STD_LOGIC;
+		branchBubble : in STD_LOGIC;
 		writeInstruction : in STD_LOGIC
 	);
 end IMBubbleUnit;
 
 architecture Behavioral of IMBubbleUnit is
 begin
-	process (writeInstruction)
+	process (writeInstruction, branchBubble)
 	begin
-		IMStay <= writeInstruction;
+		if (branchBubble = '0' and writeInstruction = '0') then
+			IMStay <= '0';
+			PCStay <= '0';
+		elsif (branchBubble = '0' and writeInstruction = '1') then
+			IMStay <= '1';
+			PCStay <= '1';
+		elsif (branchBubble = '1' and writeInstruction = '0') then
+			IMStay <= '1';
+			PCStay <= '0';
+		else 
+			IMStay <= '1';
+			PCStay <= '0';
+		end if;
 	end process;
 end Behavioral;
