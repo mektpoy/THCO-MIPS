@@ -17,18 +17,20 @@ architecture Behavioral of IMBubbleUnit is
 begin
 	process (writeInstruction, branchBubble)
 	begin
-		if (branchBubble = '0' and writeInstruction = '0') then
-			IMStay <= '0';
-			PCStay <= '0';
-		elsif (branchBubble = '0' and writeInstruction = '1') then
-			IMStay <= '1';
-			PCStay <= '1';
-		elsif (branchBubble = '1' and writeInstruction = '0') then
-			IMStay <= '1';
-			PCStay <= '0';
-		else 
-			IMStay <= '1';
-			PCStay <= '0';
-		end if;
+		--if (branchBubble = '0' and writeInstruction = '0') then
+		--	IMStay <= '0';
+		--	PCStay <= '0';
+		--elsif (branchBubble = '0' and writeInstruction = '1') then
+		--	IMStay <= '1';
+		--	PCStay <= '1';
+		--elsif (branchBubble = '1' and writeInstruction = '0') then
+		--	IMStay <= '1';
+		--	PCStay <= '0';
+		--else 
+		--	IMStay <= '1';
+		--	PCStay <= '0';
+		--end if;
+		IMStay <= branchBubble or writeInstruction;
+		PCStay <= (not branchBubble) and writeInstruction;
 	end process;
 end Behavioral;
