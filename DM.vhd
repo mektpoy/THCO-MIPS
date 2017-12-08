@@ -97,7 +97,7 @@ begin
 			ramData <= "ZZZZZZZZZZZZZZZZ";
 		end if;
 	end process;
-	
+
 	en <= tempRam1En;
 	oe <= tempRam1Oe;
 	we <= tempRam1We;

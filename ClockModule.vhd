@@ -14,15 +14,15 @@ end ClockModule;
 architecture Behavioral of ClockModule is
 	signal clock : STD_LOGIC := '0';
 begin
-	process(clockin)
-	begin
-		clockout <= clockin;
-	end process;
-	--clockout <= clock;
-	--process (clockin)
+	--process(clockin)
 	--begin
-	--	if (rising_edge(clockin)) then
-	--		clock <= not clock;
-	--	end if;
+	--	clockout <= clockin;
 	--end process;
+	clockout <= clock;
+	process (clockin)
+	begin
+		if (rising_edge(clockin)) then
+			clock <= not clock;
+		end if;
+	end process;
 end Behavioral;

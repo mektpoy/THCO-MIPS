@@ -4,8 +4,8 @@ use IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 entity CPU is
-    Port ( 
-    		clockin : in STD_LOGIC;
+	Port ( 
+			clockin : in STD_LOGIC;
 			rst : in STD_LOGIC;
 			ram1Addr : out STD_LOGIC_VECTOR (17 downto 0);
 			ram1En : out STD_LOGIC;
@@ -20,12 +20,40 @@ entity CPU is
 			ram2We : out STD_LOGIC;
 			ram2Oe : out STD_LOGIC;
 			ram2Data : inout STD_LOGIC_VECTOR (15 downto 0);
+			
+			----VGA
+			--hs,vs : out std_logic;
+			--redOut, greenOut, blueOut : out std_logic_vector(2 downto 0);
+			--romClk : in STD_LOGIC;
 
 			ledOut : out STD_LOGIC_VECTOR (15 downto 0)
          );
 end CPU;
 
 architecture Behavioral of CPU is
+	--component VGA_Controller is
+	--port (
+	--	reset	: in  std_logic;
+	--	CLK_in	: in  std_logic;
+	---- font rom
+	--	romAddr : out std_logic_vector(7 downto 0);
+	--	romData : in std_logic_vector(63 downto 0);
+	----VGA Side
+	--	hs,vs	: out std_logic;
+	--	oRed	: out std_logic_vector (2 downto 0);
+	--	oGreen	: out std_logic_vector (2 downto 0);
+	--	oBlue	: out std_logic_vector (2 downto 0)
+	--);		
+	--end component;
+	
+--	component fontRom IS
+--	  PORT (
+--		 clka : IN STD_LOGIC;
+--		 addra : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+--		 douta : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
+--	  );
+--	END component;
+
 	component ClockModule is
 	Port
 	(
@@ -372,6 +400,8 @@ architecture Behavioral of CPU is
 	);
     end component;
     signal clk : STD_LOGIC;
+	--signal romAddr : STD_LOGIC_VECTOR (7 downto 0);
+	--signal romData : STD_LOGIC_VECTOR (63 downto 0);
     signal IMstay : STD_LOGIC;
     signal PCstay : STD_LOGIC;
     signal IMAddr : STD_LOGIC_VECTOR (15 downto 0);
@@ -410,7 +440,7 @@ architecture Behavioral of CPU is
     signal aluOp : STD_LOGIC_VECTOR (2 downto 0);
     signal BMuxOp : STD_LOGIC;
     signal aluResultSrc : STD_LOGIC_VECTOR (1 downto 0);
-	signal branchBubble : STD_LOGIC;
+	 signal branchBubble : STD_LOGIC;
     signal EXMemoryMode : STD_LOGIC_VECTOR (1 downto 0);
     signal EXResultSrc : STD_LOGIC;
     signal EXRegWrite : STD_LOGIC;
@@ -752,5 +782,26 @@ begin
 		clockin => clockin,
 		clockout => clk
 	);
+	--u25 : fontRom port map
+	--(
+	--	clka => clockin,
+	--	addra => romAddr,
+	--	douta => romData
+	--);
+	--u26 : VGA_Controller port map
+	--(
+	--	reset	=> rst,
+	--	CLK_in => clk,
+	---- font rom
+	--	romAddr => romAddr,
+	--	romData => romData,
+	----VGA Side
+	--	hs => hs,
+	--	vs => vs,
+	--	oRed => redOut,
+	--	oGreen => greenOut,
+	--	oBlue	=> blueOut
+	--);
+	
 end Behavioral;
 
