@@ -15,6 +15,16 @@ entity CPU is
 			rdn, wrn : out STD_LOGIC;
 			dataReady, tbre, tsre : in STD_LOGIC;
 			
+			--vga
+			hs,vs	: out std_logic;
+			oRed	: out std_logic_vector (2 downto 0);
+			oGreen	: out std_logic_vector (2 downto 0);
+			oBlue	: out std_logic_vector (2 downto 0);
+
+			--keyboard
+			ps2clk : in  STD_LOGIC;
+         ps2data : in  STD_LOGIC;
+
 			ram2Addr : out STD_LOGIC_VECTOR (17 downto 0);
 			ram2En : out STD_LOGIC;
 			ram2We : out STD_LOGIC;
@@ -31,6 +41,14 @@ architecture Behavioral of CPU is
 	(
 		clockin : in STD_LOGIC;
 		clockout : out STD_LOGIC
+	);
+	end component;
+	
+	component fontRom IS
+	PORT (
+	 clka : IN STD_LOGIC;
+	 addra : IN STD_LOGIC_VECTOR(7 DOWNTO 0);
+	 douta : OUT STD_LOGIC_VECTOR(63 DOWNTO 0)
 	);
 	end component;
 
@@ -371,6 +389,40 @@ architecture Behavioral of CPU is
 		regWbValue : out STD_LOGIC_VECTOR (15 downto 0)
 	);
     end component;
+	 
+	component VGA_Controller is
+	port (
+		reset	: in  std_logic;
+		CLK_in	: in  std_logic;
+
+		readData : in std_logic_vector(7 downto 0);
+	-- font rom
+		romAddr : out std_logic_vector(7 downto 0);
+		romData : in std_logic_vector(63 downto 0);
+	--VGA Side
+		hs,vs	: out std_logic;
+		oRed	: out std_logic_vector (2 downto 0);
+		oGreen	: out std_logic_vector (2 downto 0);
+		oBlue	: out std_logic_vector (2 downto 0)
+	);		
+	end component;
+
+	component Keyboard is
+    Port ( 
+    	   fclk : in  STD_LOGIC;
+           rst : in  STD_LOGIC;
+           ps2clk : in  STD_LOGIC;
+           ps2data : in  STD_LOGIC;
+		   key : out STD_LOGIC_VECTOR(7 downto 0);
+		   is_press : out STD_LOGIC
+          );
+	end component;
+    --rom
+    signal romAddr : STD_LOGIC_VECTOR(7 downto 0);
+    signal romData : std_logic_vector(63 downto 0);
+
+	 signal charin :  STD_LOGIC_VECTOR(7 downto 0);
+	 signal is_press :  STD_LOGIC;
     signal clk : STD_LOGIC;
     signal IMstay : STD_LOGIC;
     signal PCstay : STD_LOGIC;
@@ -410,7 +462,7 @@ architecture Behavioral of CPU is
     signal aluOp : STD_LOGIC_VECTOR (2 downto 0);
     signal BMuxOp : STD_LOGIC;
     signal aluResultSrc : STD_LOGIC_VECTOR (1 downto 0);
-	signal branchBubble : STD_LOGIC;
+	 signal branchBubble : STD_LOGIC;
     signal EXMemoryMode : STD_LOGIC_VECTOR (1 downto 0);
     signal EXResultSrc : STD_LOGIC;
     signal EXRegWrite : STD_LOGIC;
@@ -734,8 +786,10 @@ begin
 
 	u22 : LED port map
 	(
-		ledIn(15 downto 8) => IDInstruction(15 downto 8),
-		ledIn(7 downto 0) => aluresult(7 downto 0),
+		--ledIn(15 downto 8) => IDInstruction(15 downto 8),
+		--ledIn(7 downto 0) => aluresult(7 downto 0),
+		ledIn(15 downto 8) => romAddr(7 downto 0),
+		ledIn(7 downto 0) => charin(7 downto 0),
 		ledOut => ledOut
 	);
 
@@ -752,5 +806,37 @@ begin
 		clockin => clockin,
 		clockout => clk
 	);
+	
+	u25 : fontRom port map
+	(
+		clka => clockin,
+		addra => romAddr,
+		douta => romData
+	);
+	
+	u26 : VGA_Controller port map
+	(
+		reset	=> rst,
+		CLK_in => clk,
+		readData => charin,
+		romAddr => romAddr,
+		romData => romData,
+		hs => hs,
+		vs	=> vs,
+		oRed => oRed,
+		oGreen => oGreen,
+		oBlue	=> oBlue
+	);		
+
+
+	u27: Keyboard port map
+    ( 
+		fclk => clockin,
+		rst => rst,
+		ps2clk => ps2clk,
+		ps2data => ps2data,
+		key => charin,
+		is_press => is_press
+    );
 end Behavioral;
 
